@@ -1,0 +1,68 @@
+#!/bin/bash
+git svn clone --no-metadata --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/2.000 sqla2
+git svn clone --no-metadata --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/1.x sqla
+
+cd sqla
+
+cp .git/refs/remotes/* .git/refs/heads
+git remote add sqla2 /home/frew/code/sqla2
+git fetch sqla2
+git branch sqla2 sqla2/master
+
+touch .git/info/grafts
+
+## fix rob's fail
+echo "4855fa65e808af7b0bbeb1a45b5cceb3c0287b07 252d8b487a902c67bd2dc96f507767420e3f0c33" >> .git/info/grafts
+
+## fix ldami's fail
+echo "5777dbae43696839fffb72b4c8282437e3aeb17b bee1f9a4f4cefd010c04c346d3ec90f7dc95541c" >> .git/info/grafts
+
+# my first fail (branch for SQL::Abstract::Tree!)
+echo "1b0730dd289949c31a458cc212abdce9578d2e8e de763865ec7f9b807f08d7f2c033fb5bb4b56187" >> .git/info/grafts
+
+# my second fail (YASQLATBranch)
+echo "ddfdfe759319211aa07239f2ad2a6c187b3d2c56 de763865ec7f9b807f08d7f2c033fb5bb4b56187" >> .git/info/grafts
+
+# branch commits lost due to rewriting so we can at least look at them for a while
+git branch sqlat-1 cbe310de9b0f72a4917900125101bd9db7127153
+git branch sqlat-2 1ecb273eb7e50ec10f985db5cd8db25b1f77350a
+
+git branch -d sqla-tree
+git branch -d arbitrary_op_nesting
+git branch -d test_refactor
+git branch -d bool_operator
+git branch -d special_op_handling
+git branch -d and_or
+git branch -d 1.50_RC
+git branch -d trunk@3093
+git branch -d trunk
+
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/cleanup
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/fix_nesting
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/in_between
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/1.50_RC-extraparens
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/log-sprintf
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/master
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqla2
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-1
+rm .git/refs/original -rf
+git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-2
+rm .git/refs/original -rf
+
+rm .git/refs/remotes -rf
+
+#git branch -D carp-debug
+#git branch -D cleanup
+#git branch -D fix_nesting
+#git branch -D in_between
+#git branch -D 1.50_RC-extraparens
+#git branch -D 1.50_RC-extraparens
