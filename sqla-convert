@@ -1,13 +1,19 @@
 #!/bin/bash
-git svn clone --no-metadata --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/2.000 sqla2
+
+# Note: I've commented out the SQLA2 stuff since we don't want that branch,
+#       but it's an ok example of how you might integrate a couple weird
+#       SVN repos together
+
+# git svn clone --no-metadata --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/2.000 sqla2
 git svn clone --no-metadata --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/1.x sqla
 
 cd sqla
 
+# make "local" branches out of all the svn branches
 cp .git/refs/remotes/* .git/refs/heads
-git remote add sqla2 /home/frew/code/sqla2
-git fetch sqla2
-git branch sqla2 sqla2/master
+#git remote add sqla2 /home/frew/code/sqla2
+#git fetch sqla2
+#git branch sqla2 sqla2/master
 
 touch .git/info/grafts
 
@@ -27,6 +33,18 @@ echo "ddfdfe759319211aa07239f2ad2a6c187b3d2c56 de763865ec7f9b807f08d7f2c033fb5bb
 git branch sqlat-1 cbe310de9b0f72a4917900125101bd9db7127153
 git branch sqlat-2 1ecb273eb7e50ec10f985db5cd8db25b1f77350a
 
+git filter-branch -f bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/cleanup  \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/fix_nesting \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/in_between \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/1.50_RC-extraparens \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/log-sprintf \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/master \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqla2 \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-1 \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-2
+
+# The following branches were merged, so we delete them
 git branch -d sqla-tree
 git branch -d arbitrary_op_nesting
 git branch -d test_refactor
@@ -37,28 +55,15 @@ git branch -d 1.50_RC
 git branch -d trunk@3093
 git branch -d trunk
 
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug
 rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/cleanup
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/fix_nesting
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/in_between
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/1.50_RC-extraparens
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/log-sprintf
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/master
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqla2
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-1
-rm .git/refs/original -rf
-git filter-branch bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-2
-rm .git/refs/original -rf
-
 rm .git/refs/remotes -rf
+
+# ditch all pre-conversion objects forcefully
+git reflog expire --all --expire=now
+git gc --aggressive
+
+git prune
+git fsck --full
 
 #git branch -D carp-debug
 #git branch -D cleanup
