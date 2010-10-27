@@ -30,21 +30,10 @@ echo "1b0730dd289949c31a458cc212abdce9578d2e8e de763865ec7f9b807f08d7f2c033fb5bb
 echo "ddfdfe759319211aa07239f2ad2a6c187b3d2c56 de763865ec7f9b807f08d7f2c033fb5bb4b56187" >> .git/info/grafts
 
 # branch commits lost due to rewriting so we can at least look at them for a while
-git branch sqlat-1 cbe310de9b0f72a4917900125101bd9db7127153
-git branch sqlat-2 1ecb273eb7e50ec10f985db5cd8db25b1f77350a
+git branch sqlat-1 c76842f233e1c75b73c2c08875120a0a1f35154f
+git branch sqlat-2 eabf47b23d216a71f6f91583e3f6446c83d8e546
 
-git filter-branch -f bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/cleanup  \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/fix_nesting \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/in_between \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/1.50_RC-extraparens \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/log-sprintf \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/master \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqla2 \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-1 \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-2
-
-# The following branches were merged, so we delete them
+# The following branches were merged, so we delete them so that we don't have to rewrite them
 git branch -d sqla-tree
 git branch -d arbitrary_op_nesting
 git branch -d test_refactor
@@ -54,6 +43,16 @@ git branch -d and_or
 git branch -d 1.50_RC
 git branch -d trunk@3093
 git branch -d trunk
+
+git filter-branch -f bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/cleanup  \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/fix_nesting \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/in_between \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/1.50_RC-extraparens \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/log-sprintf \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/master \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-1 \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-2
 
 rm .git/refs/original -rf
 rm .git/refs/remotes -rf
