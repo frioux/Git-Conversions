@@ -1,0 +1,9 @@
+#!/usr/bin/env perl
+
+use 5.12.0;
+use warnings;
+
+my ( $parents ) = (<>);
+open my $fh, ">", "/home/frew/parentlist";
+print {$fh} $parents;
+print $parents;

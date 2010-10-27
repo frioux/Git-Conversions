@@ -1,10 +1,8 @@
 #!/usr/bin/env perl
 
-use strict;
-use warnings;
 use 5.12.0;
+use warnings;
 
-my @lines = <>;
 
 # r2279@metis (orig r1):  nwiger | 2006-09-28 04:06:33 +0100
 # initial "import"
@@ -33,10 +31,21 @@ my @lines = <>;
 # Added tests for hashpair with literal SQL and bind value (ie. col => { op => \[$sql, @bind] }) when bindt
 
 my @out;
-for (@lines) {
-   unless (/^\s*r\d+\@\w+(\s+\(orig\s+r\d+\))?:\s+\w+\s+\|\s+\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\s+\+\d{4}\s*$/) {
-      /(?:\s*)(?:\*\s+)?(.*)\s*/;
-      push @out, $1;
+open my $fh, "<", "/home/frew/parentlist";
+my @p = grep { $_ && $_ ne '-p' } split /\s/, <$fh>;
+if (@p > 1) {
+   my $x = `git name-rev --name-only $p[0]`;
+   chomp $x;
+   my $y = `git name-rev --name-only $p[1]`;
+   chomp $y;
+   print "Merge branch ($p[0]) $y into ($p[1]) $x"
+} else {
+   my @lines = <>;
+   for (@lines) {
+      unless (/^\s*r\d+\@\w+(\s+\(orig\s+r\d+\))?:\s+\w+\s+\|\s+\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\s+\+\d{4}\s*$/) {
+         /(?:\s*)(?:\*\s+)?(.*)\s*/;
+         push @out, $1;
+      }
    }
 }
 print join "\n", @out;
