@@ -33,18 +33,11 @@ echo "ddfdfe759319211aa07239f2ad2a6c187b3d2c56 de763865ec7f9b807f08d7f2c033fb5bb
 git branch sqlat-1 c76842f233e1c75b73c2c08875120a0a1f35154f
 git branch sqlat-2 eabf47b23d216a71f6f91583e3f6446c83d8e546
 
-# The following branches were merged, so we delete them so that we don't have to rewrite them
-git branch -d sqla-tree
-git branch -d arbitrary_op_nesting
-git branch -d test_refactor
-git branch -d bool_operator
-git branch -d special_op_handling
-git branch -d and_or
-git branch -d 1.50_RC
-git branch -d trunk@3093
-git branch -d trunk
-
-git filter-branch -f bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug \
+# I use -d /tmp because it's a tmp-fs on my computer, so it should be faster
+git filter-branch -d /tmp/.git-rewrite/ -f \
+   --parent-filter 'git stash-parents' \
+   --msg-filter 'git fix-ghetto-message' \
+   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug \
    bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/cleanup  \
    bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/fix_nesting \
    bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/in_between \
@@ -56,6 +49,17 @@ git filter-branch -f bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_d
 
 rm .git/refs/original -rf
 rm .git/refs/remotes -rf
+
+# The following branches were merged, so we delete them so that we don't have to rewrite them
+git branch -D sqla-tree
+git branch -D arbitrary_op_nesting
+git branch -D test_refactor
+git branch -D bool_operator
+git branch -D special_op_handling
+git branch -D and_or
+git branch -D 1.50_RC
+git branch -D trunk@3093
+git branch -D trunk
 
 # ditch all pre-conversion objects forcefully
 git reflog expire --all --expire=now
