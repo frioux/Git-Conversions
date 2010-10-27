@@ -1,0 +1,42 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use 5.12.0;
+
+my @lines = <>;
+
+# r2279@metis (orig r1):  nwiger | 2006-09-28 04:06:33 +0100
+# initial "import"
+
+# should just be
+
+# initial "import"
+
+# ALSO
+
+# r2298@metis (orig r20):  matthewt | 2007-02-07 13:46:06 +0000
+#  r33610@cain (orig r9):  matthewt | 2006-11-13 09:14:03 +0000
+#  abstract from code imported from DBIC::SQL::Abstract plus tests
+
+# should just be
+
+# abstract from code imported from DBIC::SQL::Abstract plus tests
+
+# r5582@vger:  mendel | 2009-02-15 15:29:13 +0100
+#  * Fixed a bug in hashpair with literal SQL and bind value (ie. col => { op => \[$sql, @bind] }) when bindty
+#  * Added tests for hashpair with literal SQL and bind value (ie. col => { op => \[$sql, @bind] }) when bindt
+
+# should just be
+
+# Fixed a bug in hashpair with literal SQL and bind value (ie. col => { op => \[$sql, @bind] }) when bindty
+# Added tests for hashpair with literal SQL and bind value (ie. col => { op => \[$sql, @bind] }) when bindt
+
+my @out;
+for (@lines) {
+   unless (/^\s*r\d+\@\w+(\s+\(orig\s+r\d+\))?:\s+\w+\s+\|\s+\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\s+\+\d{4}\s*$/) {
+      /(?:\s*)(?:\*\s+)?(.*)\s*/;
+      push @out, $1;
+   }
+}
+print join "\n", @out;
