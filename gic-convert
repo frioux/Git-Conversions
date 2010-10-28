@@ -1,0 +1,39 @@
+#!/bin/bash
+
+git svn clone --no-metadata --authors-file=/home/frew/tmp/git/authors --stdlayout svn://hg/GIC/gic gic
+git svn clone --no-metadata --authors-file=/home/frew/tmp/git/authors svn://hg/GIC gic-pre-convert
+
+cd gic
+
+# make "local" branches out of all the svn branches
+cp .git/refs/remotes/* .git/refs/heads
+git remote add pre /home/frew/code/Work/gic-pre-convert
+git fetch pre
+
+
+touch .git/info/grafts
+
+echo "ee9739aa62bd7c6604d4f5ea7aef61f4bb874090 1de1f1883ac6ab0ef694e74d05a3458e0ca159ba" >> .git/info/grafts
+
+# flatten second commit into first as it's just a bunch of bogus files
+git checkout 4dd1f97f
+git reset --soft 106fa6f
+git commit --amend -C 106fa6f
+git rebase --onto HEAD 4dd1f97f master
+
+git filter-branch --tree-filter "\
+   ack --perl -f --print0 | xargs -0 perl -pi -e '                  \
+      s/\r\n/\n/g;                            # fix line endings    \
+      s/Inetpub/inetpub/g;                    # fix case of inetpub \
+      s{#!(?:/perl/bin/)?perl(\s+-w)?}{#!/usr/bin/env perl}; # fix shebang         \
+   ';                                                               \
+   find . \( -iname '*.pl' -o -iname '*.plx' -o -iname '*.plex' \) -print0 | \
+   xargs -0 -I frew chmod +x frew"
+
+# ditch all pre-conversion objects forcefully
+git reflog expire --all --expire=now
+git gc --aggressive
+
+git prune
+git fsck --full
+
