@@ -3,6 +3,62 @@
 use 5.12.0;
 use warnings;
 
+my $svn_id;
+my $msg = '';
+
+while (<>) {
+   if ( /^git-svn-id: (.*)/ ) {
+      $svn_id = $1;
+   } else {
+      $msg .= $_;
+   }
+}
+
+# if this is a merge commit, rewrite the message to have a better "subject"
+if ( $msg =~ /^\s*r\d+\@.*\(orig r\d+\):/ ) {
+   # print the original message
+   $msg =~ s/^ //mg;
+
+   my ( $to, @from ) = ( split /\s+/, `git show -s --pretty='format:%P' $ENV{GIT_COMMIT}` );
+
+   if (scalar @from) {
+      print "Merge ",
+         join(", ", map { format_branch($_) } @from),
+         " into ",
+         format_branch($to),
+         "\n\n", $msg;
+   } else {
+      my @dumb = grep { /^\s*r\d+\@.*\(orig r\d+\):/ } split /\n/, $msg;
+      my @msg = map { /^\s*(?:\*\s+)?(.*?)\s*$/; $1 } grep { !/^\s*r\d+\@.*\(orig r\d+\):/ } split /\n/, $msg;
+      print join "\n", @msg, @dumb;
+   }
+} else {
+   if ( $msg =~ s/^\s*r\d+\@.*:.*$//m ) {
+      $msg =~ s/^ //mg;
+   }
+
+   print join "\n", map { /^\s*(?:\*\s+)?(.*?)\s*$/; $1 } split /\n/, $msg;
+}
+
+sub format_branch {
+   my $commit = shift;
+
+   my $body = `git show -s --pretty='format:%b' $commit`;
+
+   if ( $body =~ m{git-svn-id: .*/branches/(.*?)\@} ) {
+      return "'$1'";
+   } elsif ( $body =~ m{git-svn-id: .*/trunk\@} ) {
+      return "'trunk'";
+   } elsif ( $body =~ m{git-svn-id: .*/trunk/SQL-Abstract\@} ) {
+      return "'trunk'";
+   } elsif ( $body =~ /\@r(\d+)/ ) {
+      return $1;
+   } else {
+      die "unknown rev for $commit";
+   }
+}
+
+__END__
 
 # r2279@metis (orig r1):  nwiger | 2006-09-28 04:06:33 +0100
 # initial "import"
@@ -34,11 +90,7 @@ my @out;
 open my $fh, "<", "/home/frew/parentlist";
 my @p = grep { $_ && $_ ne '-p' } split /\s/, <$fh>;
 if (@p > 1) {
-   my $x = `git name-rev --name-only $p[0]`;
-   chomp $x;
-   my $y = `git name-rev --name-only $p[1]`;
-   chomp $y;
-   print "Merge branch ($p[0]) $y into ($p[1]) $x"
+   print ""
 } else {
    my @lines = <>;
    for (@lines) {

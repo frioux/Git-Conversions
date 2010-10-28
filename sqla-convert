@@ -4,73 +4,65 @@
 #       but it's an ok example of how you might integrate a couple weird
 #       SVN repos together
 
-# git svn clone --no-metadata --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/2.000 sqla2
-git svn clone --no-metadata --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/1.x sqla
+git svn clone --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/2.000 sqla2
+git svn clone --authors-file=/home/frew/code/Haarg-convert/convert-git-dbic/authors --stdlayout http://dev.catalyst.perl.org/repos/bast/SQL-Abstract/1.x sqla
 
 cd sqla
 
 # make "local" branches out of all the svn branches
 cp .git/refs/remotes/* .git/refs/heads
-#git remote add sqla2 /home/frew/code/sqla2
-#git fetch sqla2
-#git branch sqla2 sqla2/master
+git remote add sqla2 /home/frew/code/sqla2
+git fetch sqla2
 
 touch .git/info/grafts
 
-## fix rob's fail
-echo "4855fa65e808af7b0bbeb1a45b5cceb3c0287b07 252d8b487a902c67bd2dc96f507767420e3f0c33" >> .git/info/grafts
+# fix rob's fail
+echo "66ea9a3e96731deb3ef3b86f9f2c90312eb87366 28c8cbc18b47bd8fcec5c433425e188845b46d25" >> .git/info/grafts
 
-## fix ldami's fail
-echo "5777dbae43696839fffb72b4c8282437e3aeb17b bee1f9a4f4cefd010c04c346d3ec90f7dc95541c" >> .git/info/grafts
+# fix ldami's fail
+echo "19b49611ea0dd27a065ca523963b822de0849a66 08621652ee2124fbfcee2bbb8b42c2d59adee61d" >> .git/info/grafts
 
 # my first fail (branch for SQL::Abstract::Tree!)
-echo "1b0730dd289949c31a458cc212abdce9578d2e8e de763865ec7f9b807f08d7f2c033fb5bb4b56187" >> .git/info/grafts
+echo "ef73512183f83714333a487a1e229bfb6e5fcac2 aef8f7d74ad0a3347799ef66ed496c813823b12c" >> .git/info/grafts
 
 # my second fail (YASQLATBranch)
-echo "ddfdfe759319211aa07239f2ad2a6c187b3d2c56 de763865ec7f9b807f08d7f2c033fb5bb4b56187" >> .git/info/grafts
+echo "62e02eec5a0e82183bb881e4ba767f4bbc36e2db aef8f7d74ad0a3347799ef66ed496c813823b12c" >> .git/info/grafts
 
 # branch commits lost due to rewriting so we can at least look at them for a while
-git branch sqlat-1 c76842f233e1c75b73c2c08875120a0a1f35154f
-git branch sqlat-2 eabf47b23d216a71f6f91583e3f6446c83d8e546
+git branch sqlat-1 a4d19942c440a3ad5bb10a12ee6127983c46e8d9
+git branch sqlat-2 ef73512183f83714333a487a1e229bfb6e5fcac2
 
-# I use -d /tmp because it's a tmp-fs on my computer, so it should be faster
-git filter-branch -d /tmp/.git-rewrite/ -f \
-   --parent-filter 'git stash-parents' \
-   --msg-filter 'git fix-ghetto-message' \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/carp_debug \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/cleanup  \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/fix_nesting \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/in_between \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/1.50_RC-extraparens \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/log-sprintf \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/master \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-1 \
-   bee1f9a4f4cefd010c04c346d3ec90f7dc95541c..refs/heads/sqlat-2
+# The following branches were merged, so we delete them so that we don't have to rewrite them
+git branch -d arbitrary_op_nesting
+git branch -d test_refactor
+git branch -d bool_operator
+git branch -d special_op_handling
+git branch -d and_or
+git branch -d 1.50_RC
+git branch -d trunk@3093
+git branch -d trunk
+
+## I use -d /tmp because it's a tmp-fs on my computer, so it should be faster
+git filter-branch --msg-filter 'git fix-ghetto-message' \
+   refs/heads/carp_debug refs/heads/cleanup refs/heads/fix_nesting \
+   refs/heads/in_between refs/heads/1.50_RC-extraparens \
+   refs/heads/log-sprintf refs/heads/master refs/heads/sqlat-1 \
+   refs/heads/sqlat-2 refs/heads/sqla-tree
 
 rm .git/refs/original -rf
 rm .git/refs/remotes -rf
 
-# The following branches were merged, so we delete them so that we don't have to rewrite them
-git branch -D sqla-tree
-git branch -D arbitrary_op_nesting
-git branch -D test_refactor
-git branch -D bool_operator
-git branch -D special_op_handling
-git branch -D and_or
-git branch -D 1.50_RC
-git branch -D trunk@3093
-git branch -D trunk
 
-# ditch all pre-conversion objects forcefully
+## ditch all pre-conversion objects forcefully
 git reflog expire --all --expire=now
 git gc --aggressive
 
 git prune
 git fsck --full
 
-#git branch -D carp-debug
-#git branch -D cleanup
-#git branch -D fix_nesting
-#git branch -D in_between
-#git branch -D 1.50_RC-extraparens
-#git branch -D 1.50_RC-extraparens
+##git branch -D carp-debug
+##git branch -D cleanup
+##git branch -D fix_nesting
+##git branch -D in_between
+##git branch -D 1.50_RC-extraparens
+##git branch -D 1.50_RC-extraparens
