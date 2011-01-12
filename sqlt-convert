@@ -1,0 +1,24 @@
+#!/bin/bash
+
+git svn clone --authors-file=sqlt-authors -Ttrunk/sqlfairy -bbranches -bhistoric_branches -ttags https://sqlfairy.svn.sourceforge.net/svnroot/sqlfairy sqlt
+
+cd sqlt
+
+# make "local" branches out of all the svn branches
+cp .git/refs/remotes/* .git/refs/heads
+git remote add sqla2 /home/frew/code/sqla2
+git fetch sqla2
+
+## I use -d /tmp because it's a tmp-fs on my computer, so it should be faster
+#git filter-branch --msg-filter 'git fix-ghetto-message' \
+   #refs/heads/carp_debug refs/heads/cleanup refs/heads/fix_nesting \
+   #refs/heads/in_between refs/heads/1.50_RC-extraparens \
+   #refs/heads/log-sprintf refs/heads/master refs/heads/sqlat-1 \
+   #refs/heads/sqlat-2 refs/heads/sqla-tree
+
+## ditch all pre-conversion objects forcefully
+git reflog expire --all --expire=now
+git gc --aggressive
+
+git prune
+git fsck --full
