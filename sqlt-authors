@@ -3,18 +3,19 @@ acestus = Ricardo Signes <rjbs@cpan.org>
 
 # actual commits
 aaron_trevana = Aaron Trevena <teejay@cpan.org>
+aaron_trevena = Aaron Trevena <teejay@cpan.org>
 acmoore = Andrew Moore <amoore@cpan.org>
 alexhartmaier = Alexander Hartmaier <abraxxa@cpan.org>
 allenday = Allen Day <allenday@users.sourceforge.net>
 angiuoli = Sam Angiuoli <angiuoli@users.sourceforge.net>
 arodland = Andrew Rodland <arodland@cpan.org>
 ashberlin = Ash Berlin <ash_github@firemirror.com>
-boconnor = Brian O'Connor <boconner@users.sourceforge.net>
+boconnor = Brian O'Connor <briandoconnor@gmail.com>
 caelum = Rafael Kitover <rkitover@cpan.org>
-cahille = Earl Cahill <cahille@users.sourceforge.net>
+cahille = Earl Cahill <cahille@yahoo.com>
 cmungall = Chris Mungall <cjmungall@lbl.gov>
 dlc = Darren Chamberlain <dlc@sevenroot.org>
-duality72 = Chris Hilton <chilton@alterpoint.com>
+duality72 = Chris Hilton <chilton@thoughtworks.com>
 faxm0dem = Fabien Wernli <cpan@faxm0dem.org>
 grommit = Mark Addison <grommit@users.sourceforge.net>
 jawnsy = Jonathan Yu <frequency@cpan.org>
@@ -30,7 +31,7 @@ rossta = Ross Smith II <rossta@users.sf.net>
 ruoso = Daniel Ruoso <daniel@ruoso.com>
 sbennett = Stephen Bennett <stephen@freenode.net>
 schiffbruechige = Jess Robinson <castaway@desert-island.me.uk>
-scottcain = Scott Cain <scottcain@users.sourceforge.net>
+scottcain = Scott Cain <scott@scottcain.net>
 wallacereis = Wallace Reis <wreis@cpan.org>
 
 # no commits
@@ -39,3 +40,6 @@ christot = Chris To <christot@users.sourceforge.net>
 gugod = Kang-ming Liu <gugod@users.sourceforge.net>
 msaffitz = Michael Saffitz<smdwilliams@users.sourceforge.net>
 smdwilliams = Jason Williams <smdwilliams@users.sourceforge.net>
+
+(no author) = CVS2SVN <fail@fail.com>
+root = CVS2SVN <fail@fail.com>

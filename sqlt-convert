@@ -1,20 +1,97 @@
 #!/bin/bash
 
-git svn clone --authors-file=sqlt-authors -Ttrunk/sqlfairy -bbranches -bhistoric_branches -ttags https://sqlfairy.svn.sourceforge.net/svnroot/sqlfairy sqlt
+git svn clone --authors-file=sqlt-authors -Ttrunk/sqlfairy -bbranches -bhistoric_branches -ttags https://sqlfairy.svn.sourceforge.net/svnroot/sqlfairy ../sqlt
 
-cd sqlt
+cd ../sqlt
 
-# make "local" branches out of all the svn branches
-cp .git/refs/remotes/* .git/refs/heads
-git remote add sqla2 /home/frew/code/sqla2
-git fetch sqla2
+## make "local" branches out of all the svn branches
+#cp .git/refs/remotes/* .git/refs/heads
 
-## I use -d /tmp because it's a tmp-fs on my computer, so it should be faster
-#git filter-branch --msg-filter 'git fix-ghetto-message' \
-   #refs/heads/carp_debug refs/heads/cleanup refs/heads/fix_nesting \
-   #refs/heads/in_between refs/heads/1.50_RC-extraparens \
-   #refs/heads/log-sprintf refs/heads/master refs/heads/sqlat-1 \
-   #refs/heads/sqlat-2 refs/heads/sqla-tree
+git checkout -b RELEASE-0-07-RC2 remotes/RELEASE-0-07-RC2
+git checkout -b RELEASE-0-07-RC2@1113 remotes/RELEASE-0-07-RC2@1113
+git checkout -b Turnkey-1-1-patches remotes/Turnkey-1-1-patches
+git checkout -b Turnkey-1-1-patches@545 remotes/Turnkey-1-1-patches@545
+git checkout -b darren-1_0 remotes/darren-1_0
+git checkout -b diff-refactor remotes/diff-refactor
+git checkout -b diff-refactor@1315 remotes/diff-refactor@1315
+git checkout -b dlc-sqltsh-branch remotes/dlc-sqltsh-branch
+git checkout -b dlc-sqltsh-branch@611 remotes/dlc-sqltsh-branch@611
+git checkout -b foo remotes/foo
+git checkout -b oracle_datatypes remotes/oracle_datatypes
+git checkout -b oracle_quotes remotes/oracle_quotes
+git checkout -b oracle_quotes@1652 remotes/oracle_quotes@1652
+git checkout -b pg_proc remotes/pg_proc
+git checkout -b release-0-10 remotes/release-0-10
+git checkout -b roundtrip remotes/roundtrip
+git checkout -b tags/RELEASE-0_01 remotes/tags/RELEASE-0_01
+git checkout -b tags/RELEASE-0_01@103 remotes/tags/RELEASE-0_01@103
+git checkout -b tags/RELEASE-0_02 remotes/tags/RELEASE-0_02
+git checkout -b tags/RELEASE-0_02@340 remotes/tags/RELEASE-0_02@340
+git checkout -b tags/Release-0-04 remotes/tags/Release-0-04
+git checkout -b tags/Release-0-04@766 remotes/tags/Release-0-04@766
+git checkout -b tags/Release-0-06 remotes/tags/Release-0-06
+git checkout -b tags/Release-0-06@1031 remotes/tags/Release-0-06@1031
+git checkout -b tags/Turnkey_Stable_04-16-2004 remotes/tags/Turnkey_Stable_04-16-2004
+git checkout -b tags/Turnkey_Stable_04-16-2004@950 remotes/tags/Turnkey_Stable_04-16-2004@950
+git checkout -b tags/bar remotes/tags/bar
+git checkout -b tags/dlc-sqltsh-base remotes/tags/dlc-sqltsh-base
+git checkout -b tags/dlc-sqltsh-base@615 remotes/tags/dlc-sqltsh-base@615
+git checkout -b tags/help remotes/tags/help
+git checkout -b tags/help@773 remotes/tags/help@773
+git checkout -b tags/mda-2k51201 remotes/tags/mda-2k51201
+git checkout -b tags/mda-2k51201@1186 remotes/tags/mda-2k51201@1186
+git checkout -b tags/pre-schema-object remotes/tags/pre-schema-object
+git checkout -b tags/pre-schema-object@1052 remotes/tags/pre-schema-object@1052
+git checkout -b trunk remotes/trunk
+git checkout -b xmi remotes/xmi
+git checkout -b xmi@1445 remotes/xmi@1445
+
+git filter-branch --msg-filter 'git fix-ghetto-message' \
+   refs/heads/master \
+   refs/heads/RELEASE-0-07-RC2 \
+   refs/heads/RELEASE-0-07-RC2@1113 \
+   refs/heads/Turnkey-1-1-patches \
+   refs/heads/Turnkey-1-1-patches@545 \
+   refs/heads/darren-1_0 \
+   refs/heads/diff-refactor \
+   refs/heads/diff-refactor@1315 \
+   refs/heads/dlc-sqltsh-branch \
+   refs/heads/dlc-sqltsh-branch@611 \
+   refs/heads/foo \
+   refs/heads/master \
+   refs/heads/oracle_datatypes \
+   refs/heads/oracle_quotes \
+   refs/heads/oracle_quotes@1652 \
+   refs/heads/pg_proc \
+   refs/heads/release-0-10 \
+   refs/heads/roundtrip \
+   refs/heads/tags/RELEASE-0_01 \
+   refs/heads/tags/RELEASE-0_01@103 \
+   refs/heads/tags/RELEASE-0_02 \
+   refs/heads/tags/RELEASE-0_02@340 \
+   refs/heads/tags/Release-0-04 \
+   refs/heads/tags/Release-0-04@766 \
+   refs/heads/tags/Release-0-06 \
+   refs/heads/tags/Release-0-06@1031 \
+   refs/heads/tags/Turnkey_Stable_04-16-2004 \
+   refs/heads/tags/Turnkey_Stable_04-16-2004@950 \
+   refs/heads/tags/bar \
+   refs/heads/tags/dlc-sqltsh-base \
+   refs/heads/tags/dlc-sqltsh-base@615 \
+   refs/heads/tags/help \
+   refs/heads/tags/help@773 \
+   refs/heads/tags/mda-2k51201 \
+   refs/heads/tags/mda-2k51201@1186 \
+   refs/heads/tags/pre-schema-object \
+   refs/heads/tags/pre-schema-object@1052 \
+   refs/heads/trunk \
+   refs/heads/xmi \
+   refs/heads/xmi@1445
+
+git tag v0.01 -m 'Release 0.01' refs/heads/tags/RELEASE-0_01
+git tag v0.02 -m 'Release 0.02' refs/heads/tags/RELEASE-0_02
+git tag v0.04 -m 'Release 0.04' refs/heads/tags/Release-0-04
+git tag v0.06 -m 'Release 0.06' refs/heads/tags/Release-0-06
 
 ## ditch all pre-conversion objects forcefully
 git reflog expire --all --expire=now

@@ -45,16 +45,16 @@ sub format_branch {
 
    my $body = `git show -s --pretty='format:%b' $commit`;
 
-   if ( $body =~ m{git-svn-id: .*/branches/(.*?)\@} ) {
+   if ( $body =~ m{git-svn-id: .*/(?:historic_)?branches/(.*?)\@} ) {
       return "'$1'";
-   } elsif ( $body =~ m{git-svn-id: .*/trunk\@} ) {
+   } elsif ( $body =~ m{git-svn-id: .*/trunk(?:/sqlfairy)?\@} ) {
       return "'trunk'";
-   } elsif ( $body =~ m{git-svn-id: .*/trunk/SQL-Abstract\@} ) {
+   } elsif ( $body =~ m{git-svn-id: .*/trunk/sqlfairy\@} ) {
       return "'trunk'";
    } elsif ( $body =~ /\@r(\d+)/ ) {
       return $1;
    } else {
-      die "unknown rev for $commit";
+      die "unknown rev for $commit\n$body";
    }
 }
 
