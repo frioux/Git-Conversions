@@ -1,0 +1,112 @@
+#!/bin/bash
+
+mkdir ../mech
+cd ../mech
+git init
+git remote add 0-www-automate-pre-fork file:///home/frew/code/0-www-automate-pre-fork
+git remote add 1-backpan-for-things-before-0.45 file:///home/frew/code/1-backpan-for-things-before-0.45
+git remote add 2-sourceforge-cvs-repo file:///home/frew/code/2-sourceforge-cvs-repo
+git remote add 3-svn.perl.org file:///home/frew/code/3-svn.perl.org
+git remote add 4-code.google.com file:///home/frew/code/4-code.google.com
+
+git remote | xargs -n1 git fetch
+
+touch .git/info/grafts
+
+git checkout -b www-automate/cpan/master remotes/0-www-automate-pre-fork/cpan/master
+git checkout -b www-automate/master remotes/0-www-automate-pre-fork/master
+git checkout -b backpan/cpan/master remotes/1-backpan-for-things-before-0.45/cpan/master
+git checkout -b backpan/master remotes/1-backpan-for-things-before-0.45/master
+git checkout -b sourceforge/master remotes/2-sourceforge-cvs-repo/master
+git checkout -b sourceforge/none remotes/2-sourceforge-cvs-repo/none
+git checkout -b sourceforge/origin remotes/2-sourceforge-cvs-repo/origin
+git checkout -b perl/master remotes/3-svn.perl.org/master
+git checkout -b google/master remotes/4-code.google.com/master
+git checkout -b master google/master
+
+# Note, if tags collide git doesn't do anything
+
+# www-automate -> backpan
+echo "ee2688440ef31883b072df230785213a33cf3589 0b49ee13b33eb9ff43080f7fd2a258a729ab08a5" >> .git/info/grafts
+
+# backpan -> sourceforge
+echo "9803c2267a9a728ce5e250102db68e0b9d24f2f7 db66793df603099d32fc2c12f95182b04df06dc5" >> .git/info/grafts
+
+# sourceforge -> perl
+echo "ff579016705083159a5a5cdfbcd0904ea05b9ac9 2cb02e96e018b0c0ac00e87143ccb9c673d59b6a" >> .git/info/grafts
+
+# perl -> google code
+echo "5c099f5680cae53918c79abc5a74d2a76947e47f ec4264001d5f942bf06a5dda042b44e6470645e5" >> .git/info/grafts
+
+git filter-branch --msg-filter 'sed -e "/^git-svn-id:/d"' --env-filter '
+if [ "$GIT_AUTHOR_EMAIL" = "andy@petdance.com" ]; then export GIT_AUTHOR_NAME="Andy Lester"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "petdance" ]; then export GIT_AUTHOR_EMAIL="andy@petdance.com"; export GIT_AUTHOR_NAME="Andy Lester"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "petdance@50811bd7-b8ce-0310-adc1-d9db26280581" ]; then export GIT_AUTHOR_EMAIL="andy@petdance.com"; export GIT_AUTHOR_NAME="Andy Lester"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "petdance@fa6c7475-4f37-0410-a643-9d661a9e9720" ]; then export GIT_AUTHOR_EMAIL="andy@petdance.com"; export GIT_AUTHOR_NAME="Andy Lester"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "corion" ]; then export GIT_AUTHOR_EMAIL="corion@cpan.org"; export GIT_AUTHOR_NAME="Max Maischein"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "markstos@50811bd7-b8ce-0310-adc1-d9db26280581" ]; then export GIT_AUTHOR_EMAIL="mark@summersault.com"; export GIT_AUTHOR_NAME="Mark Stosberg"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "markjugg" ]; then export GIT_AUTHOR_EMAIL="mark@summersault.com"; export GIT_AUTHOR_NAME="Mark Stosberg"; fi
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME";
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL";
+' $(git branch | cut -b3- | xargs) $(git tag | xargs)
+
+OLDTAGS=$(git tag | xargs)
+
+git tag v0.10 -m 'Release 0.10' refs/tags/0.10
+git tag v0.20 -m 'Release 0.20' refs/tags/0.20
+git tag v0.21 -m 'Release 0.21' refs/tags/0.21
+git tag v0.30 -m 'Release 0.30' refs/tags/0.30
+git tag v0.31 -m 'Release 0.31' refs/tags/0.31
+git tag v0.32 -m 'Release 0.32' refs/tags/0.32
+git tag v0.33 -m 'Release 0.33' refs/tags/0.33
+git tag v0.35 -m 'Release 0.35' refs/tags/0.35
+git tag v0.36 -m 'Release 0.36' refs/tags/0.36
+git tag v0.37 -m 'Release 0.37' refs/tags/0.37
+git tag v0.38 -m 'Release 0.38' refs/tags/0.38
+git tag v0.39 -m 'Release 0.39' refs/tags/0.39
+git tag v0.40 -m 'Release 0.40' refs/tags/0.40
+git tag v0.41 -m 'Release 0.41' refs/tags/0.41
+git tag v0.42 -m 'Release 0.42' refs/tags/0.42
+git tag v0.43 -m 'Release 0.43' refs/tags/0.43
+git tag v0.44 -m 'Release 0.44' refs/tags/0.44
+git tag v0.44-plus -m 'Release 0.44-plus (wtf)?' refs/tags/v0-44plus
+git tag v0.45 -m 'Release 0.45' refs/tags/RELEASE_0_45
+git tag v0.46 -m 'Release 0.46' refs/tags/RELEASE_0_46
+git tag v0.47 -m 'Release 0.47' refs/tags/RELEASE_0_47
+git tag v0.48 -m 'Release 0.48' refs/tags/RELEASE_0_48
+git tag v0.49 -m 'Release 0.49' refs/tags/RELEASE_0_49
+git tag v0.50 -m 'Release 0.50' refs/tags/RELEASE_0_50
+git tag v0.51 -m 'Release 0.51' refs/tags/RELEASE_0_51
+git tag v0.52 -m 'Release 0.52' refs/tags/RELEASE_0_52
+git tag v0.53 -m 'Release 0.53' refs/tags/RELEASE_0_53
+git tag v0.54 -m 'Release 0.54' refs/tags/RELEASE_0_54
+git tag v0.55 -m 'Release 0.55' refs/tags/RELEASE_0_55
+git tag v0.56 -m 'Release 0.56' refs/tags/RELEASE_0_56
+git tag v0.57 -m 'Release 0.57' refs/tags/RELEASE_0_57
+git tag v0.58 -m 'Release 0.58' refs/tags/RELEASE_0_58
+git tag v0.59 -m 'Release 0.59' refs/tags/RELEASE_0_59
+git tag v0.60 -m 'Release 0.60' refs/tags/RELEASE_0_60
+git tag v0.61 -m 'Release 0.61' refs/tags/RELEASE_0_61
+git tag v0.62 -m 'Release 0.62' refs/tags/RELEASE_0_62
+git tag v0.63 -m 'Release 0.63' refs/tags/RELEASE_0_63
+git tag v0.64 -m 'Release 0.64' refs/tags/RELEASE_0_64
+git tag v0.65 -m 'Release 0.65' refs/tags/RELEASE_0_65
+git tag v0.66 -m 'Release 0.66' refs/tags/RELEASE_0_66
+git tag v0.69_01 -m 'Release 0.69_01' refs/tags/RELEASE_0_69_01
+git tag v0.70 -m 'Release 0.70' refs/tags/RELEASE_0_70
+git tag v0.71_01 -m 'Release 0.71_01' refs/tags/RELEASE_0_71_01
+git tag v0.71_02 -m 'Release 0.71_02' refs/tags/RELEASE_0_71_02
+git tag v0.72 -m 'Release 0.72' refs/tags/RELEASE_0_72
+git tag v0.73_03 -m 'Release 0.73_03' refs/tags/RELEASE_0_73_03
+git tag v0.74 -m 'Release 0.74' refs/tags/RELEASE_0_74
+git tag v0.75_01 -m 'Release 0.75_01' refs/tags/RELEASE_0_75_01
+git tag v0.75_02 -m 'Release 0.75_02' refs/tags/RELEASE_0_75_02
+git tag v0.76 -m 'Release 0.76' refs/tags/RELEASE_0_76
+git tag v1.00  -m 'Release 1.00' refs/tags/RELEASE_1_00
+git tag v1.03_01  -m 'Release 1.03_01' refs/tags/RELEASE_1_03_01
+git tag v1.03_02  -m 'Release 1.03_02' refs/tags/RELEASE_1_03_02
+git tag v1.04  -m 'Release 1.04' refs/tags/RELEASE_1_04
+git tag v1.05_01  -m 'Release 1.05_01' refs/tags/RELEASE_1_05_01
+git tag v1.05_04  -m 'Release 1.05_04' refs/tags/RELEASE_1_05_04
+git tag v1.06  -m 'Release 1.06' refs/tags/RELEASE_1_06
+git tag -d $OLDTAGS
