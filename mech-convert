@@ -46,61 +46,116 @@ export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL";
 
 OLDTAGS=$(git tag | xargs)
 
-git tag v0.10 -m 'Release 0.10' refs/tags/0.10
-git tag v0.20 -m 'Release 0.20' refs/tags/0.20
-git tag v0.21 -m 'Release 0.21' refs/tags/0.21
-git tag v0.30 -m 'Release 0.30' refs/tags/0.30
-git tag v0.31 -m 'Release 0.31' refs/tags/0.31
-git tag v0.32 -m 'Release 0.32' refs/tags/0.32
-git tag v0.33 -m 'Release 0.33' refs/tags/0.33
-git tag v0.35 -m 'Release 0.35' refs/tags/0.35
-git tag v0.36 -m 'Release 0.36' refs/tags/0.36
-git tag v0.37 -m 'Release 0.37' refs/tags/0.37
-git tag v0.38 -m 'Release 0.38' refs/tags/0.38
-git tag v0.39 -m 'Release 0.39' refs/tags/0.39
-git tag v0.40 -m 'Release 0.40' refs/tags/0.40
-git tag v0.41 -m 'Release 0.41' refs/tags/0.41
-git tag v0.42 -m 'Release 0.42' refs/tags/0.42
-git tag v0.43 -m 'Release 0.43' refs/tags/0.43
-git tag v0.44 -m 'Release 0.44' refs/tags/0.44
-git tag v0.44-plus -m 'Release 0.44-plus (wtf)?' refs/tags/v0-44plus
-git tag v0.45 -m 'Release 0.45' refs/tags/RELEASE_0_45
-git tag v0.46 -m 'Release 0.46' refs/tags/RELEASE_0_46
-git tag v0.47 -m 'Release 0.47' refs/tags/RELEASE_0_47
-git tag v0.48 -m 'Release 0.48' refs/tags/RELEASE_0_48
-git tag v0.49 -m 'Release 0.49' refs/tags/RELEASE_0_49
-git tag v0.50 -m 'Release 0.50' refs/tags/RELEASE_0_50
-git tag v0.51 -m 'Release 0.51' refs/tags/RELEASE_0_51
-git tag v0.52 -m 'Release 0.52' refs/tags/RELEASE_0_52
-git tag v0.53 -m 'Release 0.53' refs/tags/RELEASE_0_53
-git tag v0.54 -m 'Release 0.54' refs/tags/RELEASE_0_54
-git tag v0.55 -m 'Release 0.55' refs/tags/RELEASE_0_55
-git tag v0.56 -m 'Release 0.56' refs/tags/RELEASE_0_56
-git tag v0.57 -m 'Release 0.57' refs/tags/RELEASE_0_57
-git tag v0.58 -m 'Release 0.58' refs/tags/RELEASE_0_58
-git tag v0.59 -m 'Release 0.59' refs/tags/RELEASE_0_59
-git tag v0.60 -m 'Release 0.60' refs/tags/RELEASE_0_60
-git tag v0.61 -m 'Release 0.61' refs/tags/RELEASE_0_61
-git tag v0.62 -m 'Release 0.62' refs/tags/RELEASE_0_62
-git tag v0.63 -m 'Release 0.63' refs/tags/RELEASE_0_63
-git tag v0.64 -m 'Release 0.64' refs/tags/RELEASE_0_64
-git tag v0.65 -m 'Release 0.65' refs/tags/RELEASE_0_65
-git tag v0.66 -m 'Release 0.66' refs/tags/RELEASE_0_66
-git tag v0.69_01 -m 'Release 0.69_01' refs/tags/RELEASE_0_69_01
-git tag v0.70 -m 'Release 0.70' refs/tags/RELEASE_0_70
-git tag v0.71_01 -m 'Release 0.71_01' refs/tags/RELEASE_0_71_01
-git tag v0.71_02 -m 'Release 0.71_02' refs/tags/RELEASE_0_71_02
-git tag v0.72 -m 'Release 0.72' refs/tags/RELEASE_0_72
-git tag v0.73_03 -m 'Release 0.73_03' refs/tags/RELEASE_0_73_03
-git tag v0.74 -m 'Release 0.74' refs/tags/RELEASE_0_74
-git tag v0.75_01 -m 'Release 0.75_01' refs/tags/RELEASE_0_75_01
-git tag v0.75_02 -m 'Release 0.75_02' refs/tags/RELEASE_0_75_02
-git tag v0.76 -m 'Release 0.76' refs/tags/RELEASE_0_76
-git tag v1.00  -m 'Release 1.00' refs/tags/RELEASE_1_00
-git tag v1.03_01  -m 'Release 1.03_01' refs/tags/RELEASE_1_03_01
-git tag v1.03_02  -m 'Release 1.03_02' refs/tags/RELEASE_1_03_02
-git tag v1.04  -m 'Release 1.04' refs/tags/RELEASE_1_04
-git tag v1.05_01  -m 'Release 1.05_01' refs/tags/RELEASE_1_05_01
-git tag v1.05_04  -m 'Release 1.05_04' refs/tags/RELEASE_1_05_04
-git tag v1.06  -m 'Release 1.06' refs/tags/RELEASE_1_06
+function tag {
+   export GIT_COMMITTER_NAME="$(git show $2 | head -n2 | tail -n1 | cut -b9- | cut -d'<' -f1)"
+   export GIT_COMMITTER_EMAIL="$(git show $2 | head -n2 | tail -n1 | cut -b9- | cut -d'<' -f2 | cut -d'>' -f1)"
+   export GIT_COMMITTER_DATE="$(git show $2 | head -n3 | tail -n1 | cut -b9- )"
+   git tag "v$1" -m "Release $1" refs/tags/$2
+}
+
+tag 0.10 0.10
+tag 0.20 0.20
+tag 0.21 0.21
+
+# these have the wrong dates {
+tag 0.30 0.30
+tag 0.31 0.31
+tag 0.32 0.32
+tag 0.33 0.33
+tag 0.35 0.35
+tag 0.36 0.36
+tag 0.37 0.37
+tag 0.38 0.38
+tag 0.39 0.39
+tag 0.40 0.40
+tag 0.41 0.41
+tag 0.42 0.42
+tag 0.43 0.43
+tag 0.44 0.44
+# }
+
+tag 0.44-plus v0-44plus
+tag 0.45 RELEASE_0_45
+tag 0.46 RELEASE_0_46
+tag 0.47 RELEASE_0_47
+tag 0.48 RELEASE_0_48
+tag 0.49 RELEASE_0_49
+tag 0.50 RELEASE_0_50
+tag 0.51 RELEASE_0_51
+tag 0.52 RELEASE_0_52
+tag 0.53 RELEASE_0_53
+tag 0.54 RELEASE_0_54
+tag 0.55 RELEASE_0_55
+tag 0.56 RELEASE_0_56
+tag 0.57 RELEASE_0_57
+tag 0.58 RELEASE_0_58
+tag 0.59 RELEASE_0_59
+tag 0.60 RELEASE_0_60
+tag 0.61 RELEASE_0_61
+tag 0.62 RELEASE_0_62
+tag 0.63 RELEASE_0_63
+tag 0.64 RELEASE_0_64
+tag 0.65 RELEASE_0_65
+tag 0.66 RELEASE_0_66
+tag 0.69_01  RELEASE_0_69_01
+tag 0.70     RELEASE_0_70
+tag 0.71_01  RELEASE_0_71_01
+tag 0.71_02  RELEASE_0_71_02
+tag 0.72     RELEASE_0_72
+tag 0.73_03  RELEASE_0_73_03
+tag 0.74     RELEASE_0_74
+tag 0.75_01  RELEASE_0_75_01
+tag 0.75_02  RELEASE_0_75_02
+tag 0.76     RELEASE_0_76
+tag 1.00     RELEASE_1_00
+tag 1.03_01  RELEASE_1_03_01
+tag 1.03_02  RELEASE_1_03_02
+tag 1.04     RELEASE_1_04
+tag 1.05_01  RELEASE_1_05_01
+tag 1.05_04  RELEASE_1_05_04
+tag 1.06     RELEASE_1_06
+
+# missing tags {
+#
+# 1.08 abf9a4694ce0f090ffd8d60d669b48f14be23e9b
+# 1.10 6e943a379e790e0616074166519af452539a4f79
+# 1.11_01 dc486daa73cdfa54d6286559aa0fb2d061d985e7
+# 1.11_02 3fb75e8472dbd091c8cbb8f6fa7fe03d9debc5a1
+# 1.12 c6b301cbc6460b96c6cc453bfd14225bedf85e6a
+# 1.13_01 503ab29d42fe809aa0d6a7a3f9e1ee5a300833d7
+# 1.14 132525eb76f0fd0331daea4658ba3901969db0e5
+# 1.16 30f8319b6be94ae30515c33ec9df971438ec6a9d
+# 1.17_01 18dfdbbb575eeb0e3f1d7ddfaef72c88bdcf6db2
+# 1.18 dd8b24c04562cb7a7a8aa2bd1c0accadb40183a4
+# 1.19_02 3c62d3e7f579745873b79f691f2ad7c12ec9b234
+# 1.20 1d0a9860d45711984c1a648395a9921f9c0ffb53
+# 1.21_01 a954691f0f588290b58ecb99468e91f2e0dcf1e2
+# 1.21_02 fad0707ad5533a82f6082a417704049a2065bcfc
+# 1.21_03 b6bdb6f07f2e09dcd98191b01057bfa4924491ae
+# 1.21_04 18187250785834a79ffdd244b0932b2e9c0d1956
+# 1.22 5a3f76599345d2fa2a14d46687b965444e09176f
+# 1.24 6f0c1c19af2cd422291cdaa79d69ec52d6df9c74
+# 1.26
+# 1.29_01 cdd73136002265ac586a146864f5c7c56270e574
+# 1.30 e3825449456eee6d47e5941defee5f11da18bd76
+# 1.31_01
+# 1.31_02
+# 1.32 fd53f68fd3cb08bf0351fc1290c707c958cfea80
+# 1.34 b2589eda5f006da38b9d40e7313213ed5617bccf
+# 1.49_01 9fbb917590c226eb97e15b5a42eec4b2a5e5efec
+# 1.50 1cda257746f222bad11f0e00e02ed611a6e7ad5f
+# 1.51_01 4dd97781728f22ff6f0ec4a9b9d2c0332e6b0bd3
+# 1.51_02 2cc93524d6a350d3e018767150b1e4f25d22cc1a
+# 1.51_03 74bfbf63c1e1a47d7da96452466a1ae9560b7130
+# 1.52 3fb9fcdb32f245f18eed6fecfb492f69611e9480
+# 1.54 6ecfb15991c52ae12725bceefde63cee38561d20
+# 1.56 3067b13bd2569053464d105e1d12ffb439504190
+# 1.58 8cb3350d13767fa2e716464b66331d46429abbe3
+# 1.60 b31d5736f6462b790ceed61cbade38db5d98c666
+# 1.62 f303193b44870c7cc7f56202d48ce1c07fd2c729
+# 1.64 af5398c17b8568859bd9b413fb7829386063f5c6
+# 1.66 b9c412ea6ae2228672ba90d124cd549e82e8a7ff
+#
+# }
+
 git tag -d $OLDTAGS
