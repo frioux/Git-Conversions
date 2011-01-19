@@ -29,6 +29,9 @@ echo "ff579016705083159a5a5cdfbcd0904ea05b9ac9 2cb02e96e018b0c0ac00e87143ccb9c67
 # perl -> google code
 echo "5c099f5680cae53918c79abc5a74d2a76947e47f ec4264001d5f942bf06a5dda042b44e6470645e5" >> .git/info/grafts
 
+# fix weird merge thing
+echo "bcdb6cdc02b02913cd72eac5433fa1c979bfd2e3 1d59578f1ea94520a67ce2e7b58d0aa3c7a7c1c8" >> .git/info/grafts
+
 git filter-branch --msg-filter 'sed -e "/^git-svn-id:/d"' --env-filter '
 if [ "$GIT_AUTHOR_EMAIL" = "andy@petdance.com" ]; then export GIT_AUTHOR_NAME="Andy Lester"; fi
 if [ "$GIT_AUTHOR_EMAIL" = "petdance" ]; then export GIT_AUTHOR_EMAIL="andy@petdance.com"; export GIT_AUTHOR_NAME="Andy Lester"; fi
