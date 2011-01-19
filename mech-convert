@@ -117,6 +117,11 @@ tag 1.06     RELEASE_1_06
 
 # missing tags {
 #
+# Note: these are my initial guesses as to which
+#       commits these tags should point to.  They
+#       could definitely be incorrect.  Just
+#       starting points.
+#
 # 1.08 abf9a4694ce0f090ffd8d60d669b48f14be23e9b
 # 1.10 6e943a379e790e0616074166519af452539a4f79
 # 1.11_01 dc486daa73cdfa54d6286559aa0fb2d061d985e7
