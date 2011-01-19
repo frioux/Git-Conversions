@@ -6,14 +6,18 @@ git init
 git remote add 0-www-automate-pre-fork file:///home/frew/code/0-www-automate-pre-fork
 git remote add 1-backpan-for-things-before-0.45 file:///home/frew/code/1-backpan-for-things-before-0.45
 git remote add 2-sourceforge-cvs-repo file:///home/frew/code/2-sourceforge-cvs-repo
-git remote add 3-svn.perl.org file:///home/frew/code/3-svn.perl.org
-git remote add 4-code.google.com file:///home/frew/code/4-code.google.com
+git remote add 3-svn-perl-org file:///home/frew/code/3-svn.perl.org
+git remote add 4-code-google-com file:///home/frew/code/4-code.google.com
 
 git fetch --all
 
-cp .git/refs/remotes/* .git/refs/heads -r
+cp .git/refs/remotes/0-* .git/refs/heads/www-automate-pre-fork -r
+cp .git/refs/remotes/1-* .git/refs/heads/backpan -r
+cp .git/refs/remotes/2-* .git/refs/heads/sourceforge -r
+cp .git/refs/remotes/3-* .git/refs/heads/perl -r
+cp .git/refs/remotes/4-* .git/refs/heads/google -r
 
-git co -b master refs/heads/4-code.google.com/master
+git co -b master refs/heads/google/master
 
 touch .git/info/grafts
 
