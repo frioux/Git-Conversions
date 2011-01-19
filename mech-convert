@@ -18,7 +18,7 @@ git co -b master refs/heads/4-code.google.com/master
 touch .git/info/grafts
 
 # www-automate -> backpan
-echo "ee2688440ef31883b072df230785213a33cf3589 0b49ee13b33eb9ff43080f7fd2a258a729ab08a5" >> .git/info/grafts
+echo "ee2688440ef31883b072df230785213a33cf3589 b763f26305a03173b432ad799ee08a55c757d133" >> .git/info/grafts
 
 # backpan -> sourceforge
 echo "9803c2267a9a728ce5e250102db68e0b9d24f2f7 db66793df603099d32fc2c12f95182b04df06dc5" >> .git/info/grafts
