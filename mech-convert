@@ -9,22 +9,13 @@ git remote add 2-sourceforge-cvs-repo file:///home/frew/code/2-sourceforge-cvs-r
 git remote add 3-svn.perl.org file:///home/frew/code/3-svn.perl.org
 git remote add 4-code.google.com file:///home/frew/code/4-code.google.com
 
-git remote | xargs -n1 git fetch
+git fetch --all
+
+cp .git/refs/remotes/* .git/refs/heads -r
+
+git co -b master refs/heads/4-code.google.com/master
 
 touch .git/info/grafts
-
-git checkout -b www-automate/cpan/master remotes/0-www-automate-pre-fork/cpan/master
-git checkout -b www-automate/master remotes/0-www-automate-pre-fork/master
-git checkout -b backpan/cpan/master remotes/1-backpan-for-things-before-0.45/cpan/master
-git checkout -b backpan/master remotes/1-backpan-for-things-before-0.45/master
-git checkout -b sourceforge/master remotes/2-sourceforge-cvs-repo/master
-git checkout -b sourceforge/none remotes/2-sourceforge-cvs-repo/none
-git checkout -b sourceforge/origin remotes/2-sourceforge-cvs-repo/origin
-git checkout -b perl/master remotes/3-svn.perl.org/master
-git checkout -b google/master remotes/4-code.google.com/master
-git checkout -b master google/master
-
-# Note, if tags collide git doesn't do anything
 
 # www-automate -> backpan
 echo "ee2688440ef31883b072df230785213a33cf3589 0b49ee13b33eb9ff43080f7fd2a258a729ab08a5" >> .git/info/grafts
