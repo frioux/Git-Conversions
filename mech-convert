@@ -50,33 +50,42 @@ export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL";
 
 OLDTAGS=$(git tag | xargs)
 
-function tag {
+function mtag {
+   export GIT_COMMITTER_NAME="$(git show $2 | head -n2 | tail -n1 | cut -b9- | cut -d'<' -f1)"
+   export GIT_COMMITTER_EMAIL="$(git show $2 | head -n2 | tail -n1 | cut -b9- | cut -d'<' -f2 | cut -d'>' -f1)"
+   export GIT_COMMITTER_DATE="$(git log "$(cat ".git/refs/tags/$2")" -1 --pretty=format:%ai)"
+   git tag "v$1" -m "Release $1" $2
+}
+
+function rtag {
    export GIT_COMMITTER_NAME="$(git show $2 | head -n2 | tail -n1 | cut -b9- | cut -d'<' -f1)"
    export GIT_COMMITTER_EMAIL="$(git show $2 | head -n2 | tail -n1 | cut -b9- | cut -d'<' -f2 | cut -d'>' -f1)"
    export GIT_COMMITTER_DATE="$(git show $2 | head -n3 | tail -n1 | cut -b9- )"
-   git tag "v$1" -m "Release $1" refs/tags/$2
+   git tag "v$1" -m "Release $1" $2
+}
+
+function tag {
+   rtag $1 refs/tags/$2
 }
 
 tag 0.10 0.10
 tag 0.20 0.20
 tag 0.21 0.21
 
-# these have the wrong dates {
-tag 0.30 0.30
-tag 0.31 0.31
-tag 0.32 0.32
-tag 0.33 0.33
-tag 0.35 0.35
-tag 0.36 0.36
-tag 0.37 0.37
-tag 0.38 0.38
-tag 0.39 0.39
-tag 0.40 0.40
-tag 0.41 0.41
-tag 0.42 0.42
-tag 0.43 0.43
-tag 0.44 0.44
-# }
+mtag 0.30 0.30
+mtag 0.31 0.31
+mtag 0.32 0.32
+mtag 0.33 0.33
+mtag 0.35 0.35
+mtag 0.36 0.36
+mtag 0.37 0.37
+mtag 0.38 0.38
+mtag 0.39 0.39
+mtag 0.40 0.40
+mtag 0.41 0.41
+mtag 0.42 0.42
+mtag 0.43 0.43
+mtag 0.44 0.44
 
 tag 0.44-plus v0-44plus
 tag 0.45 RELEASE_0_45
@@ -118,53 +127,43 @@ tag 1.04     RELEASE_1_04
 tag 1.05_01  RELEASE_1_05_01
 tag 1.05_04  RELEASE_1_05_04
 tag 1.06     RELEASE_1_06
-
-# missing tags {
-#
-# Note: these are my initial guesses as to which
-#       commits these tags should point to.  They
-#       could definitely be incorrect.  Just
-#       starting points.
-#
-# 1.08 abf9a4694ce0f090ffd8d60d669b48f14be23e9b
-# 1.10 6e943a379e790e0616074166519af452539a4f79
-# 1.11_01 dc486daa73cdfa54d6286559aa0fb2d061d985e7
-# 1.11_02 3fb75e8472dbd091c8cbb8f6fa7fe03d9debc5a1
-# 1.12 c6b301cbc6460b96c6cc453bfd14225bedf85e6a
-# 1.13_01 503ab29d42fe809aa0d6a7a3f9e1ee5a300833d7
-# 1.14 132525eb76f0fd0331daea4658ba3901969db0e5
-# 1.16 30f8319b6be94ae30515c33ec9df971438ec6a9d
-# 1.17_01 18dfdbbb575eeb0e3f1d7ddfaef72c88bdcf6db2
-# 1.18 dd8b24c04562cb7a7a8aa2bd1c0accadb40183a4
-# 1.19_02 3c62d3e7f579745873b79f691f2ad7c12ec9b234
-# 1.20 1d0a9860d45711984c1a648395a9921f9c0ffb53
-# 1.21_01 a954691f0f588290b58ecb99468e91f2e0dcf1e2
-# 1.21_02 fad0707ad5533a82f6082a417704049a2065bcfc
-# 1.21_03 b6bdb6f07f2e09dcd98191b01057bfa4924491ae
-# 1.21_04 18187250785834a79ffdd244b0932b2e9c0d1956
-# 1.22 5a3f76599345d2fa2a14d46687b965444e09176f
-# 1.24 6f0c1c19af2cd422291cdaa79d69ec52d6df9c74
-# 1.26
-# 1.29_01 cdd73136002265ac586a146864f5c7c56270e574
-# 1.30 e3825449456eee6d47e5941defee5f11da18bd76
-# 1.31_01
-# 1.31_02
-# 1.32 fd53f68fd3cb08bf0351fc1290c707c958cfea80
-# 1.34 b2589eda5f006da38b9d40e7313213ed5617bccf
-# 1.49_01 9fbb917590c226eb97e15b5a42eec4b2a5e5efec
-# 1.50 1cda257746f222bad11f0e00e02ed611a6e7ad5f
-# 1.51_01 4dd97781728f22ff6f0ec4a9b9d2c0332e6b0bd3
-# 1.51_02 2cc93524d6a350d3e018767150b1e4f25d22cc1a
-# 1.51_03 74bfbf63c1e1a47d7da96452466a1ae9560b7130
-# 1.52 3fb9fcdb32f245f18eed6fecfb492f69611e9480
-# 1.54 6ecfb15991c52ae12725bceefde63cee38561d20
-# 1.56 3067b13bd2569053464d105e1d12ffb439504190
-# 1.58 8cb3350d13767fa2e716464b66331d46429abbe3
-# 1.60 b31d5736f6462b790ceed61cbade38db5d98c666
-# 1.62 f303193b44870c7cc7f56202d48ce1c07fd2c729
-# 1.64 af5398c17b8568859bd9b413fb7829386063f5c6
-# 1.66 b9c412ea6ae2228672ba90d124cd549e82e8a7ff
-#
-# }
+rtag 1.08 abf9a4694ce0f090ffd8d60d669b48f14be23e9b
+rtag 1.10 6e943a379e790e0616074166519af452539a4f79
+rtag 1.11_01 dc486daa73cdfa54d6286559aa0fb2d061d985e7
+rtag 1.11_02 3fb75e8472dbd091c8cbb8f6fa7fe03d9debc5a1
+rtag 1.12 c6b301cbc6460b96c6cc453bfd14225bedf85e6a
+rtag 1.13_01 503ab29d42fe809aa0d6a7a3f9e1ee5a300833d7
+rtag 1.14 132525eb76f0fd0331daea4658ba3901969db0e5
+rtag 1.16 30f8319b6be94ae30515c33ec9df971438ec6a9d
+rtag 1.17_01 18dfdbbb575eeb0e3f1d7ddfaef72c88bdcf6db2
+rtag 1.18 dd8b24c04562cb7a7a8aa2bd1c0accadb40183a4
+rtag 1.19_02 3c62d3e7f579745873b79f691f2ad7c12ec9b234
+rtag 1.20 1d0a9860d45711984c1a648395a9921f9c0ffb53
+rtag 1.21_01 a954691f0f588290b58ecb99468e91f2e0dcf1e2
+rtag 1.21_02 fad0707ad5533a82f6082a417704049a2065bcfc
+rtag 1.21_03 b6bdb6f07f2e09dcd98191b01057bfa4924491ae
+rtag 1.21_04 18187250785834a79ffdd244b0932b2e9c0d1956
+rtag 1.22 5a3f76599345d2fa2a14d46687b965444e09176f
+rtag 1.24 6f0c1c19af2cd422291cdaa79d69ec52d6df9c74
+rtag 1.26 2cba07bf2c9fa28a86cf5d671bfe209a4ee3c8ed
+rtag 1.29_01 cdd73136002265ac586a146864f5c7c56270e574
+rtag 1.30 e3825449456eee6d47e5941defee5f11da18bd76
+rtag 1.31_01 ad556cd2ac47d6fef54edc61b12550e95f3fbfe1
+rtag 1.31_02 911bc9392725adaa94454b95b4a2b33aeadc560e
+rtag 1.32 fd53f68fd3cb08bf0351fc1290c707c958cfea80
+rtag 1.34 b2589eda5f006da38b9d40e7313213ed5617bccf
+rtag 1.49_01 9fbb917590c226eb97e15b5a42eec4b2a5e5efec
+rtag 1.50 1cda257746f222bad11f0e00e02ed611a6e7ad5f
+rtag 1.51_01 4dd97781728f22ff6f0ec4a9b9d2c0332e6b0bd3
+rtag 1.51_02 2cc93524d6a350d3e018767150b1e4f25d22cc1a
+rtag 1.51_03 74bfbf63c1e1a47d7da96452466a1ae9560b7130
+rtag 1.52 3fb9fcdb32f245f18eed6fecfb492f69611e9480
+rtag 1.54 6ecfb15991c52ae12725bceefde63cee38561d20
+rtag 1.56 3067b13bd2569053464d105e1d12ffb439504190
+rtag 1.58 8cb3350d13767fa2e716464b66331d46429abbe3
+rtag 1.60 b31d5736f6462b790ceed61cbade38db5d98c666
+rtag 1.62 f303193b44870c7cc7f56202d48ce1c07fd2c729
+rtag 1.64 af5398c17b8568859bd9b413fb7829386063f5c6
+rtag 1.66 b9c412ea6ae2228672ba90d124cd549e82e8a7ff
 
 git tag -d $OLDTAGS
