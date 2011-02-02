@@ -109,6 +109,7 @@ echo "d41a81f7b1b9ef31af6b60fa8af1d486e8fc9abd" > .git/refs/heads/tags/mda-2k512
 git filter-branch  \
    --prune-empty \
    --msg-filter 'git fix-ghetto-message' \
+   --tree-filter 'git sqlt-tree-filter' \
    refs/heads/master \
    refs/heads/RELEASE-0-07-RC2 \
    refs/heads/Turnkey-1-1-patches \

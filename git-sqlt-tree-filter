@@ -1,0 +1,13 @@
+#!/bin/bash
+
+shopt -s dotglob
+if [ -d sqlfairy ]
+then
+   mv sqlfairy/* . && rmdir sqlfairy
+fi
+if [ -d htdocs ]
+then
+   rm -rf htdocs
+fi
+find . -name \*.swp -type f -delete
+find . -name .cvsignore -type f -delete
