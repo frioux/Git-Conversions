@@ -1,50 +1,51 @@
 #!/bin/bash
 
-#git svn clone --authors-file=sqlt-authors -Ttrunk/sqlfairy -bbranches -bhistoric_branches -ttags https://sqlfairy.svn.sourceforge.net/svnroot/sqlfairy ../sqlt
-
-## make "local" branches out of all the svn branches
-#cp .git/refs/remotes/* .git/refs/heads
-
-#git checkout -b RELEASE-0-07-RC2 remotes/RELEASE-0-07-RC2
-#git checkout -b RELEASE-0-07-RC2@1113 remotes/RELEASE-0-07-RC2@1113
-#git checkout -b Turnkey-1-1-patches remotes/Turnkey-1-1-patches
-#git checkout -b Turnkey-1-1-patches@545 remotes/Turnkey-1-1-patches@545
-#git checkout -b darren-1_0 remotes/darren-1_0
-#git checkout -b diff-refactor remotes/diff-refactor
-#git checkout -b diff-refactor@1315 remotes/diff-refactor@1315
-#git checkout -b dlc-sqltsh-branch remotes/dlc-sqltsh-branch
-#git checkout -b dlc-sqltsh-branch@611 remotes/dlc-sqltsh-branch@611
-#git checkout -b foo remotes/foo
-#git checkout -b oracle_datatypes remotes/oracle_datatypes
-#git checkout -b oracle_quotes remotes/oracle_quotes
-#git checkout -b oracle_quotes@1652 remotes/oracle_quotes@1652
-#git checkout -b pg_proc remotes/pg_proc
-#git checkout -b release-0-10 remotes/release-0-10
-#git checkout -b roundtrip remotes/roundtrip
-#git checkout -b tags/RELEASE-0_01 remotes/tags/RELEASE-0_01
-#git checkout -b tags/RELEASE-0_01@103 remotes/tags/RELEASE-0_01@103
-#git checkout -b tags/RELEASE-0_02 remotes/tags/RELEASE-0_02
-#git checkout -b tags/RELEASE-0_02@340 remotes/tags/RELEASE-0_02@340
-#git checkout -b tags/Release-0-04 remotes/tags/Release-0-04
-#git checkout -b tags/Release-0-04@766 remotes/tags/Release-0-04@766
-#git checkout -b tags/Release-0-06 remotes/tags/Release-0-06
-#git checkout -b tags/Release-0-06@1031 remotes/tags/Release-0-06@1031
-#git checkout -b tags/Turnkey_Stable_04-16-2004 remotes/tags/Turnkey_Stable_04-16-2004
-#git checkout -b tags/Turnkey_Stable_04-16-2004@950 remotes/tags/Turnkey_Stable_04-16-2004@950
-#git checkout -b tags/bar remotes/tags/bar
-#git checkout -b tags/dlc-sqltsh-base remotes/tags/dlc-sqltsh-base
-#git checkout -b tags/dlc-sqltsh-base@615 remotes/tags/dlc-sqltsh-base@615
-#git checkout -b tags/help remotes/tags/help
-#git checkout -b tags/help@773 remotes/tags/help@773
-#git checkout -b tags/mda-2k51201 remotes/tags/mda-2k51201
-#git checkout -b tags/mda-2k51201@1186 remotes/tags/mda-2k51201@1186
-#git checkout -b tags/pre-schema-object remotes/tags/pre-schema-object
-#git checkout -b tags/pre-schema-object@1052 remotes/tags/pre-schema-object@1052
-#git checkout -b trunk remotes/trunk
-#git checkout -b xmi remotes/xmi
-#git checkout -b xmi@1445 remotes/xmi@1445
-
 rm ../sqlt -rf
+
+git svn clone --authors-file=sqlt-authors -Ttrunk/sqlfairy -bbranches -bhistoric_branches -ttags https://sqlfairy.svn.sourceforge.net/svnroot/sqlfairy ../sqlt-sqlt-export
+
+# make "local" branches out of all the svn branches
+cp .git/refs/remotes/* .git/refs/heads
+
+git checkout -b RELEASE-0-07-RC2 remotes/RELEASE-0-07-RC2
+git checkout -b RELEASE-0-07-RC2@1113 remotes/RELEASE-0-07-RC2@1113
+git checkout -b Turnkey-1-1-patches remotes/Turnkey-1-1-patches
+git checkout -b Turnkey-1-1-patches@545 remotes/Turnkey-1-1-patches@545
+git checkout -b darren-1_0 remotes/darren-1_0
+git checkout -b diff-refactor remotes/diff-refactor
+git checkout -b diff-refactor@1315 remotes/diff-refactor@1315
+git checkout -b dlc-sqltsh-branch remotes/dlc-sqltsh-branch
+git checkout -b dlc-sqltsh-branch@611 remotes/dlc-sqltsh-branch@611
+git checkout -b foo remotes/foo
+git checkout -b oracle_datatypes remotes/oracle_datatypes
+git checkout -b oracle_quotes remotes/oracle_quotes
+git checkout -b oracle_quotes@1652 remotes/oracle_quotes@1652
+git checkout -b pg_proc remotes/pg_proc
+git checkout -b release-0-10 remotes/release-0-10
+git checkout -b roundtrip remotes/roundtrip
+git checkout -b tags/RELEASE-0_01 remotes/tags/RELEASE-0_01
+git checkout -b tags/RELEASE-0_01@103 remotes/tags/RELEASE-0_01@103
+git checkout -b tags/RELEASE-0_02 remotes/tags/RELEASE-0_02
+git checkout -b tags/RELEASE-0_02@340 remotes/tags/RELEASE-0_02@340
+git checkout -b tags/Release-0-04 remotes/tags/Release-0-04
+git checkout -b tags/Release-0-04@766 remotes/tags/Release-0-04@766
+git checkout -b tags/Release-0-06 remotes/tags/Release-0-06
+git checkout -b tags/Release-0-06@1031 remotes/tags/Release-0-06@1031
+git checkout -b tags/Turnkey_Stable_04-16-2004 remotes/tags/Turnkey_Stable_04-16-2004
+git checkout -b tags/Turnkey_Stable_04-16-2004@950 remotes/tags/Turnkey_Stable_04-16-2004@950
+git checkout -b tags/bar remotes/tags/bar
+git checkout -b tags/dlc-sqltsh-base remotes/tags/dlc-sqltsh-base
+git checkout -b tags/dlc-sqltsh-base@615 remotes/tags/dlc-sqltsh-base@615
+git checkout -b tags/help remotes/tags/help
+git checkout -b tags/help@773 remotes/tags/help@773
+git checkout -b tags/mda-2k51201 remotes/tags/mda-2k51201
+git checkout -b tags/mda-2k51201@1186 remotes/tags/mda-2k51201@1186
+git checkout -b tags/pre-schema-object remotes/tags/pre-schema-object
+git checkout -b tags/pre-schema-object@1052 remotes/tags/pre-schema-object@1052
+git checkout -b trunk remotes/trunk
+git checkout -b xmi remotes/xmi
+git checkout -b xmi@1445 remotes/xmi@1445
+
 cp ../sqlt-export ../sqlt -r
 cd ../sqlt
 
@@ -87,6 +88,11 @@ echo "3090ac7707fc880849fc268d7bfeca794ac53509 4ecb27e4108ccd402314bdfafc533394d
 # refs/heads/Turnkey-1-1-patches
 echo "fc6175f0a44722aa561422c1ccba4f775808bc27 0432eb8cc2047f7845912d842510d7ce07f648fa" >> .git/info/grafts
 
+echo "47c933c4b45800dea646c196271e705442b60128 53afe27bab8e687101c3d1516f71edecfe905eec" >> .git/info/grafts
+echo "b142fc4dd7f29e84ae88b4f445cad03e680b9cb8 fa2d0a6a2ebc2ba56fe384d4cc9944458926dd82 e25205a5613ceb9292740f4e3b4afaa29d2e7dab" >> .git/info/grafts
+echo "c6c6f8c887ab7110ef0fafd93c3503283712a391 61c218a0c204a90e824ee066365f7546ab41ff7d" >> .git/info/grafts
+
+echo "1d0492016e79e7e7913849c0c8dcc74387e9cfc9 ba3ae69014e9c10329778011f0cba9f46c44a7c8 29959b6170edf5371de2b437e24ee766641d3368" >> .git/info/grafts
 
 echo "f55aaa730a2f0b93e87dd495fc909f7d575fd99d" > .git/refs/heads/tags/RELEASE-0_01
 echo "b6911a7d5d5ed2a4a9482aecf495309946e42601" > .git/refs/heads/tags/RELEASE-0_02
@@ -100,7 +106,9 @@ echo "d047443c4a424436c5423d5c1cb459527416cb4a" > .git/refs/heads/RELEASE-0-07-R
 echo "d41a81f7b1b9ef31af6b60fa8af1d486e8fc9abd" > .git/refs/heads/tags/mda-2k51201
 
 
-git filter-branch --msg-filter 'git fix-ghetto-message' \
+git filter-branch  \
+   --prune-empty \
+   --msg-filter 'git fix-ghetto-message' \
    refs/heads/master \
    refs/heads/RELEASE-0-07-RC2 \
    refs/heads/Turnkey-1-1-patches \
