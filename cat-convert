@@ -1,4 +1,22 @@
 #!/bin/bash
-#!/bin/bash
+
+# Initial Clone:
 git svn clone --authors-file=catalyst-authors -T5.70/trunk -b5.70/branches -t5.70/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-570
 git svn clone --authors-file=catalyst-authors -T5.80/trunk -b5.80/branches -t5.80/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-580
+
+# "Localize" branches
+cp ../CR-580/.git/refs/remotes/* ../CR-580/.git/refs/heads -r
+cp ../CR-570/.git/refs/remotes/* ../CR-570/.git/refs/heads -r
+
+rm ../Catalyst-git -rf
+mkdir ../Catalyst-git
+cd ../Catalyst-git
+git init
+git remote add cr570 file:///home/frew/code/OS/CR-570
+git remote add cr580 file:///home/frew/code/OS/CR-580
+git fetch cr570
+git fetch cr580
+
+# Localize branches
+git co -b master remotes/cr580/master
+git br -a | grep -v '* master' | cut -b11- | xargs -n1 -Ifoo git branch remotes/foo foo
