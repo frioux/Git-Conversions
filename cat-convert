@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#git svn clone --authors-file=catalyst-authors -T5.70/trunk -b5.70/branches -t5.70/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-570
+
+git svn clone --authors-file=catalyst-authors -T5.80/trunk -b5.80/branches -t5.80/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-580

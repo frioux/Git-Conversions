@@ -1,0 +1,144 @@
+#confirmed
+stevan = Stevan Little <stevan.little@iinteractive.com>
+nothingmuch = Yuval Kogman <nothingmuch@woobling.org>
+perigrin = Chris Prather <chris@prather.org>
+rjbs = Ricardo SIGNES <rjbs@cpan.org>
+jrockway = Jonathan Rockway <jon@jrock.us>
+rafl = Florian Ragwitz <rafl@debian.org>
+matthewt = Matt S Trout <mst@shadowcat.co.uk>
+ct = Christopher Thompson <cthom@cpan.org>
+renormalist = Steffen Schwigon <ss5@renormalist.net>
+autarch = Dave Rolsky <autarch@urth.org>
+#hanekomu = Marcel Gruenauer <hanekomu@gmail.com>
+hanekomu = Marcel Grünauer <hanekomu@gmail.com>
+doy = Jesse Luehrs <doy@tozt.net>
+thepler = Todd Hepler <thepler@employees.org>
+frodwith = Paul Driver <frodwith@gmail.com>
+edenc = Eden Cardim <e.cardim@shadowcat.co.uk>
+jesse = Jesse Vincent <jesse@bestpractical.com>
+jasonmay = Jason May <jason.a.may@gmail.com>
+
+# speculative
+hdp = Hans Dieter Pearcey <hdp@weftsoar.net>
+phaylon = Robert 'phaylon' Sedlacek <rs@474.at>
+gphat = Cory G Watson <gphat@onemogin.com>
+lestrrat = Daisuke Maki <dmaki@cpan.org>
+collin = Collin Winter <collinw@gmail.com>
+sartak = Shawn M Moore <sartak@gmail.com>
+yappo = 大沢 和宏 <yappo@shibuya.pl>
+robkinyon = Rob Kinyon <rob.kinyon@gmail.com>
+rob = Rob Kinyon <rob.kinyon@gmail.com>
+groditi = Guillermo Roditi <groditi@gmail.com>
+chansen = Christian Hansen <chansen@cpan.org>
+tokuhirom = Tokuhiro Matsuno <tokuhirom@gp.ath.cx>
+clkao = Chia-liang Kao <clkao@clkao.org>
+ningu = David Kamholz <dkamholz@cpan.org>
+wdh = Will Hawes <info@whawes.co.uk>
+miyagawa = Tatsuhiko Miyagawa <miyagawa@bulknews.net>
+omega = Andreas Marienborg <omega@palle.net>
+caelum = Rafael Kitover <rkitover@io.com>
+
+# from github
+brunov = Bruno Vecchi <vecchi.b@gmail.com>
+dann = Dann <techmemo@gmail.com>
+evancarroll = Evan Carroll <evan@dealermade.com>
+gaal = Gaal Yahas <gaal@forum2.org>
+rlb3 = Robert Boone <robo4288@gmail.com>
+marcus = Marcus Ramberg <marcus@nordaaker.com>
+dandv = Dan Dascalescu <bigbang7@gmail.com>
+batman = Jan Henning Thorsen <git@flodhest.net>
+
+# from pause
+adamk = Adam Kennedy <adamk@cpan.org>
+ash = Ash Berlin <ash@cpan.org>
+blblack = Brandon L Black <blblack@gmail.com>
+bluefeet = Aran Clary Deltac <bluefeet@cpan.org>
+castaway = Jess Robinson <cpan@desert-island.me.uk>
+wreis = Wallace Reis <reis.wallace@gmail.com>
+konobi = Scott McWhirter <konobi@cpan.org>
+polettix = Flavio Poletti <polettix@cpan.org>
+t0m = Tomas Doran <bobtfish@bobtfish.net>
+shlomif = Shlomi Fish <shlomif@iglu.org.il>
+ewilhelm = Eric Wilhelm <ewilhelm@cpan.org>
+debolaz = Anders Nor Berle <berle@cpan.org>
+kolibrie = Nathan Gray <kolibrie@graystudios.org>
+jgoulah = John Goulah <jgoulah@cpan.org>
+ishigaki = Kenichi Ishigaki <ishigaki@cpan.org>
+charsbar = Kenichi Ishigaki <ishigaki@cpan.org>
+fhoxh = Adam J. Foxson <fhoxh@pobox.com>
+pjf = Paul Jamieson Fenwick <pjf@perltraining.com.au>
+jnapiorkowski = John Napiorkowski <jjnapiork@cpan.org>
+penfold = Mike Whitaker <mike@altrion.org>
+jhannah = Jay Hannah <jay@jays.net>
+jdporter = John Douglas Porter <jdporter@cpan.org>
+dexter = Piotr Roszatycki <piotr.roszatycki@gmail.com>
+sri = Sebastian Riedel <sri@labs.kraih.com>
+fordmason = Andrew Ford <A.Ford@ford-mason.co.uk>
+jester = Jesse Sheidlower <jester@panix.com>
+andyg = Andy Grundman <andy@hybridized.org>
+bricas = Brian Cassidy <bricas@cpan.org>
+ovid = Curtis "Ovid" Poe <ovid@cpan.org>
+ghenry = Gavin Henry <ghenry@perl.me.uk>
+zarquon = Kieren Diment <diment@gmail.com>
+hkclark = Kennedy Clark <hkclark@gmail.com>
+lbr = Lars Balker Rasmussen <lbr@balker.dk>
+jshirley = J. Shirley <jshirley+cpan@gmail.com>
+
+# guess
+Aankhen = Aankhen <aankhen@gmail.com>
+spicyjack = Brian Manning <elspicyjack@gmail.com>
+kraai = Matt Kraai <kraai@ftbfs.org>
+rdj = Ryan D Johnson <ryan@innerfence.com>
+dec = Tom Lanyon <tom@netspot.com.au>
+gabbana = Danijel Milicevic <info@danijel.de>
+kixx = Christian-Rolf Grün <kiki@abc.ro>
+gbjk = Gareth Kirwan <gbjk@thermeoneurope.com>
+
+
+#isillitoe
+#joel
+#leifj
+#malte
+#oliver
+#spx2
+#stoptypingnow
+#sukria
+
+kane = Jos Boumans <kane@cpan.org>
+dwc  = Daniel Westermann-Clark <danieltwc@cpan.org>
+timbunce = Tim Bunce <Tim.Bunce@pobox.com>
+ijw = Ian Wells <ijw@cack.org.uk>
+Sadrak = Felix Antonius Wilhelm Ostmann <sadrak@cpan.org>
+hobbs = Andrew Rodland <arodland@cpan.org>
+abraxxa = Alexander Hartmaier <abraxxa@cpan.org>
+purge = Simon Elliott <cpan@browsing.co.uk>
+karpet = Peter Karman <perl@peknet.com>
+arcanez = Justin Hunter <justin.d.hunter@gmail.com>
+mo = Moritz Onken <onken@netcubed.de>
+lukes = Luke Saunders <luke.saunders@gmail.com>
+dhoss = Devin Austin <devin.austin@gmail.com>
+bpphillips = Brian Phillips <bphillips@cpan.org>
+frew = Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+random = Roland Lammel <rl@brabbel.net>
+pjfl = Peter Flanigan <pjf@roxsoft.co.uk>
+ferz   = Ferruccio Zamuner <nonsolosoft@diff.org>
+rodrigolive = Rodrigo de Oliveira Gonzalez <rodrigo@cpan.org>
+mateu = Mateu X. Hunter <hunter@missoula.org>
+zts = Zac Stevens <zts@cryptocracy.com>
+ilmari = Dagfinn Ilmari Mannsåker <ilmari@ilmari.org>
+zby = Zbigniew Łukasiak <zbigniew@lukasiak.name>
+gshank = Gerda Shank <gshank@cpan.org>
+aristotle = Αριστοτέλης Παγκαλτζής <pagaltzis@gmx.de>
+kmx = KMX <kmx@cpan.org>
+altreus = Alastair Douglas <altreus@perl.org>
+ribasushi = Peter Rabbitson <ribasushi@cpan.org>
+
+yousef = yousef <no@se.com>
+# Iñigo Tejedor Arrondo <poisonbit@gmail.com>
+poisonbit = poisonbit <no@se.com>
+
+aCiD2 = aCiD2 <no@se.com>
+phurl = phurl <no@se.com>
+szbalint = szbalint <no@se.com>
+khisanth = khisanth <no@se.com>
+ajgb = ajgb <no@se.com>
