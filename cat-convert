@@ -8,6 +8,7 @@ git svn clone --authors-file=catalyst-authors -T5.80/trunk -b5.80/branches -t5.8
 cp ../CR-580/.git/refs/remotes/* ../CR-580/.git/refs/heads -r
 cp ../CR-570/.git/refs/remotes/* ../CR-570/.git/refs/heads -r
 
+# Load refs from 580 and 570
 rm ../Catalyst-git -rf
 mkdir ../Catalyst-git
 cd ../Catalyst-git
@@ -18,5 +19,49 @@ git fetch cr570
 git fetch cr580
 
 # Localize branches
-git co -b master remotes/cr580/master
-git br -a | grep -v '* master' | cut -b11- | xargs -n1 -Ifoo git branch remotes/foo foo
+git checkout -b master remotes/cr580/master
+git branch -a | grep -v '* master' | cut -b11- | xargs -n1 -Ifoo git branch foo remotes/foo
+
+# Get rid of remotes
+git remote rm cr570
+git remote rm cr580
+
+# Fix Tags
+git branch -D cr580/tags/trunk
+git branch | grep tags | xargs -n1 perl -E '
+   $old = $ARGV[0];
+   $new = (split qr(/), $old)[2];
+   $exec = qq(git tag v$new $old -m"Release $new" && git branch -D $old );
+   system $exec'
+
+
+# get rid of merged branches
+git branch -d cr570/trunk@5068
+git branch -d cr570/trunk@6895
+git branch -d cr580/Catalyst-Test-base-href
+git branch -d cr580/aggregate_more
+git branch -d cr580/better_scripts
+git branch -d cr580/fix_iis_cgi
+git branch -d cr580/fix_path_info_decoding
+git branch -d cr580/fix_request_uri
+git branch -d cr580/master
+git branch -d cr580/more_metaclass_compat
+git branch -d cr580/param_filtering
+git branch -d cr580/relative_uri_for
+git branch -d cr580/rt58057
+git branch -d cr580/trunk
+git branch -d cr580/tweak_controller_action_creation
+git branch -d cr580/uri_encode_captures_andor_args_take2
+
+# the following is a single commit contributing no changes
+git branch -D cr570/moose-experiment
+
+cp ../git-conv/cat-grafts .git/info/grafts
+
+git filter-branch  \
+   --prune-empty \
+   --msg-filter 'git fix-ghetto-message' \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
