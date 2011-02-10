@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Initial Clone:
-git svn clone --authors-file=catalyst-authors -T5.70/trunk -b5.70/branches -t5.70/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-570
-git svn clone --authors-file=catalyst-authors -T5.80/trunk -b5.80/branches -t5.80/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-580
+#git svn clone --authors-file=catalyst-authors -T5.70/trunk -b5.70/branches -t5.70/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-570
+#git svn clone --authors-file=catalyst-authors -T5.80/trunk -b5.80/branches -t5.80/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-580
 
 # "Localize" branches
-cp ../CR-580/.git/refs/remotes/* ../CR-580/.git/refs/heads -r
-cp ../CR-570/.git/refs/remotes/* ../CR-570/.git/refs/heads -r
+#cp ../CR-580/.git/refs/remotes/* ../CR-580/.git/refs/heads -r
+#cp ../CR-570/.git/refs/remotes/* ../CR-570/.git/refs/heads -r
 
 # Load refs from 580 and 570
 rm ../Catalyst-git -rf
@@ -58,10 +58,10 @@ git branch -D cr570/moose-experiment
 
 cp ../git-conv/cat-grafts .git/info/grafts
 
-git filter-branch  \
-   --prune-empty \
-   --msg-filter 'git fix-ghetto-message' \
-   --tag-name-filter cat \
-   -- --all
+#git filter-branch  \
+   #--prune-empty \
+   #--msg-filter 'git fix-ghetto-message' \
+   #--tag-name-filter cat \
+   #-- --all
 
-rm .git/refs/original -rf
+#rm .git/refs/original -rf
