@@ -1,8 +1,24 @@
 #!/bin/bash
 
 # Initial Clone:
-#git svn clone --authors-file=catalyst-authors -T5.70/trunk -b5.70/branches -t5.70/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-570
-#git svn clone --authors-file=catalyst-authors -T5.80/trunk -b5.80/branches -t5.80/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-580
+git svn clone --authors-file=catalyst-authors -T5.70/trunk -b5.70/branches -t5.70/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-570
+git svn clone --authors-file=catalyst-authors -T5.80/trunk -b5.80/branches -t5.80/tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-580
+function branch_clone {
+   git svn clone --authors-file=catalyst-authors -T5.80/branches/$1 http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Runtime ../CR-$1
+}
+branch_clone test_aggregate
+branch_clone uri_for_action
+branch_clone register_actions
+branch_clone decode-chained-args
+branch_clone pass_component_names
+branch_clone locate_components # fail
+branch_clone check_conflicts
+branch_clone author_requires
+
+function fetch_cr {
+   git remote add $1 file:///home/frew/code/OS/CR-$1
+   git fetch $1
+}
 
 # "Localize" branches
 #cp ../CR-580/.git/refs/remotes/* ../CR-580/.git/refs/heads -r
@@ -17,6 +33,14 @@ git remote add cr570 file:///home/frew/code/OS/CR-570
 git remote add cr580 file:///home/frew/code/OS/CR-580
 git fetch cr570
 git fetch cr580
+fetch_cr test_aggregate
+fetch_cr uri_for_action
+fetch_cr register_actions
+fetch_cr decode-chained-args
+fetch_cr pass_component_names
+fetch_cr locate_components
+fetch_cr check_conflicts
+fetch_cr author_requires
 
 # Localize branches
 git checkout -b master remotes/cr580/master
@@ -58,10 +82,10 @@ git branch -D cr570/moose-experiment
 
 cp ../git-conv/cat-grafts .git/info/grafts
 
-#git filter-branch  \
-   #--prune-empty \
-   #--msg-filter 'git fix-ghetto-message' \
-   #--tag-name-filter cat \
-   #-- --all
+git filter-branch  \
+   --prune-empty \
+   --msg-filter 'git fix-ghetto-message' \
+   --tag-name-filter cat \
+   -- --all
 
-#rm .git/refs/original -rf
+rm .git/refs/original -rf

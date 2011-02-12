@@ -6,6 +6,8 @@ ea8bd486b388635114ab0f0d463a48503c0bf389 d6ca66986e1e205145ded7593d8719ab5b829a7
 
 # Fix the failathon from 2008-06
 baa3e9f69342ec76591fd94d53aee7768c27f68e 8edc0555ff6ebce9f930dbde2c745ba6c044ebb0
+b768f9053048b78515a3e0d7d0eef9784300de2c 62ea5406b76f8746f3f6c03cbd70ab7467e07535
+a1c59ba3ded206575bf34e1821bcb63e68ff6e42 b14a1fd0f4d978a1288fcdc226f660dc22469cf0
 
 # remove needless merge commit
 ab7a588c0255bd4083f1cfc0ae05cdf5b338f93c 7c41e2bb843f2a88abe53c43788bca68aab07238 2062eadfbd660d4ebb05d723b441bc79c2679e2e
@@ -28,8 +30,8 @@ d10e14c53043e56379c790c31d105b4fe23a33db 8a0e5dcd768de74148ddc0e7584ca09ced19764
 83e79aff0ba0ce630871e3e65068928ab8459a13 faa9010481cc0f7b224f7678465aaf5f781f7e62
 a6801873f3499b4b9dbb0072e988c29df58a7d52 6e7d396dd7d0d518fcbf8612adafe6e5d1ba7dbe
 
-# merge compres branch
-# merge go branch
+ee59674964c4d292dd3bc13e0a4f5180637956d6 47b418454cf31734977ca720f6dfee7a1c996cf1
+47b418454cf31734977ca720f6dfee7a1c996cf1 3188113c56296f9366a3279749f7f2d2cb6fc48f
 
 # tag fails resulting in tag merge commits
 6d4333938a5b512b69c1b08bee318cd23cc91833 8ad639cd65603ff861cf4e3e3908492653ded2c6
@@ -55,64 +57,38 @@ c3f60bac5dd8bfc7209025b4a5c33b6752de8958 a69a09152372c105ccfc3a34b9353b301d8d9c9
 f6e46e8ce4cccf0bcfe633ae3e4a94ebbaa71987 7e3a3998d07bec1f19a942f32ea6f91186c5fa7e fd7e0c728da4747631cdde5aede7fd1c2c3891ae
 e97a7f31b7f6059b87bf9ec9310c5d6715353ecb f6e46e8ce4cccf0bcfe633ae3e4a94ebbaa71987 9b832f20e64d8a4f3fb0d297fd87ed65baf13ce1
 2399d1ec63c462364c3a4fa101fe9f38b02f530d e97a7f31b7f6059b87bf9ec9310c5d6715353ecb dda98aef9a85076cec24bc8bb4b9c283411273de
+0b40321aaff27c1472f8f550679791c38eea0d56 987b5d740c7fcbe34c99c4c1d77114be47ed280d 15c37c430716cab2c7f9b6997d8ef60855328206
+d9a35a5fc6bb3e12fde0c3c157bf14dc71dca841 bed92f20af01d80b3fae6a6051d0db37ec0fa093 f1e4926f87dfdba28f162f964bf6a3e77d8a13a6
+5fe200bd2c87f89416e18dd5064fd6e0f995dcaa 913f89809d61925f4bf04ae75533dc3f74c62d69 4b8579e840ca1184615d748bf2344f59acb16301
+0ef2b16ea276e143f6753beafaf18808d5dd3d5e be61eb4509059e596fd4e8f1d557525c56b998d5 03d3cd069654650aff8e4b5e7a16002c34756d17
+e7210667fb22eb76447e6212d9d7cbf6649b9c73 836dc85c94b6803b9fe322740a3cc06e415c21eb 681c7119bd90f522266fc1ff5c0d8f246349b249
+888f2931f48b09dca593f8814a8272b65c2db282 2f266fe7ae3d38e5b98c84d8f1689c7c038a4723 7bd982a222679b7d3ca2753ef2fe38b2e5b1019f
+2f266fe7ae3d38e5b98c84d8f1689c7c038a4723 70aa6abf12ee0136ea9c8bb284549e85c472c34d daa34af238d194a54097a666e6e5e4f106c11819
 
-# 0b40321aaff27c1472f8f550679791c38eea0d56 987b5d740c7fcbe34c99c4c1d77114be47ed280d
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=8383
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=8358
-# /Catalyst-Runtime/5.80/branches/test_aggregate
-
-
-# d9a35a5fc6bb3e12fde0c3c157bf14dc71dca841 bed92f20af01d80b3fae6a6051d0db37ec0fa093
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=9652
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=9651
-# /Catalyst-Runtime/5.80/branches/uri_for_action
-
-# 5fe200bd2c87f89416e18dd5064fd6e0f995dcaa 913f89809d61925f4bf04ae75533dc3f74c62d69
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=9672
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=9666
-# /Catalyst-Runtime/5.80/branches/register_actions
+# wtf.  wtf is this.
+900de384ed2d60aa99d1ce7bb8f7edee8685c453 e7210667fb22eb76447e6212d9d7cbf6649b9c73 39d79feedb01d705ff29035a27f105280c7f5db0
 
 
 # 0288cd4eb0de6b6be8d192dd83c187f0a5aaf4f2 b3731db5e8bc3748c642a6c6e682dce5cbb8b0e1
 # http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10218
-
-# 0ef2b16ea276e143f6753beafaf18808d5dd3d5e be61eb4509059e596fd4e8f1d557525c56b998d5
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10296
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10295
-# /Catalyst-Runtime/5.80/branches/decode_chained_args
-
-# e7210667fb22eb76447e6212d9d7cbf6649b9c73 836dc85c94b6803b9fe322740a3cc06e415c21eb
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11018
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10927
-# /Catalyst-Runtime/5.80/branches/pass_component_names
-
-# dcc3284656ce9a03ea8bbb0e165654978f69728d 70f78b6631f5b7f18eb16dded038e04a78f95df4
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11126
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11125
-# /Catalyst-Runtime/5.80/branches/locate_components
-
-# 900de384ed2d60aa99d1ce7bb8f7edee8685c453 e7210667fb22eb76447e6212d9d7cbf6649b9c73
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11020
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10927
-# /Catalyst-Runtime/5.80/branches/pass_component_names
-
-# e7210667fb22eb76447e6212d9d7cbf6649b9c73 836dc85c94b6803b9fe322740a3cc06e415c21eb
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11018
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10927
-# /Catalyst-Runtime/5.80/branches/pass_component_names
-
-# 888f2931f48b09dca593f8814a8272b65c2db282 2f266fe7ae3d38e5b98c84d8f1689c7c038a4723
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10781
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10776
-# /Catalyst-Runtime/5.80/branches/check_conflicts
-
-# 2f266fe7ae3d38e5b98c84d8f1689c7c038a4723 70aa6abf12ee0136ea9c8bb284549e85c472c34d
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10780
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10774
-# /Catalyst-Runtime/5.80/branches/author_requires
 
 # 202169a1df7c684c9ea78b14002b7a056e1b6d6f c20fdf17a8d15946076f8b44cc095d71b4b9dcfd 1556269490ec0f39e1489aa13f8cae8ca0056bbf
 # http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11803
 #     http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11457
 #     http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11468
 
+# dcc3284656ce9a03ea8bbb0e165654978f69728d 70f78b6631f5b7f18eb16dded038e04a78f95df4
+# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11126
+#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11125
+# /Catalyst-Runtime/5.80/branches/locate_components
+
+# Fix duplicated history (probably thanks to my multi importing with git svn)
+b6117f389679d228fb660baa6be8b73427d8bb5c 70aa6abf12ee0136ea9c8bb284549e85c472c34d
+d76ebf736a2497719ef6e49582250192dbab8f46 70aa6abf12ee0136ea9c8bb284549e85c472c34d
+ac7c017af422e5304e097e64fb5dc7904ba093ff be61eb4509059e596fd4e8f1d557525c56b998d5
+d58dd09b8752961b3faf2e8dec7a7246ea3ee53d 9fe2b807ab22145619029784c5def26b2f118566
+827718834a991f2cb222c47eca80880963cd09f6 d6ba171290271df8694748c12a1286cde36f5449
+650cf4663314042691d6f6c6302c3593d243aab3 89f27b3d44018af7ce40caba6dc6d632d0f0d580
+3f7aff74dbbdcc1bd60d148e17e9bd2df7e2fa60 06a649972910b2b54ba5854db4afc33ff0201ab4
+4123698a3f0acf70bc9b0479b463a48fd32fee77 bc3600ce3b06de0013ce775a8d1c3a19ffd1a456
+3353d63075e53575055c99b10698ee9f8c8fc270 bc3600ce3b06de0013ce775a8d1c3a19ffd1a456
