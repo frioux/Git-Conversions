@@ -11,26 +11,26 @@ branch_clone uri_for_action
 branch_clone register_actions
 branch_clone decode-chained-args
 branch_clone pass_component_names
-branch_clone locate_components # fail
 branch_clone check_conflicts
 branch_clone author_requires
 
 function fetch_cr {
-   git remote add $1 file:///home/frew/code/OS/CR-$1
+   git remote add $1 file:///home/frew/code/CR-$1
    git fetch $1
+   git remote rm $1
 }
 
 # "Localize" branches
-#cp ../CR-580/.git/refs/remotes/* ../CR-580/.git/refs/heads -r
-#cp ../CR-570/.git/refs/remotes/* ../CR-570/.git/refs/heads -r
+cp ../CR-580/.git/refs/remotes/* ../CR-580/.git/refs/heads -r
+cp ../CR-570/.git/refs/remotes/* ../CR-570/.git/refs/heads -r
 
 # Load refs from 580 and 570
 rm ../Catalyst-git -rf
 mkdir ../Catalyst-git
 cd ../Catalyst-git
 git init
-git remote add cr570 file:///home/frew/code/OS/CR-570
-git remote add cr580 file:///home/frew/code/OS/CR-580
+git remote add cr570 file:///home/frew/code/CR-570
+git remote add cr580 file:///home/frew/code/CR-580
 git fetch cr570
 git fetch cr580
 fetch_cr test_aggregate
@@ -38,7 +38,6 @@ fetch_cr uri_for_action
 fetch_cr register_actions
 fetch_cr decode-chained-args
 fetch_cr pass_component_names
-fetch_cr locate_components
 fetch_cr check_conflicts
 fetch_cr author_requires
 
@@ -71,7 +70,6 @@ git branch -d cr580/fix_request_uri
 git branch -d cr580/master
 git branch -d cr580/more_metaclass_compat
 git branch -d cr580/param_filtering
-git branch -d cr580/relative_uri_for
 git branch -d cr580/rt58057
 git branch -d cr580/trunk
 git branch -d cr580/tweak_controller_action_creation
@@ -80,11 +78,30 @@ git branch -d cr580/uri_encode_captures_andor_args_take2
 # the following is a single commit contributing no changes
 git branch -D cr570/moose-experiment
 
+git checkout -b fail-11125 70f78b6631f5b7f18eb16dded038e04a78f95df4
+patch -p0 <../git-conv/cat/11125.patch
+GIT_AUTHOR_DATE='2009-08-11 22:58:44' GIT_COMMITTER_DATE='2009-08-11 22:58:44' GIT_AUTHOR_NAME='Ricardo SIGNES' GIT_AUTHOR_EMAIL='rjbs@cpan.org' GIT_COMMITTER_NAME='Ricardo SIGNES' GIT_COMMITTER_EMAIL='rjbs@cpan.org' git commit -am 'break setup_components into three parts'
+git checkout master
+git branch -D fail-11125
+
+git checkout -b fail-11457 7f8473a9cbcae66ad6509096f8911c1737a7d299
+patch -p0 <../git-conv/cat/11457.patch
+GIT_AUTHOR_DATE='2009-10-05 21:59:47' GIT_COMMITTER_DATE='2009-10-05 21:59:47' GIT_AUTHOR_NAME='Tomas Doran' GIT_AUTHOR_EMAIL='bobtfish@bobtfish.net' GIT_COMMITTER_NAME='Tomas Doran' GIT_COMMITTER_EMAIL='bobtfish@bobtfish.net' git commit -am 'r11483@t0mlaptop (orig r11453): abraxxa | 2009-10-05 12:57:34 +0100
+Improved the suggested fix warning when component resolution uses regex fallback for fully qualified component names.
+Added disable_component_resolution_regex_fallback config option to switch off regex fallback for component resolution.'
+git checkout master
+git branch -D fail-11457
+
 cp ../git-conv/cat-grafts .git/info/grafts
 
 git filter-branch  \
    --prune-empty \
    --msg-filter 'git fix-ghetto-message' \
+   --env-filter '
+if [ "$GIT_AUTHOR_NAME" = "yousef" ]; then export GIT_AUTHOR_NAME="Yousef H. Alhashemi"; export GIT_AUTHOR_EMAIL="yousef.alhashemi@gmail.com"; fi
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME";
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL";
+' \
    --tag-name-filter cat \
    -- --all
 

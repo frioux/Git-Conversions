@@ -64,24 +64,14 @@ d9a35a5fc6bb3e12fde0c3c157bf14dc71dca841 bed92f20af01d80b3fae6a6051d0db37ec0fa09
 e7210667fb22eb76447e6212d9d7cbf6649b9c73 836dc85c94b6803b9fe322740a3cc06e415c21eb 681c7119bd90f522266fc1ff5c0d8f246349b249
 888f2931f48b09dca593f8814a8272b65c2db282 2f266fe7ae3d38e5b98c84d8f1689c7c038a4723 7bd982a222679b7d3ca2753ef2fe38b2e5b1019f
 2f266fe7ae3d38e5b98c84d8f1689c7c038a4723 70aa6abf12ee0136ea9c8bb284549e85c472c34d daa34af238d194a54097a666e6e5e4f106c11819
+15c37c430716cab2c7f9b6997d8ef60855328206 332e2b14fc52d288b763b8daedd59b833b44e3eb 4b0dd9cb954c9a15c6b5e9661b62f658500fb748
 
-# wtf.  wtf is this.
 900de384ed2d60aa99d1ce7bb8f7edee8685c453 e7210667fb22eb76447e6212d9d7cbf6649b9c73 39d79feedb01d705ff29035a27f105280c7f5db0
 
+202169a1df7c684c9ea78b14002b7a056e1b6d6f c20fdf17a8d15946076f8b44cc095d71b4b9dcfd 1556269490ec0f39e1489aa13f8cae8ca0056bbf 2a77066573e58d0aaa1ecc118ce6c8014bce9428
+dcc3284656ce9a03ea8bbb0e165654978f69728d 70f78b6631f5b7f18eb16dded038e04a78f95df4 d736f73d554b73718e4a6dc57f89bb61ffb018b8
 
-# 0288cd4eb0de6b6be8d192dd83c187f0a5aaf4f2 b3731db5e8bc3748c642a6c6e682dce5cbb8b0e1
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=10218
-
-# 202169a1df7c684c9ea78b14002b7a056e1b6d6f c20fdf17a8d15946076f8b44cc095d71b4b9dcfd 1556269490ec0f39e1489aa13f8cae8ca0056bbf
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11803
-#     http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11457
-#     http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11468
-
-# dcc3284656ce9a03ea8bbb0e165654978f69728d 70f78b6631f5b7f18eb16dded038e04a78f95df4
-# http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11126
-#    http://dev.catalystframework.org/svnweb/Catalyst/revision?rev=11125
-# /Catalyst-Runtime/5.80/branches/locate_components
-
+# I don't even: 0288cd4eb0de6b6be8d192dd83c187f0a5aaf4f2
 # Fix duplicated history (probably thanks to my multi importing with git svn)
 b6117f389679d228fb660baa6be8b73427d8bb5c 70aa6abf12ee0136ea9c8bb284549e85c472c34d
 d76ebf736a2497719ef6e49582250192dbab8f46 70aa6abf12ee0136ea9c8bb284549e85c472c34d

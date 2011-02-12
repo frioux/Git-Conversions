@@ -1,0 +1,116 @@
+--- t/unit_core_mvc.t   (revision 11456)
++++ t/unit_core_mvc.t   (revision 11457)
+@@ -1,4 +1,4 @@
+-use Test::More tests => 46;
++use Test::More tests => 51;
+ use strict;
+ use warnings;
+
+@@ -181,3 +181,47 @@
+
+
+ }
++
++{
++    my $warn = '';
++    no warnings 'redefine';
++    local *Catalyst::Log::warn = sub { $warn .= $_[1] };
++
++    is_deeply (MyApp->controller('MyApp::Controller::C'),
++        MyApp->components->{'MyApp::Controller::C'},
++        'controller by fully qualified name ok');
++
++    # You probably meant $c->controller('C') instead of $c->controller({'MyApp::Controller::C'})
++    my ($suggested_comp_name, $orig_comp_name) = $warn =~ /You probably meant (.*) instead of (.*) /;
++    isnt($suggested_comp_name, $orig_comp_name, 'suggested fix in warning for fully qualified component names makes sense' );
++}
++
++{
++    package MyApp::WithoutRegexFallback;
++
++    use base qw/Catalyst/;
++
++    __PACKAGE__->config( { disable_component_resolution_regex_fallback => 1 } );
++
++    __PACKAGE__->components( { map { ( ref($_)||$_ , $_ ) }
++        qw/MyApp::WithoutRegexFallback::Controller::Another::Foo/ } );
++
++    # allow $c->log->warn to work
++    __PACKAGE__->setup_log;
++}
++
++{
++    # test if non-regex component retrieval still works
++    is( MyApp::WithoutRegexFallback->controller('Another::Foo'),
++        'MyApp::WithoutRegexFallback::Controller::Another::Foo', 'controller Another::Foo found');
++}
++
++{
++    my $warnings = 0;
++    no warnings 'redefine';
++    local *Catalyst::Log::warn = sub { $warnings++ };
++
++    # try to get nonexisting object w/o regexp fallback
++    is( MyApp::WithoutRegexFallback->controller('Foo'), undef, 'no controller Foo found');
++    ok( !$warnings, 'no regexp fallback warnings' );
++}
+--- lib/Catalyst.pm  (revision 11456)
++++ lib/Catalyst.pm  (revision 11457)
+@@ -552,6 +552,10 @@
+     # if we were given a regexp to search against, we're done.
+     return if ref $name;
+
++    # skip regexp fallback if configured
++    return
++        if $appclass->config->{disable_component_resolution_regex_fallback};
++
+     # regexp fallback
+     $query  = qr/$name/i;
+     @result = grep { $eligible{ $_ } =~ m{$query} } keys %eligible;
+@@ -569,7 +573,8 @@
+            (join '", "', @result) . "'. Relying on regexp fallback behavior for " .
+            "component resolution is unreliable and unsafe.";
+         my $short = $result[0];
+-        $short =~ s/.*?Model:://;
++        # remove the component namespace prefix
++        $short =~ s/.*?(Model|Controller|View):://;
+         my $shortmess = Carp::shortmess('');
+         if ($shortmess =~ m#Catalyst/Plugin#) {
+            $msg .= " You probably need to set '$short' instead of '${name}' in this " .
+@@ -578,7 +583,7 @@
+            $msg .= " You probably need to set '$short' instead of '${name}' in this " .
+               "component's config";
+         } else {
+-           $msg .= " You probably meant \$c->${warn_for}('$short') instead of \$c->${warn_for}({'${name}'}), " .
++           $msg .= " You probably meant \$c->${warn_for}('$short') instead of \$c->${warn_for}('${name}'), " .
+               "but if you really wanted to search, pass in a regexp as the argument " .
+               "like so: \$c->${warn_for}(qr/${name}/)";
+         }
+@@ -795,6 +800,12 @@
+ If C<$name> is a regexp, a list of components matched against the full
+ component name will be returned.
+
++If Catalyst can't find a component by name, it will fallback to regex
++matching by default. To disable this behaviour set
++disable_component_resolution_regex_fallback to a true value.
++
++    __PACKAGE__->config( { disable_component_resolution_regex_fallback => 1 } );
++
+ =cut
+
+ sub component {
+--- Changes (revision 11456)
++++ Changes (revision 11457)
+@@ -6,6 +6,12 @@
+       role combination of roles containing attributed methods.
+     - Catalyst::Dispatcher::dispatch_types no longer throws deprecated warnings
+       as there is no recommended alternative.
++    - Improved the suggested fix warning when component resolution uses regex
++      fallback for fully qualified component names. (abraxxa)
++
++  New features:
++    - Added disable_component_resolution_regex_fallback config option to
++      switch off regex fallback for component resolution. (abraxxa)
+
+ 5.80013 2009-09-17 11:07:04
+
