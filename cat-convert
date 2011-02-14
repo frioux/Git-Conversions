@@ -100,7 +100,8 @@ git filter-branch  \
    --env-filter '
 if [ "$GIT_AUTHOR_NAME" = "yousef" ]; then export GIT_AUTHOR_NAME="Yousef H. Alhashemi"; export GIT_AUTHOR_EMAIL="yousef.alhashemi@gmail.com"; fi
 if [ "$GIT_AUTHOR_NAME" = "didls" ]; then export GIT_AUTHOR_NAME="Naveen Manivannan"; export GIT_AUTHOR_EMAIL="nmani@nashresearch.com"; fi
-if [ "$GIT_AUTHOR_EMAIL" = "rjk@linguist.dartmouth.edu" ]; then export GIT_AUTHOR_EMAIL="rkimball@pangeamedia.com"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "rjk@linguist.dartmouth.edu" ]; then export GIT_AUTHOR_EMAIL="rjk@tamias.net"; fi
+if [ "$GIT_AUTHOR_EMAIL" = "perl@rainboxx.de" ]; then export GIT_AUTHOR_EMAIL="foo@rainboxx.de"; fi
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME";
 export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL";
 ' \
