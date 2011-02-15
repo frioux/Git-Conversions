@@ -1,3 +1,63 @@
-http://code.sixapart.com/svn/XML-Feed/trunk/
-git://git.shadowcat.co.uk/catagits/XML-Feed.git
+#!/bin/bash
+git svn clone --no-metadata --stdlayout --authors-file=xml-feed-authors http://code.sixapart.com/svn/XML-Feed/ ../XML-Feed
 
+cd ../XML-Feed
+
+# localize branches
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+function _tag {
+   COMMIT="$(cat ".git/$2")"
+   export GIT_COMMITTER_NAME="$(git log $COMMIT -1 --pretty=format:%an)"
+   export GIT_COMMITTER_EMAIL="$(git log $COMMIT -1 --pretty=format:%ae)"
+   export GIT_COMMITTER_DATE="$(git log $COMMIT -1 --pretty=format:%ai)"
+   git tag "v$1" -m "Release $1" $2
+}
+
+function tag {
+   _tag $1 refs/heads/tags/$1
+   git branch -D tags/$1
+}
+
+git branch multivalue-convert 84ac5c9a6647b4933c5bb3752e953f97d218ac69
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.10
+tag 0.11
+tag 0.12
+tag 0.20
+tag 0.21
+tag 0.22
+tag 0.23
+tag 0.3
+tag 0.40
+git tag v0.41 -m "Release 0.41" 392e947e19218633f275baa8d987b93b7e46a40e
+git branch -D tags/0.41
+tag 0.42
+tag 0.43
+
+cp ../git-conv/xml-feed-grafts .git/info/grafts
+
+git branch -d pluggable
+git branch -d trunk
+
+# this is so filter-branch will work, even though it's already checked out
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+git rebase -i HEAD~20
+
+rm .git/refs/original -rf
