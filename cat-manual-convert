@@ -1,0 +1,4 @@
+#!/bin/bash
+
+git svn clone --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Manual/5.80 ../CM
+
