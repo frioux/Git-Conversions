@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function _tag {
+   COMMIT="$(cat ".git/$2")"
+   export GIT_COMMITTER_NAME="$(git log $COMMIT -1 --pretty=format:%an)"
+   export GIT_COMMITTER_EMAIL="$(git log $COMMIT -1 --pretty=format:%ae)"
+   export GIT_COMMITTER_DATE="$(git log $COMMIT -1 --pretty=format:%ai)"
+   git tag "v$1" -m "Release $1" $2
+}
+
+function tag {
+   _tag $1 refs/heads/tags/$1
+   git branch -D tags/$1
+}

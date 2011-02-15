@@ -1,4 +1,30 @@
 #!/bin/bash
 
-git svn clone --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Manual/5.80 ../CM
+#git svn clone --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Manual/5.80 ../CM
 
+rm ../Catalyst-Manual-git -rf
+cp ../CM ../Catalyst-Manual-git -r
+cd ../Catalyst-Manual-git
+
+cp .git/refs/remotes/* .git/refs/heads -r
+rm .git/refs/remotes -rf
+
+cp ../git-conv/cat-manual-grafts .git/info/grafts
+
+git branch -d trunk@8492
+git branch -d trunk@10286
+git branch -d sqlite_fks
+git branch -d tutorial_role_updates
+
+source ../git-conv/git-lib
+tag 5.8005
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --msg-filter 'git fix-ghetto-message' \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
