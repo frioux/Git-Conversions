@@ -42,23 +42,64 @@ fetch_cr check_conflicts
 fetch_cr author_requires
 
 # Localize branches
-git checkout -b master remotes/cr580/master
+git checkout -b master remotes/cr580/trunk
 git branch -a | grep -v '* master' | cut -b11- | xargs -n1 -Ifoo git branch foo remotes/foo
 
 # Get rid of remotes
 git remote rm cr570
 git remote rm cr580
 
-# Fix Tags
+## Fix Tags
 git branch -D cr580/tags/trunk
-git branch | grep tags | xargs -n1 perl -E '
-   $old = $ARGV[0];
-   $new = (split qr(/), $old)[2];
-   $exec = qq(git tag v$new $old -m"Release $new" && git branch -D $old );
-   system $exec'
+function ctag {
+  _tag $1 refs/heads/cr5${2}0/tags/$1
+  git branch -D cr5${2}0/tags/$1
+}
+
+ctag 5.7015 7
+ctag 5.7099_04 7
+ctag 5.71000 7
+ctag 5.71001 7
+manual-tag v5.8000_03 'Release v5.8000_03' 7ba7a54fde7afd4c6a76489428d873d12dadb227 'Kieren Diment' 'diment@gmail.com' '2008-12-01 05:35:14'
+manual-tag v5.8000_04 'Release v5.8000_04' 3ee7cd46de9f8008e26d30d5fab6dd87c6f5cdea 'Marcus Ramberg' 'marcus@nordaaker.com' '2008-12-05 15:24:48'
+manual-tag v5.8000_05 'Release v5.8000_05' ddbae9e46d17c49db18f2b7ab51cea8730c68bec 'Marcus Ramberg' 'marcus@nordaaker.com' '2009-01-29 09:00:29'
+manual-tag v5.80_06 'Release v5.80_06'     7b4707f5c3e211b6c3178948c835b4676638542d 'Marcus Ramberg' 'marcus@nordaaker.com' '2009-02-04 20:06:52'
+manual-tag v5.80001 'Release v5.80001' 0e240c2894425771842210b6b5d715509b4c2251 'Florial Ragwitz' 'rafl@debian.org' '2009-04-18 20:25:53'
+manual-tag v5.80002 'Release v5.80002' 036ed4989b9610f25dc884ebaedddcce43e7def0 'Florial Ragwitz' 'rafl@debian.org' '2009-04-21 23:44:23'
+manual-tag v5.80003 'Release v5.80003' c0e5bf41cfa5d67137caf38ce7d9e26210c864ee 'Florial Ragwitz' 'rafl@debian.org' '2009-04-29 14:39:35'
+manual-tag v5.80004 'Release v5.80004' 9c19f9f68da39fd10492ecdab6420a61076127da 'Florial Ragwitz' 'rafl@debian.org' '2009-05-18 15:12:19'
+manual-tag v5.80005 'Release v5.80005' 6333a19d14f08037c5d6febb164675cf767779cc 'Tomas Doran' 'bobtfish@bobtfish.net' '2009-06-06 15:18:08'
+manual-tag v5.80006 'Release v5.80006' 9910dadbe4883a10819305ef6715cf319dcead54 'Florial Ragwitz' 'rafl@debian.org' '2009-06-29 22:07:09'
+manual-tag v5.80007 'Release v5.80007' 70aa6abf12ee0136ea9c8bb284549e85c472c34d 'Florial Ragwitz' 'rafl@debian.org' '2009-06-30 22:10:24'
+manual-tag v5.80008 'Release v5.80008' e2ba1ab217c9a4e8d89eb97271bd9f671e25880c 'Florial Ragwitz' 'rafl@debian.org' '2009-08-21 16:13:38'
+manual-tag v5.80009 'Release v5.80009' d484d99b2099fc7f23fc0e724dab04ced02bed7f 'Florial Ragwitz' 'rafl@debian.org' '2009-08-21 20:29:07'
+manual-tag v5.80010 'Release v5.80010' 37f4b4b430f493ef72764f633a41c055e1e725fc 'Florial Ragwitz' 'rafl@debian.org' '2009-08-21 21:41:36'
+manual-tag v5.80011 'Release v5.80011' 075cda9c6469614ea62df85b5271895595a35c15 'Florial Ragwitz' 'rafl@debian.org' '2009-08-23 11:56:09'
+manual-tag v5.80012 'Release v5.80012' 4ca50428155e3d9374fbb9aa9ab0dd0ae522fcb2 'Marcus Ramberg' 'marcus@nordaaker.com' '2009-09-09 20:40:03'
+manual-tag v5.80013 'Release v5.80013' 7c8f444f03cf3c546c24b212d6035ce9eff32e27 'Florial Ragwitz' 'rafl@debian.org' '2009-09-17 09:33:46'
+ctag 5.80014_01 8
+ctag 5.80014_02 8
+ctag 5.80014 8
+ctag 5.80015 8
+ctag 5.80016 8
+ctag 5.80017 8
+ctag 5.80018 8
+ctag 5.80019 8
+ctag 5.80020 8
+ctag 5.80021 8
+ctag 5.80022 8
+ctag 5.80023 8
+ctag 5.80025 8
+ctag 5.80026 8
+ctag 5.80027 8
+ctag 5.80028 8
+ctag 5.80029 8
+ctag 5.80030 8
+ctag 5.80031 8
+ctag 5.89000 8
 
 
-# get rid of merged branches
+## get rid of merged branches
 git branch -d cr570/trunk@5068
 git branch -d cr570/trunk@6895
 git branch -d cr580/Catalyst-Test-base-href
@@ -72,6 +113,7 @@ git branch -d cr580/more_metaclass_compat
 git branch -d cr580/param_filtering
 git branch -d cr580/rt58057
 git branch -d cr580/trunk
+git branch -d cr570/trunk
 git branch -d cr580/tweak_controller_action_creation
 git branch -d cr580/uri_encode_captures_andor_args_take2
 
@@ -93,6 +135,38 @@ git checkout master
 git branch -D fail-11457
 
 cp ../git-conv/cat-grafts .git/info/grafts
+
+git branch -m cr570/compres attic/component-resolution
+git branch -m cr570/context_go attic/context_go
+git branch -m cr570/master attic/5.70-trunk
+git branch -m cr570/proxystuff attic/proxystuff
+git branch -m cr580/action_args action_args
+git branch -m cr580/action_roles action_roles
+git branch -m cr580/basic-app-ctx-separation basic-app-ctx-separation
+git branch -m cr580/basic-app-ctx-separation-cleaned basic-app-ctx-separation-cleaned
+git branch -m cr580/basic-app-ctx-separation-cleaned-appnotcomponent basic-app-ctx-separation-cleaned-appnotcomponent
+git branch -m cr580/captures_and_args_combined captures_and_args_combined
+git branch -m cr580/contextual_uri_for contextual_uri_for
+git branch -m cr580/deprecate_appclass_actions deprecate_appclass_actions
+git branch -m cr580/docpatch_component_config docpatch_component_config
+git branch -m cr580/exception_interface exception_interface
+git branch -m cr580/expand_modules expand_modules
+git branch -m cr580/fastcgi_ipc-run fastcgi_ipc-run
+git branch -m cr580/finalize_response finalize_response
+git branch -m cr580/forward-comp-obj forward-comp-obj
+git branch -m cr580/gsoc_breadboard gsoc_breadboard
+git branch -m cr580/https_on_port_80 https_on_port_80
+git branch -m cr580/ipv6_server_script ipv6_server_script
+git branch -m cr580/private-action-attributes private-action-attributes
+git branch -m cr580/psgi psgi
+git branch -m cr580/refactor_debug refactor_debug
+git branch -m cr580/refactoring_dispatcher refactoring_dispatcher
+git branch -m cr580/relative_uri_for relative_uri_for
+git branch -m cr580/restarter_changeclass restarter_changeclass
+git branch -m cr580/safer_eval safer_eval
+git branch -m cr580/script_roles script_roles
+git branch -m cr580/slash_in_pathparts_take3 slash_in_pathparts_take3
+git branch -m cr580/uri_for_utf8 uri_for_utf8
 
 git filter-branch  \
    --prune-empty \
