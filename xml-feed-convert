@@ -58,6 +58,4 @@ git filter-branch  \
    --tag-name-filter cat \
    -- --all
 
-git rebase -i HEAD~20
-
 rm .git/refs/original -rf
