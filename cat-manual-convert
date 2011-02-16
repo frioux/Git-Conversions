@@ -27,4 +27,7 @@ git filter-branch  \
    --tag-name-filter cat \
    -- --all
 
+git branch -d tome_tutorial_fixes
+git branch -d formhandler
+
 rm .git/refs/original -rf
