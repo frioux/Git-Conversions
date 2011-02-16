@@ -14,6 +14,8 @@ branch_clone pass_component_names
 branch_clone check_conflicts
 branch_clone author_requires
 
+source git-lib
+
 function fetch_cr {
    git remote add $1 file:///home/frew/code/CR-$1
    git fetch $1
@@ -113,7 +115,8 @@ git branch -d cr580/more_metaclass_compat
 git branch -d cr580/param_filtering
 git branch -d cr580/rt58057
 git branch -d cr580/trunk
-git branch -d cr570/trunk
+# force this because it has another name anyway
+git branch -D cr570/trunk
 git branch -d cr580/tweak_controller_action_creation
 git branch -d cr580/uri_encode_captures_andor_args_take2
 
