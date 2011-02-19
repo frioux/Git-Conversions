@@ -2,7 +2,10 @@
 
 rm ../sqlt -rf
 
-git svn clone --authors-file=sqlt-authors -Ttrunk/sqlfairy -bbranches -bhistoric_branches -ttags https://sqlfairy.svn.sourceforge.net/svnroot/sqlfairy ../sqlt-sqlt-export
+git svn clone --authors-file=sqlt-authors -Ttrunk/sqlfairy -bbranches -bhistoric_branches -ttags https://sqlfairy.svn.sourceforge.net/svnroot/sqlfairy ../sqlt-export
+
+cp ../sqlt-export ../sqlt -r
+cd ../sqlt
 
 # make "local" branches out of all the svn branches
 cp .git/refs/remotes/* .git/refs/heads
@@ -46,9 +49,6 @@ git checkout -b trunk remotes/trunk
 git checkout -b xmi remotes/xmi
 git checkout -b xmi@1445 remotes/xmi@1445
 
-cp ../sqlt-export ../sqlt -r
-cd ../sqlt
-
 git checkout master
 
 rm .git/packed-refs
@@ -57,24 +57,7 @@ rm .git/refs/remotes -rf
 
 touch .git/info/grafts
 
-git branch -D tags/dlc-sqltsh-base@615
-git branch -D tags/Release-0-04@766
-git branch -D tags/help@773
-git branch -D tags/Turnkey_Stable_04-16-2004@950
-git branch -D tags/Release-0-06@1031
-git branch -D tags/pre-schema-object@1052
-git branch -D RELEASE-0-07-RC2@1113
-git branch -D tags/mda-2k51201@1186
-git branch -D diff-refactor@1315
-git branch -D xmi@1445
-git branch -D tags/RELEASE-0_01@103
-git branch -D tags/RELEASE-0_02@340
-git branch -D Turnkey-1-1-patches@545
-git branch -D dlc-sqltsh-branch@611
-git branch -D oracle_quotes@1652
-
 echo "8dbc38b91a68def17b0078e67a486dc950103367 d6caf25b84adfc9c86a88fdb1f382032f72900ca" >> .git/info/grafts
-echo "d59d77ec4f4d8ac573d3acfafa9b8a089643c717 0428230009b30ffa462abaed4a2788ff04d4f3fd 35a7c02ac02aad41a73d5f186730c6bfdbfd2afe" >> .git/info/grafts
 
 # refs/heads/xmi
 echo "ce194aa2d601d9c62b26f8c1ed2c145423065dc3 2fd7ae62e1c36464f05beb7baebde1bec24b8f4a" >> .git/info/grafts
@@ -94,6 +77,7 @@ echo "c6c6f8c887ab7110ef0fafd93c3503283712a391 61c218a0c204a90e824ee066365f7546a
 
 echo "1d0492016e79e7e7913849c0c8dcc74387e9cfc9 ba3ae69014e9c10329778011f0cba9f46c44a7c8 29959b6170edf5371de2b437e24ee766641d3368" >> .git/info/grafts
 
+echo "d59d77ec4f4d8ac573d3acfafa9b8a089643c717 0428230009b30ffa462abaed4a2788ff04d4f3fd 35a7c02ac02aad41a73d5f186730c6bfdbfd2afe 3eed263cd12707e8783c60fabb6a5a37498192ee" >> .git/info/grafts
 echo "f55aaa730a2f0b93e87dd495fc909f7d575fd99d" > .git/refs/heads/tags/RELEASE-0_01
 echo "b6911a7d5d5ed2a4a9482aecf495309946e42601" > .git/refs/heads/tags/RELEASE-0_02
 echo "18500d10e9e0ad9b6fa02dad3d20924f2499df52" > .git/refs/heads/tags/help
@@ -105,36 +89,36 @@ echo "cddc0c048d18afd73b2d91180265ce90fec34d07" > .git/refs/heads/tags/pre-schem
 echo "d047443c4a424436c5423d5c1cb459527416cb4a" > .git/refs/heads/RELEASE-0-07-RC2
 echo "d41a81f7b1b9ef31af6b60fa8af1d486e8fc9abd" > .git/refs/heads/tags/mda-2k51201
 
+git branch -D tags/dlc-sqltsh-base@615
+git branch -D tags/Release-0-04@766
+git branch -D tags/help@773
+git branch -D tags/Turnkey_Stable_04-16-2004@950
+git branch -D tags/Release-0-06@1031
+git branch -D tags/pre-schema-object@1052
+git branch -D RELEASE-0-07-RC2@1113
+git branch -D tags/mda-2k51201@1186
+git branch -D diff-refactor@1315
+git branch -D xmi@1445
+git branch -D tags/RELEASE-0_01@103
+git branch -D tags/RELEASE-0_02@340
+git branch -D Turnkey-1-1-patches@545
+git branch -D dlc-sqltsh-branch@611
+git branch -D oracle_quotes@1652
+# merged
+git branch -d oracle_quotes
+git branch -d oracle_datatypes
+git branch -d trunk
+git branch -d roundtrip
+git branch -d diff-refactor
+git branch -d darren-1_0
+git branch -d pg_proc
+
 
 git filter-branch  \
    --prune-empty \
-   --msg-filter 'git fix-ghetto-message' \
    --tree-filter 'git sqlt-tree-filter' \
-   refs/heads/master \
-   refs/heads/RELEASE-0-07-RC2 \
-   refs/heads/Turnkey-1-1-patches \
-   refs/heads/darren-1_0 \
-   refs/heads/diff-refactor \
-   refs/heads/dlc-sqltsh-branch \
-   refs/heads/foo \
-   refs/heads/master \
-   refs/heads/oracle_datatypes \
-   refs/heads/oracle_quotes \
-   refs/heads/pg_proc \
-   refs/heads/release-0-10 \
-   refs/heads/roundtrip \
-   refs/heads/tags/RELEASE-0_01 \
-   refs/heads/tags/RELEASE-0_02 \
-   refs/heads/tags/Release-0-04 \
-   refs/heads/tags/Release-0-06 \
-   refs/heads/tags/Turnkey_Stable_04-16-2004 \
-   refs/heads/tags/bar \
-   refs/heads/tags/dlc-sqltsh-base \
-   refs/heads/tags/help \
-   refs/heads/tags/mda-2k51201 \
-   refs/heads/tags/pre-schema-object \
-   refs/heads/trunk \
-   refs/heads/xmi \
+   --msg-filter 'git fix-ghetto-message' \
+   -- --all
 
 rm .git/refs/original -rf
 
@@ -142,10 +126,3 @@ git tag v0.01 -m 'Release 0.01' refs/heads/tags/RELEASE-0_01
 git tag v0.02 -m 'Release 0.02' refs/heads/tags/RELEASE-0_02
 git tag v0.04 -m 'Release 0.04' refs/heads/tags/Release-0-04
 git tag v0.06 -m 'Release 0.06' refs/heads/tags/Release-0-06
-
-## ditch all pre-conversion objects forcefully
-#git reflog expire --all --expire=now
-#git gc --aggressive
-
-#git prune
-#git fsck --full

@@ -3,7 +3,11 @@
 shopt -s dotglob
 if [ -d sqlfairy ]
 then
-   mv sqlfairy/* . && rmdir sqlfairy
+   mv sqlfairy/* .
+fi
+if [ -d CVSROOT ]
+then
+   rm -rf CVSROOT
 fi
 if [ -d htdocs ]
 then
