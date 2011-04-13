@@ -1,0 +1,152 @@
+# git-svn-authors
+ash = Ash Berlin <ash_github@firemirror.com>
+t0m = Tomas Doran <bobtfish@bobtfish.net>
+jrockway = Jonathan Rockway <jon@jrock.us>
+castaway = Jess Robinson <castaway@desert-island.me.uk>
+captainL = Luke Saunders <luke.saunders@gmail.com>
+lukes = Luke Saunders <luke.saunders@gmail.com>
+timbunce = Tim Bunce <Tim.Bunce@ig.co.uk>
+matthewt = Matt S Trout <mst@shadowcat.co.uk>
+mst = Matt S Trout <matthewt@hercule.scsys.co.uk>
+ilmari = Dagfinn Ilmari Mannsåker <ilmari@ilmari.org>
+drew = Drew Taylor <taylor.andrew.j@gmail.com>
+jgoulah = John Goulah <jgoulah@cpan.org>
+ribasushi = Peter Rabbitson <ribasushi@cpan.org>
+
+# POD
+Nniuq = Ron "Quinn" Straight <quinnfazigu@gmail.org>
+nniuq = Ron "Quinn" Straight <quinnfazigu@gmail.org>
+Numa = Dan Sully <daniel@cpan.org>
+Roman = Roman Filippov <romanf@cpan.org>
+abraxxa = Alexander Hartmaier <abraxxa@cpan.org>
+aherzog = Adam Herzog <adam@herzogdesigns.com>
+amoore = Andrew Moore <amoore@cpan.org>
+andyg = Andy Grundman <andy@hybridized.org>
+arcanez = Justin Hunter <justin.d.hunter@gmail.com>
+bert = Norbert Csongradi <bert@cpan.org>
+blblack = Brandon L. Black <blblack@gmail.com>
+bluefeet = Aran Deltac <bluefeet@cpan.org>
+boghead = Bryan Beeley <cpan@beeley.org>
+bricas = Brian Cassidy <bricas@cpan.org>
+brunov = Bruno Vecchi <vecchi.b@gmail.com>
+caelum = Rafael Kitover <rkitover@cpan.org>
+da5id = David Jack Olrik <djo@cpan.org>
+debolaz = Anders Nor Berle <berle@cpan.org>
+dew = Dan Thomas <dan@godders.org>
+dkubb = Dan Kubb <dan.kubb-cpan@onautopilot.com>
+dnm = Justin Wheeler <jwheeler@datademons.com>
+dpetrov = Dimitar Petrov <mitakaa@gmail.com>
+dwc = Daniel Westermann-Clark <danieltwc@cpan.org>
+dyfrgi = Michael Leuchtenburg <michael@slashhome.org>
+frew = Arthur Axel "fREW" Schmidt <frioux@gmail.com>
+goraxe = Gordon Irving <goraxe@cpan.org>
+gphat = Cory G Watson <gphat@cpan.org>
+groditi = Guillermo Roditi <groditi@cpan.org>
+hobbs = Andrew Rodland <arodland@cpan.org>
+jasonmay = Jason May <jason.a.may@gmail.com>
+jguenther = Justin Guenther <jguenther@cpan.org>
+jhannah = Jay Hannah <jay@jays.net>
+jnapiorkowski = John Napiorkowski <jjn1056@yahoo.com>
+jon = Jon Schutz <jjschutz@cpan.org>
+jshirley = J. Shirley <jshirley@gmail.com>
+marcus = Marcus Ramberg <mramberg@cpan.org>
+michaelr = Michael Reddick <michael.reddick@gmail.com>
+nigel = Nigel Metheringham <nigelm@cpan.org>
+ningu = David Kamholz <dkamholz@cpan.org>
+norbi = Norbert Buchmuller <norbi@nix.hu>
+nuba = Nuba Princigalli <nuba@cpan.org>
+ovid = Curtis "Ovid" Poe <ovid@cpan.org>
+oyse = Øystein Torget <oystein.torget@dnv.com>
+perigrin = Chris Prather <chris@prather.org>
+peter = Peter Collingbourne <peter@pcc.me.uk>
+phaylon = Robert Sedlacek <phaylon@dunkelheit.at>
+plu = Johannes Plunien <plu@cpan.org>
+rafl = Florian Ragwitz <rafl@debian.org>
+rbuels = Robert Buels <rmb32@cornell.edu>
+rdj = Ryan D Johnson <ryan@innerfence.com>
+rjbs = Ricardo Signes <rjbs@cpan.org>
+robkinyon = Rob Kinyon <rkinyon@cpan.org>
+scotty = Scotty Allen <scotty@scottyallen.com>
+semifor = Marc Mims <marc@questright.com>
+solomon = Jared Johnson <jaredj@nmgi.com>
+spb = Stephen Bennett <stephen@freenode.net>
+sszabo = Stephan Szabo <sszabo@bigpanda.com>
+teejay = Aaron Trevena <teejay@cpan.org>
+triode = Pete Gamache <gamache@cpan.org>
+typester = Daisuke Murase <typester@cpan.org>
+victori = Victor Igumnov <victori@cpan.org>
+willert = Sebastian Willert <willert@cpan.org>
+wreis = Wallace Reis <wreis@cpan.org>
+zamolxes = Bogdan Lucaciu <bogdan@wiz.ro>
+
+# POD with email from PAUSE
+ank = Andres Kievsky <ank@ank.com.ar>
+claco = Christopher H. Laco <claco@cpan.org>
+clkao = CL Kao <clkao@clkao.org>
+konobi = Scott McWhirter <konobi@cpan.org>
+mattlaw = Matt Lawrence <matt.lawrence@virgin.net>
+paulm = Paul Makepeace <paulm+pause@paulm.com>
+penguin = K J Cheetham <jamie@shadowcatsystems.co.uk>
+quicksilver = Jules Bean <jules@jellybean.co.uk>
+wdh = Will Hawes <wdhawes@gmail.com>
+pcc = Peter Collingbourne <peter@pcc.me.uk>
+
+# PAUSE
+jester = Jesse Sheidlower <jester@panix.com>
+tomk = Thomas Kratz <tomk@cpan.org>
+davekam = David Kamholz <davekam@pobox.com>
+jules = Jules Bean <jules@jellybean.co.uk>
+zarquon = Kieren Diment <diment@gmail.com>
+purge = Simon Elliott <cpan@browsing.co.uk>
+fireartist = Carl Franks <cpan@fireartist.com>
+nothingmuch = Yuval Kogman <nothingmuch@woobling.org>
+djo = David Jack Olrik <david@olrik.dk>
+schwern = Michael G Schwern <mschwern@cpan.org>
+evdb = Edmund von der Burg <evdb@ecclestoad.co.uk>  
+jesse = Jesse Vincent <jesse+cpan@fsck.com>
+jmmills = Jason M. Mills <jmmills@cpan.org>
+dhoss = Devin Austin <devin.austin@gmail.com>
+rbo = Robert Bohne <rbo@cpan.org>
+roman = Roman Ardern-Corris <spam_in@3legs.com>
+faxm0dem = Fabien Wernli <cpan@faxm0dem.org>
+gshank = Gerda Shank <gshank@cpan.org>
+tonvoon = Ton Voon <ton.voon@opsera.com>
+dsully = Dan Sully <daniel@cpan.org>
+wintrmute = Toby Corkindale <tjc@cpan.org>
+renormalist = Steffen Schwigon <schwigon@cpan.org>
+acmoore = Andrew Moore <amoore@cpan.org>
+nilsonsfj = Nilson Santos Figueiredo Júnior <nilsonsfj@cpan.org>
+dduncan = Darren Duncan <darren@darrenduncan.net>
+mo = Moritz Onken <onken@netcubed.de>
+amiri = Amiri Barksdale <amiribarksdale@gmail.com>
+dakkar = Gianni Ceccarelli <dakkar@thenautilus.net>
+ruoso = Daniel Ruoso <daniel@ruoso.com>
+
+# mailing lists
+bkirkbri = Brian Kirkbride <brian.kirkbride@deeperbydesign.com>
+antirice = Matt LeBlanc <antirice@gmail.com>
+ned = Neil de Carteret <n3dst4@gmail.com>
+ijw = Ian Wells <ijw@cack.org.uk>
+jesper = Jesper Krogh <jesper@krogh.cc>
+tomboh = Tom Hukins <tom@eborcom.com>
+josefk = Josef Karthauser <joe@tao.org.uk>
+
+# Github
+moritz = Moritz Lenz <moritz@faui2k3.org>
+dandv = Dan Dascalescu <ddascalescu+github@gmail.com>
+
+# Github with no name
+milki = Jonathan Chu <milki@rescomp.berkeley.edu>
+
+# other
+grink1tt3n = Robert Krimen <rkrimen@cpan.org>
+
+# CPAN
+edenc = Eden Cardim <edencardim@gmail.com>
+
+# No real commits
+sc_ = sc_ <sc_@dev.catalystframework.org>
+moses = moses <moses@dev.catalystframework.org>
+
+# no info available
+g = g <no-email-available@dev.catalystframework.org>
