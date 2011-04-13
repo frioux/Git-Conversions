@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source git-lib
+
+rm -rf ../cursor-cached
+git svn clone --no-metadata --authors-file=dbic-authors --trunk=trunk --tags=tags http://dev.catalyst.perl.org/repos/bast/DBIx-Class-Cursor-Cached/1.000 ../cursor-cached-export
+cp ../cursor-cached-export ../cursor-cached -r
+cd ../cursor-cached
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+tag 1.1.0
+git branch -d trunk
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
