@@ -1,0 +1,58 @@
+#!/bin/bash
+
+source git-lib
+
+rm -rf ../cag
+git svn clone --authors-file=dbic-authors --trunk=trunk --tags=tags http://dev.catalyst.perl.org/repos/bast/Class-Accessor-Grouped ../cag-export
+cp ../cag-export ../cag -r
+cd ../cag
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D tags/0.04000@3253
+git branch -D tags/0.04000@5788
+git branch -D tags/0.05000@3271
+git branch -D tags/0.05000@5788
+git branch -D tags/0.05001@3289
+git branch -D tags/0.05001@5788
+git branch -D tags/0.05002@3306
+git branch -D tags/0.05002@5788
+git branch -D tags/0.06000@3309
+git branch -D tags/0.06000@5788
+git branch -D tags/0.07000@3566
+git branch -D tags/0.07000@5788
+git branch -D tags/0.08000@3921
+git branch -D tags/0.08000@5788
+git branch -D tags/0.08001@3923
+git branch -D tags/0.08001@5788
+git branch -D tags/0.08003@5787
+git branch -D tags/0.08003@5788
+git branch -D trunk@9208
+
+tag 0.04000
+tag 0.05000
+tag 0.05001
+tag 0.05002
+tag 0.06000
+tag 0.07000
+tag 0.08000
+tag 0.08001
+tag 0.08003
+tag 0.09004
+tag 0.09005
+tag 0.09006
+tag 0.09007
+tag 0.09008
+tag 0.09009
+tag 0.10000
+tag 0.10001
+tag 0.10002
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
