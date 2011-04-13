@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source git-lib
+
+rm -rf ../cc3c
+git svn clone --no-metadata --authors-file=dbic-authors --trunk=trunk --branches=branches http://dev.catalyst.perl.org/repos/bast/Class-C3-Componentised ../cc3c-export
+cp ../cc3c-export ../cc3c -r
+cd ../cc3c
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -d trunk@4141
+git branch -d trunk@5739
+git branch -d trunk
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
