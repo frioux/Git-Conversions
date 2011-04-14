@@ -3,7 +3,7 @@
 source git-lib
 
 rm -rf ../cag
-git svn clone --authors-file=dbic-authors --trunk=trunk --tags=tags http://dev.catalyst.perl.org/repos/bast/Class-Accessor-Grouped ../cag-export
+git svn clone --no-metadata --authors-file=dbic-authors --trunk=trunk --tags=tags http://dev.catalyst.perl.org/repos/bast/Class-Accessor-Grouped ../cag-export
 cp ../cag-export ../cag -r
 cd ../cag
 cp .git/refs/remotes/* .git/refs/heads/ -r
