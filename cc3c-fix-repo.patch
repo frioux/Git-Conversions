@@ -1,0 +1,23 @@
+From 53b670f9f6e8618e153107a79e08594f58e73774 Mon Sep 17 00:00:00 2001
+From: Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+Date: Sat, 16 Apr 2011 16:04:32 -0500
+Subject: [PATCH] fix repo url
+
+---
+ Makefile.PL |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/Makefile.PL b/Makefile.PL
+index b9eea7e..d826e7d 100644
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -22,4 +22,6 @@ requires  'Test::Exception';
+ # will need adjustment if the require is removed
+ requires  'Class::C3' => '0.20';
+ 
++resources repository => 'git://git.shadowcat.co.uk/p5sagit/Class-C3-Componentised.git';
++
+ WriteAll;
+-- 
+1.7.4.1
+
