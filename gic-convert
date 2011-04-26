@@ -3,35 +3,53 @@
 rm -rf ../gic ../gic-pre-convert
 
 git svn clone --no-metadata --authors-file=/home/frew/tmp/git/users --stdlayout svn://hg/GIC/gic ../gic-export
-git svn clone --no-metadata --authors-file=/home/frew/tmp/git/users svn://hg/GIC gic-pre-convert-export
+git svn clone --no-metadata --authors-file=/home/frew/tmp/git/users svn://hg/GIC ../gic-pre-convert-export
 
-cp ../gic-export ../gic
-cp ../gic-pre-convert-export ../gic-pre-convert
+cp ../gic-export ../gic -r
+cp ../gic-pre-convert-export ../gic-pre-convert -r
 
+cd ../gic-pre-convert
+cp .git/refs/remotes/* .git/refs/heads -r
 cd ../gic
 
-
 # make "local" branches out of all the svn branches
-cp .git/refs/remotes/* .git/refs/heads
+cp .git/refs/remotes/* .git/refs/heads -r
 git remote add pre file:///home/frew/code/OS/gic-pre-convert
-git remote add cis-admin cs:cis-admin
 git fetch pre
+git remote add cis-admin cs:cis-admin
 git fetch cis-admin
 
 
 touch .git/info/grafts
 
-echo "275dafb7ae678988fe8f5ce84162e091b22d06b8 " >> .git/info/grafts
+echo "5c181986aacfc2b861937b4a8db27c6bd58c8e08 91b47ac172e4e8893b9cff9ba7cc5701c0c45e27" >> .git/info/grafts
+
+mkdir gic
+git mv account_creator.pl account_info.html account_info.plx ad_utilities.pl CGI CIS cis.json clear_cookie.plx controller css dispatch.plx dl.plx downtime.html eclGrid.plx ecl.pm error.plx favicon.ico footer.html generic_results.html get_cookie.plx gic.css header.html images import_msds.pl js LogEvents.txt login.plx lookup mail_utilities.pl main.plx MarketPlace overlib.js password.htm password.plx pngHack.css pngHack.htc process_account_info.plx renewal.plx Source SourceFinder structure test.plx To\ Do\ List\ -\ Chemical\ Information\ Services,\ Inc.txt transparent.gif utilities.pl view gic
+
+git ci -m 'rearrange gic for git repo'
 
 unzip /home/frew/newshop.zip
-
+git add newshop
 git ci -am 'initial commit of newshop stuff'
 
-#git filter-branch  \
-   #--prune-empty \
-   #--tag-name-filter cat \
-   #-- --all
+git co -b cis-admin cis-admin/master
 
+git clean -fd
 
+mkdir admin
+git mv active_list.html active_list.plx admin.css ad.plx ads.html Advertising chart_form.html chart_main.html chart_main.plx chart_test.html close_credit.plx dateLineApp.jar default.htm del_active_user.plx del_product.plx del_user.plx gic.css images list.html list.plx mail_utilities.pl num_users.plx pngHack.css pngHack.htc refund_credit.html refund_credit.plx search.html search.plx security.html security.plx temp transparent.gif trial trial.html trial.plx update_product.plx update_user.plx user_stats.plx utilities.pl view_mfg.html view_product.html view_product.plx view_user.html view_user.plx wayfinder.html wayfinder.plx admin
 
-#rm .git/refs/original -rf
+git ci -m 'rearrange admin for git repo'
+git co master
+git merge cis-admin
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
+
+git remote add cis cs:cis
+git push cis master
