@@ -1,0 +1,26 @@
+From 722c7dfe3b5901be2898b6f33059bf3b98ae6ff0 Mon Sep 17 00:00:00 2001
+From: Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+Date: Sat, 16 Apr 2011 16:01:04 -0500
+Subject: [PATCH] fix repo url
+
+---
+ Makefile.PL |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.PL b/Makefile.PL
+index 726b26e..7a29932 100644
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -32,8 +32,7 @@ if (-e 'MANIFEST.SKIP') {
+ 
+ auto_install;
+ 
+-resources repository =>
+-'http://dev.catalyst.perl.org/repos/bast/Class-Accessor-Grouped/trunk';
++resources repository => 'git://git.shadowcat.co.uk/p5sagit/Class-Accessor-Grouped.git';
+ 
+ WriteAll;
+ if ($Module::Install::AUTHOR) {
+-- 
+1.7.4.1
+

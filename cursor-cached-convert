@@ -14,6 +14,8 @@ git branch -d trunk
 
 git checkout master
 
+git am ../git-conv/cursor-cached-fix-repo.patch
+
 git filter-branch  \
    --prune-empty \
    --tag-name-filter cat \

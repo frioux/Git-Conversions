@@ -1,0 +1,23 @@
+From a864ce7bd3f5fadad1968db82293c97b33d46c0b Mon Sep 17 00:00:00 2001
+From: Arthur Axel 'fREW' Schmidt <frioux@gmail.com>
+Date: Sat, 16 Apr 2011 16:05:50 -0500
+Subject: [PATCH] fix repo url
+
+---
+ Makefile.PL |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/Makefile.PL b/Makefile.PL
+index c3fbac1..8aeba6d 100644
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -15,4 +15,6 @@ build_requires 'Cache::FileCache';
+ 
+ auto_install;
+ 
++resources repository => 'git://git.shadowcat.co.uk/dbsrgits/DBIx-Class-Cursor-Cached.git';
++
+ WriteAll;
+-- 
+1.7.4.1
+
