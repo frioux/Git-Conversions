@@ -104,7 +104,7 @@ fireartist = Carl Franks <cpan@fireartist.com>
 nothingmuch = Yuval Kogman <nothingmuch@woobling.org>
 djo = David Jack Olrik <david@olrik.dk>
 schwern = Michael G Schwern <mschwern@cpan.org>
-evdb = Edmund von der Burg <evdb@ecclestoad.co.uk>  
+evdb = Edmund von der Burg <evdb@ecclestoad.co.uk>
 jesse = Jesse Vincent <jesse+cpan@fsck.com>
 jmmills = Jason M. Mills <jmmills@cpan.org>
 dhoss = Devin Austin <devin.austin@gmail.com>
@@ -152,3 +152,7 @@ moses = moses <moses@dev.catalystframework.org>
 
 # no info available
 g = g <no-email-available@dev.catalystframework.org>
+
+
+jgottshall = Jason Gottshal <jgottshal@capwiz.com>
+osfameron  = Hakim Cassimally <osfameron@cpan.org>

@@ -1,0 +1,75 @@
+#!/bin/bash
+
+source git-lib
+
+rm -rf ../cmds
+git svn clone --no-metadata --authors-file=dbic-authors --trunk=trunk --tags=tags http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Model-DBIC-Schema/ ../cmds-export
+cp ../cmds-export ../cmds -r
+cd ../cmds
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D tags/0.12@10972
+git branch -D tags/0.12@11004
+git branch -D tags/0.12@4043
+git branch -D tags/0.12@4043-
+git branch -D tags/0.16@10972
+git branch -D tags/0.16@11004
+git branch -D tags/0.16@4608
+git branch -D tags/0.16@4608-
+git branch -D tags/0.17_01@10972
+git branch -D tags/0.17_01@11004
+git branch -D tags/0.17_01@4755
+git branch -D tags/0.17_01@4755-
+git branch -D tags/0.18@10972
+git branch -D tags/0.18@11004
+git branch -D tags/0.18@4824
+git branch -D tags/0.18@4824-
+git branch -D tags/0.20@10972
+git branch -D tags/0.20@11004
+git branch -D tags/0.20@5068
+git branch -D tags/0.20@5068-
+git branch -D tags/0.20@6419
+git branch -D tags/0.20@6419-
+git branch -D trunk@10972
+git branch -D trunk@11000
+git branch -D trunk@5068
+git branch -D trunk@5068-
+
+tag 0.12
+tag 0.16
+tag 0.17_01
+tag 0.18
+tag 0.20
+tag 0.26
+tag 0.27
+tag 0.28
+tag 0.29
+tag 0.30
+tag 0.32
+tag 0.33
+tag 0.34
+tag 0.35
+tag 0.36
+tag 0.37
+tag 0.38
+tag 0.39
+tag 0.40
+tag 0.41
+tag 0.42
+tag 0.43
+tag 0.44
+tag 0.45
+tag 0.46
+tag 0.47
+tag 0.48
+tag 0.49
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
