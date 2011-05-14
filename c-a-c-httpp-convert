@@ -1,0 +1,32 @@
+#!/bin/bash
+
+source git-lib
+REPO=cachttpp
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Authentication-Credential-HTTP-Proxy/1.000/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk@3425
+git branch -D trunk@3425-
+git branch -D trunk@5068
+git branch -D trunk@6576
+git branch -D trunk@735
+git branch -D trunk@735-
+git branch -D trunk
+
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
