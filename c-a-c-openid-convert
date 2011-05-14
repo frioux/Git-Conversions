@@ -1,0 +1,127 @@
+#!/bin/bash
+
+source git-lib
+REPO=cacopenid
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Authentication-Credential-OpenID/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+# Wow...
+git branch -D tags/0.02@10237
+git branch -D tags/0.03@10237
+git branch -D tags/0.03@7600
+git branch -D tags/0.04@10237
+git branch -D tags/0.04@7600
+git branch -D tags/0.04@7934
+git branch -D tags/0.05@10237
+git branch -D tags/0.05@7600
+git branch -D tags/0.05@7934
+git branch -D tags/0.05@7935
+git branch -D tags/0.06@10237
+git branch -D tags/0.06@7600
+git branch -D tags/0.06@7934
+git branch -D tags/0.06@7935
+git branch -D tags/0.06@8076
+git branch -D tags/0.07@10237
+git branch -D tags/0.07@7600
+git branch -D tags/0.07@7934
+git branch -D tags/0.07@7935
+git branch -D tags/0.07@8076
+git branch -D tags/0.07@8077
+git branch -D tags/0.08@10237
+git branch -D tags/0.08@7600
+git branch -D tags/0.08@7934
+git branch -D tags/0.08@7935
+git branch -D tags/0.08@8076
+git branch -D tags/0.08@8077
+git branch -D tags/0.08@8083
+git branch -D tags/0.09@10237
+git branch -D tags/0.09@7600
+git branch -D tags/0.09@7934
+git branch -D tags/0.09@7935
+git branch -D tags/0.09@8076
+git branch -D tags/0.09@8077
+git branch -D tags/0.09@8083
+git branch -D tags/0.09@8472
+git branch -D tags/0.10@10237
+git branch -D tags/0.10@7600
+git branch -D tags/0.10@7934
+git branch -D tags/0.10@7935
+git branch -D tags/0.10@8076
+git branch -D tags/0.10@8077
+git branch -D tags/0.10@8083
+git branch -D tags/0.10@8472
+git branch -D tags/0.10@8473
+git branch -D tags/0.11@10237
+git branch -D tags/0.11@7600
+git branch -D tags/0.11@7934
+git branch -D tags/0.11@7935
+git branch -D tags/0.11@8076
+git branch -D tags/0.11@8077
+git branch -D tags/0.11@8083
+git branch -D tags/0.11@8472
+git branch -D tags/0.11@8473
+git branch -D tags/0.11@8506
+git branch -D tags/0.12@10237
+git branch -D tags/0.12@7600
+git branch -D tags/0.12@7934
+git branch -D tags/0.12@7935
+git branch -D tags/0.12@8076
+git branch -D tags/0.12@8077
+git branch -D tags/0.12@8083
+git branch -D tags/0.12@8472
+git branch -D tags/0.12@8473
+git branch -D tags/0.12@8506
+git branch -D tags/0.12@8511
+git branch -D tags/0.13@10237
+git branch -D tags/0.13@7600
+git branch -D tags/0.13@7934
+git branch -D tags/0.13@7935
+git branch -D tags/0.13@8076
+git branch -D tags/0.13@8077
+git branch -D tags/0.13@8083
+git branch -D tags/0.13@8472
+git branch -D tags/0.13@8473
+git branch -D tags/0.13@8506
+git branch -D tags/0.13@8511
+git branch -D tags/0.13@8684
+git branch -D trunk@10237
+git branch -D trunk@7600
+git branch -D trunk@7934
+git branch -D trunk@7935
+git branch -D trunk@8076
+git branch -D trunk@8077
+git branch -D trunk@8083
+git branch -D trunk@8472
+git branch -D trunk@8473
+git branch -D trunk@8506
+git branch -D trunk@8511
+git branch -D trunk@8684
+git branch -D trunk
+
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.10
+tag 0.11
+tag 0.12
+tag 0.13
+tag 0.14
+
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
