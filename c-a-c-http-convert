@@ -1,0 +1,67 @@
+#!/bin/bash
+
+source git-lib
+REPO=cachttp
+rm -rf ../$REPO
+rm -rf ../$REPO-0
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Authentication-Credential-HTTP/0.00/ ../$REPO-0-export
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Authentication-Credential-HTTP/1.000/ ../$REPO-1-export
+cp ../$REPO-1-export ../$REPO -r
+cp ../$REPO-0-export ../$REPO-0 -r
+
+cp ../$REPO-0/.git/refs/remotes/* ../$REPO-0/.git/refs/heads/ -r
+cd ../$REPO
+git remote add $REPO-0 file:///home/frew/code/$REPO-0
+git fetch $REPO-0
+cp .git/refs/remotes/* .git/refs/heads/ -r
+cp .git/refs/heads/$REPO-0/tags/* .git/refs/heads/tags/ -r
+rm .git/refs/remotes -rf
+
+git branch -D cachttp-0/tags/0.11@10454
+git branch -D cachttp-0/tags/0.11@5068
+git branch -D cachttp-0/tags/0.11@8105
+git branch -D cachttp-0/tags/0.11@8167
+git branch -D cachttp-0/trunk@10454
+git branch -D cachttp-0/trunk@5068
+git branch -D cachttp-0/trunk@8105
+git branch -D cachttp-0/trunk@8167
+git branch -D tags/0.11@10454
+git branch -D tags/0.11@5068
+git branch -D tags/0.11@8105
+git branch -D tags/0.11@8167
+git branch -D trunk@5068
+git branch -D trunk@8105
+git branch -D trunk
+git branch -D cachttp-0/master
+git branch -D cachttp-0/tags/0.11
+git branch -D cachttp-0/tags/0.12
+git branch -D cachttp-0/tags/0.13
+git branch -D cachttp-0/trunk
+
+tag 0.11
+tag 0.12
+tag 0.13
+tag 1.000
+tag 1.001
+tag 1.002
+tag 1.003
+tag 1.004
+tag 1.005
+tag 1.006
+tag 1.007
+tag 1.008
+tag 1.009
+tag 1.010
+tag 1.011
+tag 1.012
+tag 1.013
+
+git checkout master
+
+git filter-branch  \
+   --msg-filter 'git fix-ghetto-message' \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
