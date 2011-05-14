@@ -1,0 +1,33 @@
+#!/bin/bash
+
+source git-lib
+REPO=casdbic
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Authentication-Store-DBIx-Class/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git checkout master
+
+git branch -D trunk
+git branch -D trunk@13089
+git branch -D trunk@7204
+
+tag 0.1100
+tag 0.1200
+tag 0.1201
+tag 0.1300
+tag 0.1400
+tag 0.1401
+tag 0.1500
+
+
+git filter-branch  \
+   --msg-filter 'git fix-ghetto-message' \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
