@@ -3,20 +3,61 @@
 source git-lib
 REPO=cpsched
 rm -rf ../$REPO
-git svn clone --no-metadata --authors-file=catalyst-authors http://dev.catalyst.perl.org/repos/Catalyst/trunk/Catalyst-Plugin-Scheduler/ ../${REPO}-export
+git svn clone --no-metadata --authors-file=catalyst-authors --trunk=trunk/Catalyst-Plugin-Scheduler/ --tags=tags/Catalyst-Plugin-Scheduler/ http://dev.catalyst.perl.org/repos/Catalyst/ ../${REPO}-export
 cp ../${REPO}-export ../$REPO -r
 cd ../$REPO
 cp .git/refs/remotes/* .git/refs/heads/ -r
 rm .git/refs/remotes -rf
 
-git branch -D git-svn
+git branch -D tags/0.01@13764
+git branch -D tags/0.02@13764
+git branch -D tags/0.03@13764
+git branch -D tags/0.04@13764
+git branch -D tags/0.05@13764
+git branch -D tags/0.06@13764
+git branch -D tags/0.07@13764
+git branch -D tags/0.08@13764
+git branch -D tags/0.09@13764
+git branch -D tags/0.10@13764
+git branch -D trunk
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.10
+
+
+touch .git/info/grafts
+echo "ab20e5c18d61c425d00859bae064af37560372cf 24610788cc6026440ba9cb21553adb9f3a75feaa" >> .git/info/grafts
+echo "dcd1c361750060f044854ce73cd4252d0f075176 0473657f1ac0d7cb60a4a7bfdeb72027490bdfd8" >> .git/info/grafts
+echo "d2b346e934016ac1120e0646a8dc0f322b9e694e 72ea7cfc421f8c2915e38b0ee0aabe0571e20e18" >> .git/info/grafts
+echo "1b7d2bb92cd8ca5d87a8fbf7f5b97deda2578692 ec2b05898f240ac4bc9929e31905c0d27b2ae8c9" >> .git/info/grafts
+echo "8d065bddcf5842364e30a8f2170dcda56d168795 ad8862182158ea3baf61ab7173474ac01a664d90" >> .git/info/grafts
+echo "3e42a1e63bb8c6adea8102a7404d53a4796e278b 0a4375b48cb1337c6ecc1d8c54a1c8b449be079e" >> .git/info/grafts
+echo "8f96b246289c3deb412385fb331f919ac21c8443 fd81e5bf6b01c595b6b45afcd7f7784b3a75206a" >> .git/info/grafts
+echo "ba33d6c97fda179a2177afa29a3560f8e6e79d2c 01aa8a002abccad0e16d9649b1f809cddd0e85ae" >> .git/info/grafts
+echo "d5e6d24e538f796e6eec18b28b27ac83048beb3e 21c2d4c13b345436b9894ba894ba799af66f21b6" >> .git/info/grafts
+echo "6d0c694f9ecf4a3ad69a74b9333e5da700409f30 19730b2d5e05e71872df6ec8c0114af45a0edfc6" >> .git/info/grafts
+echo "922b00ac9a64e2079425d66d19d66a6d0a8d3869 3fb8e92ebc9cc3c79892c78fb185601fac88fa79" >> .git/info/grafts
+echo "8a3cfa913ada462716e01b63d61bd98ecd366139 79c6366c7aee37b68db7b965065917bafb456dd9" >> .git/info/grafts
+
+echo "9dacb9378986f0915a9870449460f7051eb5f52f 952df4bcc4c335c154444d2329180e1e57475b14" >> .git/info/grafts
+echo "b9be65dc4d21f867a3d6d22eaafe65c365d06b97 da23e72a11bfab901e619b9165a7bc4d1576291c" >> .git/info/grafts
+echo "e86b90748322a5f2f64c8ba829789b6b437a3bc3 dd68d69f50dfc0206e897727e98a684dcc29f5c3" >> .git/info/grafts
+echo "c11d613aad22274d1b1d20c7a64321dd9fa93ce6 e0190fea1e408b02487bf9990d5e5a0c253134c2" >> .git/info/grafts
+echo "f1a53676ddbb704ec5e13a8a93b1a7a135a07173 b287540b5656d47d3fbd7c2f89694d63012887b0" >> .git/info/grafts
+echo "62ccb8ae3091fc9277525d12f1678ae55dd36fbe c58010ecaf6790dd441946faa66c1319f328cc43" >> .git/info/grafts
 
 git checkout master
 
 git filter-branch  \
-   --msg-filter '
-      git fix-ghetto-message | sed -e "s/^* //"
-   ' \
+   --msg-filter 'git fix-ghetto-message' \
    --prune-empty \
    --tag-name-filter cat \
    -- --all
