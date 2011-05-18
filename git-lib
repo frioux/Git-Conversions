@@ -25,3 +25,8 @@ function tag {
    _tag $1 refs/heads/tags/$1
    git branch -D tags/$1
 }
+
+function graft {
+   touch .git/info/grafts
+   echo "$@" >> .git/info/grafts
+}
