@@ -1,0 +1,21 @@
+#!/bin/bash
+
+source git-lib
+REPO=config-any
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors http://dev.catalyst.perl.org/repos/Catalyst/trunk/Config-Any/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D git-svn
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
