@@ -3,13 +3,62 @@
 source git-lib
 REPO=config-any
 rm -rf ../$REPO
-git svn clone --no-metadata --authors-file=catalyst-authors http://dev.catalyst.perl.org/repos/Catalyst/trunk/Config-Any/ ../${REPO}-export
+git svn clone --no-metadata --authors-file=catalyst-authors --trunk=trunk/Config-Any/ --tags=tags/Config-Any/ http://dev.catalyst.perl.org/repos/Catalyst/ ../${REPO}-export
 cp ../${REPO}-export ../$REPO -r
 cd ../$REPO
 cp .git/refs/remotes/* .git/refs/heads/ -r
 rm .git/refs/remotes -rf
 
-git branch -D git-svn
+git branch -D tags/0.04@13764
+git branch -D tags/0.08@13764
+git branch -D tags/0.09_01@13764
+git branch -D tags/0.09_02@13764
+git branch -D tags/0.10@13764
+git branch -D tags/0.11@13764
+git branch -D tags/0.12@13764
+git branch -D tags/0.13@13764
+git branch -D tags/0.14@13764
+git branch -D tags/0.15@13764
+git branch -D tags/0.16@13764
+git branch -D tags/0.17@13764
+git branch -D tags/0.18@13764
+git branch -D tags/0.19@13764
+git branch -D tags/0.20@13764
+git branch -D trunk
+
+tag 0.04
+tag 0.08
+tag 0.09_01
+tag 0.09_02
+tag 0.10
+tag 0.11
+tag 0.12
+tag 0.13
+tag 0.14
+tag 0.15
+tag 0.16
+tag 0.17
+tag 0.18
+tag 0.19
+tag 0.20
+
+
+graft 02d94215a195b268d177ee0d70699d078551cc85 5169580777eb65c5696f16bbb258b7adb0b8b45a
+graft cd51c913cf841f2a22aa87bfab5738ccd0d66419 ce9551332c08e61bf1f0f30d0d2bd30c26418525
+graft 16854f955a7300b0aec2cd104d22223fced8ff39 35a09cc192c4a736c09b60db7bc06d77924e1c95
+graft a841ecd78861b9fb53fa06589253f87358df74fc b29037ed07894a5da06a4181a98560eda91ccd7d
+graft a24e1d8974eff21d96bd73a864938f0de40bc695 b3ab7afce9c3a7c9a4e1e3f705430bceb0ca179f
+graft 4ede0009d46cdbffd2414a626d4a8155a28c752f 899e72135d6c4bbc38742f1604c95460801cd557
+graft b53f0e95be3c5b8296c659f67412935982c4edd4 afdafb6f57d83633af69593775e4854f25a5f2d9
+graft c74f892075db267aeb24e93972a9ec082fd6d715 7ca10211a63f4e88599a3fde059b962f3db189ac
+graft c97320892bdde5b13e1e1e1fbb4576f1a0d23937 db8295416cee98e1fe02457e1fd0f6267bc8b3c9
+graft 87004ac925db79095a5f4c743a04c2ee0eaaa2af 150c6fc78cf42acb9f0c4064d83c01e8e7a1e65e
+graft eac75ab39c6c2ff361ad779d62541ec1d8761f30 3ffa455f4256173a8a66d128e61920bc07f5ba52
+graft 72d4e2223761fbb431194805bfdb2c0788d1a453 4db4f8670e7a9070886d45dd5bb27873ea6fab68
+graft fbfe77c0e366bdfbb911d343680db88e1043ed3a fc9034e01a47052387842fa373906f5d846bccf2
+graft 438e3f5e9be766f561c8f79f0594f74ba7662ecc a9270902d3938327ddb5966c11da9db08b9161eb
+graft ae9556bf2dbd89bc1c15d17ffac9fba093fd039e dbebb90c28865f574256e2d57877bae7c9b4f2f5
+graft 8458a7d131f91ddde6a4e3e16309ff4aab19f5bf 9b4fb76d1bf09c0d9f4aeeec074c16073f3aa935
 
 git checkout master
 
