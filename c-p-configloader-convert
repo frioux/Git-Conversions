@@ -1,0 +1,127 @@
+#!/bin/bash
+
+source git-lib
+REPO=cpcl
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Plugin-ConfigLoader/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+touch .git/info/grafts
+echo "0e87bd74ba529107f9bed682a413c3b04cfeb181 267d802c96e138566dd251f7c3f835e4289fc795" >> .git/info/grafts
+
+git branch -D tags/0.01@13372
+git branch -D tags/0.01@3172
+git branch -D tags/0.02@13372
+git branch -D tags/0.02@3179
+git branch -D tags/0.03@13372
+git branch -D tags/0.03@3197
+git branch -D tags/0.04@13372
+git branch -D tags/0.04@3465
+git branch -D tags/0.05@13372
+git branch -D tags/0.05@3930
+git branch -D tags/0.06@13372
+git branch -D tags/0.06@4051
+git branch -D tags/0.07@13372
+git branch -D tags/0.07@4117
+git branch -D tags/0.08@13372
+git branch -D tags/0.08@4211
+git branch -D tags/0.09@13372
+git branch -D tags/0.09@4213
+git branch -D tags/0.11@13372
+git branch -D tags/0.11@4695
+git branch -D tags/0.12@13372
+git branch -D tags/0.12@4761
+git branch -D tags/0.13@13372
+git branch -D tags/0.13@4903
+git branch -D tags/0.14@13372
+git branch -D tags/0.14@5068
+git branch -D tags/0.14@6264
+git branch -D tags/0.15@13372
+git branch -D tags/0.15@5068
+git branch -D tags/0.15@6698
+git branch -D tags/0.16@13372
+git branch -D tags/0.16@5068
+git branch -D tags/0.16@6729
+git branch -D tags/0.17@13372
+git branch -D tags/0.17@5068
+git branch -D tags/0.17@6736
+git branch -D tags/0.18@13372
+git branch -D tags/0.18@5068
+git branch -D tags/0.18@6986
+git branch -D tags/0.19@13372
+git branch -D tags/0.19@5068
+git branch -D tags/0.19@7151
+git branch -D tags/0.1@13372
+git branch -D tags/0.1@4693
+git branch -D tags/0.20@13372
+git branch -D tags/0.20@5068
+git branch -D tags/0.20@7668
+git branch -D tags/0.21@13372
+git branch -D tags/0.21@5068
+git branch -D tags/0.21@8201
+git branch -D tags/0.22@13372
+git branch -D tags/0.22@5068
+git branch -D tags/0.22@9014
+git branch -D tags/0.23@13372
+git branch -D tags/0.23@5068
+git branch -D tags/0.23@9730
+git branch -D tags/0.24@10723
+git branch -D tags/0.24@13372
+git branch -D tags/0.24@5068
+git branch -D tags/0.25@11055
+git branch -D tags/0.25@13372
+git branch -D tags/0.25@5068
+git branch -D tags/0.26@11104
+git branch -D tags/0.26@13372
+git branch -D tags/0.26@5068
+git branch -D tags/0.27@11136
+git branch -D tags/0.27@13372
+git branch -D tags/0.27@5068
+git branch -D trunk@13372
+git branch -D trunk@5068
+git branch -D trunk
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.1
+tag 0.11
+tag 0.12
+tag 0.13
+tag 0.14
+tag 0.15
+tag 0.16
+tag 0.17
+tag 0.18
+tag 0.19
+tag 0.20
+tag 0.21
+tag 0.22
+tag 0.23
+tag 0.24
+tag 0.25
+tag 0.26
+tag 0.27
+tag 0.28
+tag 0.29
+tag 0.30
+
+
+git checkout master
+
+git filter-branch  \
+   --msg-filter 'sed -e "s/^- //"' \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
