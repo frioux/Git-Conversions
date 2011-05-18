@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source git-lib
+REPO=cpsched
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors http://dev.catalyst.perl.org/repos/Catalyst/trunk/Catalyst-Plugin-Scheduler/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D git-svn
+
+git checkout master
+
+git filter-branch  \
+   --msg-filter '
+      git fix-ghetto-message | sed -e "s/^* //"
+   ' \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
