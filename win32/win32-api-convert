@@ -1,0 +1,46 @@
+#!/bin/bash
+
+source git-lib
+REPO=win32-api
+PART=Win32-API
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=win32/authors --trunk=trunk/$PART --tags=tags/$PART --branches=branches/$PART http://libwin32.googlecode.com/svn/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D port-to-64-bits
+
+graft 41747c9f26741409ed8f7d2ccf064688221a1b77 70b5c4f25a8f2c8cc3a738cad0a552510884491e
+
+tag 0.59
+tag 0.58
+tag 0.57
+tag 0.56
+tag 0.55
+tag 0.54
+tag 0.53
+tag 0.52
+tag 0.51
+tag 0.50
+tag 0.49
+tag 0.48
+tag 0.47
+tag 0.46
+tag 0.45
+tag 0.44
+tag 0.43
+tag 0.41
+tag 0.40
+tag 0.20
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
