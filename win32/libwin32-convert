@@ -1,0 +1,106 @@
+#!/bin/bash
+
+source git-lib
+REPO=libwin32
+PART=libwin32
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=win32/authors --trunk=trunk/$PART --tags=tags/$PART http://libwin32.googlecode.com/svn/ ../${REPO}-export
+
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D tags/0.02@2
+git branch -D tags/0.02@286
+git branch -D tags/0.03@286
+git branch -D tags/0.03@4
+git branch -D tags/0.04@286
+git branch -D tags/0.04@6
+git branch -D tags/0.05@286
+git branch -D tags/0.05@8
+git branch -D tags/0.06@10
+git branch -D tags/0.06@286
+git branch -D tags/0.07@12
+git branch -D tags/0.07@286
+git branch -D tags/0.08@14
+git branch -D tags/0.08@286
+git branch -D tags/0.09@16
+git branch -D tags/0.09@286
+git branch -D tags/0.10@18
+git branch -D tags/0.10@286
+git branch -D tags/0.12@286
+git branch -D tags/0.12@48
+git branch -D tags/0.13@286
+git branch -D tags/0.13@78
+git branch -D tags/0.14@286
+git branch -D tags/0.14@80
+git branch -D tags/0.151@112
+git branch -D tags/0.151@286
+git branch -D tags/0.15@110
+git branch -D tags/0.15@286
+git branch -D tags/0.16@119
+git branch -D tags/0.16@286
+git branch -D tags/0.171@122
+git branch -D tags/0.171@286
+git branch -D tags/0.172@128
+git branch -D tags/0.172@286
+git branch -D tags/0.173@130
+git branch -D tags/0.173@286
+git branch -D tags/0.18@132
+git branch -D tags/0.18@286
+git branch -D tags/0.191@134
+git branch -D tags/0.191@286
+git branch -D tags/0.24@139
+git branch -D tags/0.24@286
+git branch -D tags/0.25@142
+git branch -D tags/0.25@286
+git branch -D tags/0.26@144
+git branch -D tags/0.26@286
+git branch -D tags/0.27@194
+git branch -D tags/0.27@286
+git branch -D tags/0.28@194
+git branch -D tags/0.28@286
+git branch -D trunk@196
+
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.10
+tag 0.12
+tag 0.13
+tag 0.14
+tag 0.15
+tag 0.151
+tag 0.16
+tag 0.171
+tag 0.172
+tag 0.173
+tag 0.18
+tag 0.191
+tag 0.24
+tag 0.25
+tag 0.26
+tag 0.27
+tag 0.28
+tag 0.29
+tag 0.30
+
+graft 9602617a63d51f46e017f4dcf14a2d7521d80dee 316f242430403caf4f36775575f1705009db5c63
+graft 64b1996ffd61861bca3befc7aacfa23d162f5de3 9602617a63d51f46e017f4dcf14a2d7521d80dee
+
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
