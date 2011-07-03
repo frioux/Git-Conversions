@@ -1,0 +1,174 @@
+#!/bin/bash
+
+source git-lib
+REPO=win32-ole
+PART=Win32-OLE
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=win32/authors --trunk=trunk/$PART --tags=tags/$PART http://libwin32.googlecode.com/svn/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D tags/0.0602@20
+git branch -D tags/0.0602@286
+git branch -D tags/0.0603@22
+git branch -D tags/0.0603@286
+git branch -D tags/0.0604@25
+git branch -D tags/0.0604@286
+git branch -D tags/0.0605@27
+git branch -D tags/0.0605@286
+git branch -D tags/0.0606@286
+git branch -D tags/0.0606@29
+git branch -D tags/0.0607@286
+git branch -D tags/0.0607@31
+git branch -D tags/0.0608@286
+git branch -D tags/0.0608@33
+git branch -D tags/0.0609@286
+git branch -D tags/0.0609@35
+git branch -D tags/0.0610@286
+git branch -D tags/0.0610@37
+git branch -D tags/0.0611@286
+git branch -D tags/0.0611@39
+git branch -D tags/0.0612@286
+git branch -D tags/0.0612@41
+git branch -D tags/0.0613@286
+git branch -D tags/0.0613@42
+git branch -D tags/0.0615@286
+git branch -D tags/0.0615@44
+git branch -D tags/0.0616@286
+git branch -D tags/0.0616@46
+git branch -D tags/0.0802@286
+git branch -D tags/0.0802@50
+git branch -D tags/0.0803@286
+git branch -D tags/0.0803@52
+git branch -D tags/0.0804@286
+git branch -D tags/0.0804@54
+git branch -D tags/0.0805@286
+git branch -D tags/0.0805@56
+git branch -D tags/0.0806@286
+git branch -D tags/0.0806@58
+git branch -D tags/0.0807@286
+git branch -D tags/0.0807@60
+git branch -D tags/0.0808@286
+git branch -D tags/0.0808@62
+git branch -D tags/0.0809@286
+git branch -D tags/0.0809@64
+git branch -D tags/0.0810@286
+git branch -D tags/0.0810@66
+git branch -D tags/0.0901@286
+git branch -D tags/0.0901@70
+git branch -D tags/0.0902@286
+git branch -D tags/0.0902@72
+git branch -D tags/0.0903@286
+git branch -D tags/0.0903@74
+git branch -D tags/0.0904@286
+git branch -D tags/0.0904@76
+git branch -D tags/0.09@286
+git branch -D tags/0.09@68
+git branch -D tags/0.1001@286
+git branch -D tags/0.1001@82
+git branch -D tags/0.1003@286
+git branch -D tags/0.1003@84
+git branch -D tags/0.1004@286
+git branch -D tags/0.1004@86
+git branch -D tags/0.1005@286
+git branch -D tags/0.1005@88
+git branch -D tags/0.1006@286
+git branch -D tags/0.1006@90
+git branch -D tags/0.1007@286
+git branch -D tags/0.1007@92
+git branch -D tags/0.1008@286
+git branch -D tags/0.1008@94
+git branch -D tags/0.1009@286
+git branch -D tags/0.1009@96
+git branch -D tags/0.1010@286
+git branch -D tags/0.1010@98
+git branch -D tags/0.1011@100
+git branch -D tags/0.1011@286
+git branch -D tags/0.1012@105
+git branch -D tags/0.1012@286
+git branch -D tags/0.1102@114
+git branch -D tags/0.1102@286
+git branch -D tags/0.11@107
+git branch -D tags/0.11@286
+git branch -D tags/0.12@116
+git branch -D tags/0.12@286
+git branch -D tags/0.13@120
+git branch -D tags/0.13@286
+git branch -D tags/0.1402@124
+git branch -D tags/0.1402@286
+git branch -D tags/0.1403@126
+git branch -D tags/0.1403@286
+git branch -D tags/0.1704@286
+git branch -D tags/0.1705@286
+git branch -D tags/0.1706@286
+git branch -D tags/0.1707@286
+git branch -D tags/0.17@136
+git branch -D tags/0.17@286
+git branch -D trunk@194
+
+tag 0.0602
+tag 0.0603
+tag 0.0604
+tag 0.0605
+tag 0.0606
+tag 0.0607
+tag 0.0608
+tag 0.0609
+tag 0.0610
+tag 0.0611
+tag 0.0612
+tag 0.0613
+tag 0.0615
+tag 0.0616
+tag 0.0802
+tag 0.0803
+tag 0.0804
+tag 0.0805
+tag 0.0806
+tag 0.0807
+tag 0.0808
+tag 0.0809
+tag 0.0810
+tag 0.09
+tag 0.0901
+tag 0.0902
+tag 0.0903
+tag 0.0904
+tag 0.1001
+tag 0.1003
+tag 0.1004
+tag 0.1005
+tag 0.1006
+tag 0.1007
+tag 0.1008
+tag 0.1009
+tag 0.1010
+tag 0.1011
+tag 0.1012
+tag 0.11
+tag 0.1102
+tag 0.12
+tag 0.13
+tag 0.1402
+tag 0.1403
+tag 0.17
+tag 0.1704
+tag 0.1705
+tag 0.1706
+tag 0.1707
+tag 0.1708
+tag 0.1709
+
+graft 37bb9a914bad5f40c494b77ef0fb6bf68977bed6 952c499822109466fde478f24b8cba1fc4f9ab7a
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
