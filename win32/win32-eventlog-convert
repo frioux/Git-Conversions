@@ -1,0 +1,28 @@
+#!/bin/bash
+
+source git-lib
+REPO=win32-eventlog
+PART=Win32-EventLog
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=win32/authors --trunk=trunk/$PART --tags=tags/$PART http://libwin32.googlecode.com/svn/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D trunk@194
+
+graft bc752bac51f87fafb029f4a942366397da63ddb9 5e292664e61b4adf4e171ff7ef9c8e9bf6bd6d79
+
+tag 0.075
+tag 0.076
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
