@@ -1,0 +1,55 @@
+#!/bin/bash
+
+source git-lib
+REPO=win32
+PART=Win32
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=win32/authors --trunk=trunk/$PART --tags=tags/$PART http://libwin32.googlecode.com/svn/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D tags/0.27@286
+git branch -D tags/0.27_01@286
+git branch -D tags/0.27_02@286
+git branch -D tags/0.28_01@286
+git branch -D tags/0.29@286
+git branch -D tags/0.30@286
+git branch -D tags/0.31@286
+git branch -D tags/0.32@286
+git branch -D tags/0.33@286
+git branch -D tags/0.34@286
+git branch -D tags/0.35@286
+
+
+tag 0.44
+tag 0.43
+tag 0.42
+tag 0.41
+tag 0.40
+tag 0.39
+tag 0.38
+tag 0.37
+tag 0.36
+tag 0.35
+tag 0.34
+tag 0.33
+tag 0.32
+tag 0.31
+tag 0.30
+tag 0.29
+tag 0.27_02
+tag 0.27_01
+tag 0.27
+tag 0.28_01
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
