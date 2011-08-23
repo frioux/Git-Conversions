@@ -14,6 +14,7 @@ git checkout master
 git branch -D trunk
 git branch -D trunk@13089
 git branch -D trunk@7204
+git branch -D no-unneeded-fields
 
 tag 0.1100
 tag 0.1200
@@ -22,7 +23,9 @@ tag 0.1300
 tag 0.1400
 tag 0.1401
 tag 0.1500
+tag 0.1501
 
+graft d87102a0962117f2bffb14de55e9c2a132f70012 b742532aa01817ddc38c49f72ae9ea531ba97067
 
 git filter-branch  \
    --msg-filter 'git fix-ghetto-message' \
