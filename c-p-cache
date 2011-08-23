@@ -1,0 +1,56 @@
+#!/bin/bash
+
+source git-lib
+REPO=cpcache
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --trunk=trunk/Catalyst-Plugin-Cache/ --tags=tags/Catalyst-Plugin-Cache/ http://dev.catalyst.perl.org/repos/Catalyst/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+graft 206973bac3ae81f6f3257f5ff6e2631d1aecd418 8c29477c21efe15af5291eebfe4295c4b68be05e
+graft d0da982b7fec516bce29f45dca7243ad0c019485 4bbdb508ada2e701e4961feb815916cd0bc76ab5
+graft f8e696aee6123f6d3c4a72527a49528c35c17c87 e9fc065de79a1cc706e33b0be0ac87b55735c061
+graft 3cf1db6d976585f6463a9cf589843d2e18551128 69f65dbaf55c0cf27debd5afe4379c52abf013b0
+graft 1c14f01f264cd277c9cbd78afa6e2bb9f002171a c980924fa1acb106f25a568007b0834ffdc768ba
+graft 0287ca594e96f00394ad060a2fb231aa23c88f1a 2201765515633f9bf0399f73fe8149bd6527daf3
+graft 477ba79bdccbbf22f6ae41f7388663041e86b6d9 51f3924860719d2f48e68794cf401f60e243b5ef
+graft 3de30082525a6df372213e7114896787bc7c7cf6 60771e4e6a73e9df552f809474224c4501bc53c8
+graft eb92e28c5f82557da80bf5fd51d7b3cd4bf762cc c9e0f2dad57be1df7217e8770b0d2236905c03e7
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.10
+
+git branch -D trunk
+git branch -D tags/0.01@13764
+git branch -D tags/0.02@13764
+git branch -D tags/0.03@13764
+git branch -D tags/0.05@13764
+git branch -D tags/0.07@13764
+git branch -D tags/0.08@13764
+git branch -D tags/0.09@13764
+git branch -D tags/0.10@13764
+git branch -D tags/Catalyst-Plugin-Cache-0.07@13764
+git branch -D tags/Catalyst-Plugin-Cache-0.10@13764
+git branch -D tags/Catalyst-Plugin-Cache-0.07
+git branch -D tags/Catalyst-Plugin-Cache-0.10
+
+
+git checkout master
+
+git filter-branch  \
+   --msg-filter 'git fix-ghetto-message' \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
