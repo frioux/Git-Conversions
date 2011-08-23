@@ -1,0 +1,39 @@
+#!/bin/bash
+
+source git-lib
+REPO=cvtt
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-View-TT/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git checkout master
+
+  #moose
+tag 0.13
+tag 0.30
+tag 0.31
+tag 0.32
+tag 0.33
+tag 0.34
+tag 0.35
+git branch -d export_methods
+git branch -D new-api
+git branch -d render_die
+git branch -D tags/0.13@10695
+git branch -d tags/0.13@1275
+git branch -d render_die@11717
+git branch -d trunk
+git branch -d trunk@10694
+git branch -d trunk@4019
+git branch -d trunk@4057
+
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
