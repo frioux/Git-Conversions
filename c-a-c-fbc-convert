@@ -11,6 +11,11 @@ rm .git/refs/remotes -rf
 
 git checkout master
 
+git branch -D trunk
+git branch -D cleanup-moose
+
+graft 141cb01223ff881f8748b68413fa17170c8ef7b1 5c5e442dd6a40b98b0462df2c71eba85c61c3f9c 290a825db4cabde5dc51509f9d6d188a9aa2b5a8
+
 git filter-branch  \
    --prune-empty \
    --tag-name-filter cat \
