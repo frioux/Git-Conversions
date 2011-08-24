@@ -9,12 +9,11 @@ cd ../$REPO
 cp .git/refs/remotes/* .git/refs/heads/ -r
 rm .git/refs/remotes -rf
 
-git branch -D trunk
-
 tag 0.02
 tag 0.03
 
-git checkout master
+git checkout -b master trunk
+git branch -D trunk
 
 git filter-branch  \
    --prune-empty \
