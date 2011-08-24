@@ -145,13 +145,10 @@ davewood = David Schmidt <davewood@gmx.at>
 zerodogg = Eskild Hustvedt <zerodogg@cpan.org>
 nine = Stefan Seifert <nine@cpan.org>
 khisanth = Lian Wan Situ <lwsitu@cpan.org>
-# yousef = Yousef H. Alhashemi <yousef.alhashemi@gmail.com>
-yousef = yousef <no@se.com>
+yousef = Yousef H. Alhashemi <yousef.alhashemi@gmail.com>
 
-rjk = Ronald J Kimball <rjk@linguist.dartmouth.edu>
-# rjk = Ronald J Kimball <rjk@tamias.net>
-# didls = Naveen Manivannan <nmani@nashresearch.com>
-didls = didls <no@se.com>
+rjk = Ronald J Kimball <rjk@tamias.net>
+didls = Naveen Manivannan <nmani@nashresearch.com>
 
 # Added for Catalyst::Manual
 jayk = Jay Kuri <jayk@cpan.org>
@@ -174,3 +171,6 @@ joel = Joel Bernstein <joel@fysh.org>
 theory = David E. Wheeler <david@justatheory.com>
 osfameron  = Hakim Cassimally <osfameron@cpan.org>
 plu = Johannes Plunien <plu@cpan.org>
+
+uazz = Uh <wut@lol.com>
+stephan48 = Stephan Jauernick <stephanj@cpan.org>

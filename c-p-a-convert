@@ -1,0 +1,83 @@
+#!/bin/bash
+
+source git-lib
+REPO=cpauth
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Plugin-Authentication/0.10000/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D tags/0.01@10451
+git branch -D tags/0.01@2247
+git branch -D tags/0.02@10451
+git branch -D tags/0.02@2270
+git branch -D tags/0.03@10451
+git branch -D tags/0.03@2413
+git branch -D tags/0.04@10451
+git branch -D tags/0.04@2436
+git branch -D tags/0.05@10451
+git branch -D tags/0.05@2899
+git branch -D tags/0.07@10451
+git branch -D tags/0.07@3655
+git branch -D tags/0.08@10451
+git branch -D tags/0.08@4768
+git branch -D tags/0.09@10451
+git branch -D tags/0.09@4808
+git branch -D tags/0.100092@10451
+git branch -D tags/0.100092@5068
+git branch -D tags/0.100092@9112
+git branch -D tags/0.100092_01@10451
+git branch -D tags/0.100092_01@5068
+git branch -D tags/0.100092_01@9222
+git branch -D tags/0.10009_01@10451
+git branch -D tags/0.10009_01@5068
+git branch -D tags/0.10009_01@9051
+git branch -D tags/0.10010@10451
+git branch -D tags/0.10010@5068
+git branch -D tags/0.10010@9252
+git branch -D tags/0.10011@10451
+git branch -D tags/0.10011@5068
+git branch -D tags/0.10011@9467
+git branch -D tags/0.10012@10446
+git branch -D tags/0.10012@10451
+git branch -D tags/0.10012@5068
+git branch -D trunk@10450
+git branch -D trunk@5068
+git branch -D trunk
+
+graft cf4cedaaf67b54cbc50c9f48e03375a2c04cd988 8dfcda01409a591fcfb354a644baabdf3feeabbb
+graft 38087652e4164986fc557d15db83656f2953d106 51111c817b809ef8bc912e2fa1ab49a4453d3832
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.10009_01
+tag 0.100092
+tag 0.100092_01
+tag 0.10010
+tag 0.10011
+tag 0.10012
+tag 0.10013
+tag 0.10014
+tag 0.10015
+tag 0.10016
+tag 0.10017
+tag 0.10018
+
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   --msg-filter 'git fix-ghetto-message' \
+   master $(git tag)
+
+rm .git/refs/original -rf
