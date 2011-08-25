@@ -1,0 +1,27 @@
+#!/bin/bash
+
+source git-lib
+REPO=HTTP-Request-AsCGI
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/HTTP-Request-AsCGI/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D trunk@5068
+git branch -D trunk@9834
+
+tag 1.0
+tag 1.1
+tag 1.2
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
