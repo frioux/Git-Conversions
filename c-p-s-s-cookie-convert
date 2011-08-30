@@ -1,0 +1,86 @@
+#!/bin/bash
+
+source git-lib
+REPO=cpsscookie
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Plugin-Session-State-Cookie/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D tags/0.01@11201
+git branch -D tags/0.01@1453
+git branch -D tags/0.01@1980
+git branch -D tags/0.02@11201
+git branch -D tags/0.02@1453
+git branch -D tags/0.02@2883
+git branch -D tags/0.03@11201
+git branch -D tags/0.03@1453
+git branch -D tags/0.03@4774
+git branch -D tags/0.05@11201
+git branch -D tags/0.05@1453
+git branch -D tags/0.05@4821
+git branch -D tags/0.06@11201
+git branch -D tags/0.06@1453
+git branch -D tags/0.06@4990
+git branch -D tags/0.08@11201
+git branch -D tags/0.08@1453
+git branch -D tags/0.08@1453-
+git branch -D tags/0.08@5068
+git branch -D tags/0.08@6893
+git branch -D tags/0.09@11201
+git branch -D tags/0.09@1453
+git branch -D tags/0.09@1453-
+git branch -D tags/0.09@5068
+git branch -D tags/0.09@6972
+git branch -D tags/0.10@11201
+git branch -D tags/0.10@1453
+git branch -D tags/0.10@1453-
+git branch -D tags/0.10@5068
+git branch -D tags/0.10@9241
+git branch -D tags/0.11@10127
+git branch -D tags/0.11@11201
+git branch -D tags/0.11@1453
+git branch -D tags/0.11@1453-
+git branch -D tags/0.11@5068
+git branch -D tags/0.12@10922
+git branch -D tags/0.12@11201
+git branch -D tags/0.12@1453
+git branch -D tags/0.12@1453-
+git branch -D tags/0.12@5068
+git branch -D tags/0.13@11176
+git branch -D tags/0.13@11201
+git branch -D tags/0.13@1453
+git branch -D tags/0.13@1453-
+git branch -D tags/0.13@5068
+git branch -D trunk@11200
+git branch -D trunk@1453
+git branch -D trunk@1453-
+git branch -D trunk@5068
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.05
+tag 0.06
+tag 0.08
+tag 0.09
+tag 0.10
+tag 0.11
+tag 0.12
+tag 0.13
+tag 0.14
+tag 0.15
+tag 0.16
+
+git checkout master
+
+git filter-branch  \
+   --msg-filter 'git fix-ghetto-message' \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
