@@ -1,0 +1,66 @@
+#!/bin/bash
+
+source git-lib
+REPO=cpssdbic
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Plugin-Session-Store-DBIC/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D tags/0.01@13715
+git branch -D tags/0.01@3562
+git branch -D tags/0.02@13715
+git branch -D tags/0.02@3564
+git branch -D tags/0.03@13715
+git branch -D tags/0.03@3576
+git branch -D tags/0.04@13715
+git branch -D tags/0.04@4783
+git branch -D tags/0.05@13715
+git branch -D tags/0.05@4801
+git branch -D tags/0.06@13715
+git branch -D tags/0.06@4976
+git branch -D tags/0.07@13715
+git branch -D tags/0.07@5068
+git branch -D tags/0.07@8445
+git branch -D tags/0.08@13715
+git branch -D tags/0.08@5068
+git branch -D tags/0.08@8659
+git branch -D tags/0.09@13715
+git branch -D tags/0.09@5068
+git branch -D tags/0.09@9633
+git branch -D tags/0.10@10810
+git branch -D tags/0.10@13715
+git branch -D tags/0.10@5068
+git branch -D tags/0.11@11545
+git branch -D tags/0.11@13715
+git branch -D tags/0.11@5068
+git branch -D trunk@13714
+git branch -D trunk@5068
+git branch -D trunk
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+tag 0.07
+tag 0.08
+tag 0.09
+tag 0.10
+tag 0.11
+tag 0.12
+
+graft 3dc578876221aff6c9685cd828a2ef560583c87f 73e6feeb60b3b6bde66d1b8502d15eed53809873
+
+git checkout master
+
+git filter-branch  \
+   --msg-filter 'git fix-ghetto-message' \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
