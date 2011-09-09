@@ -1,0 +1,19 @@
+#!/bin/bash
+
+source git-lib
+REPO=PHP
+rm -rf ../$REPO
+git svn clone --no-metadata --stdlayout https://svn.php.net/repository/php/php-src ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
