@@ -1,19 +1,480 @@
 #!/bin/bash
 
 source git-lib
+
+function tag {
+   _tag $2 refs/heads/$1
+   git branch -D $1
+}
+
 REPO=PHP
 rm -rf ../$REPO
+
 git svn clone --no-metadata --stdlayout https://svn.php.net/repository/php/php-src ../${REPO}-export
 cp ../${REPO}-export ../$REPO -r
 cd ../$REPO
-cp .git/refs/remotes/* .git/refs/heads/ -r
+git branch -a | grep remotes | cut -b11- | xargs -I frew git branch frew remotes/frew
 rm .git/refs/remotes -rf
+
+
+  #tags/BEFORE_ARG_INFO
+  #tags/BEFORE_BIG_SYMBOL_CHANGE
+  #tags/BEFORE_EXP_MERGE
+  #tags/BEFORE_FD_REAPPLY
+  #tags/BEFORE_FD_REVERT
+  #tags/BEFORE_HANDLERS_RESHUFFLE
+  #tags/BEFORE_HEAD_NS_CHANGE
+  #tags/BEFORE_HEAD_NS_CHANGES_MERGE
+  #tags/BEFORE_IMPORT_OF_MYSQLND
+  #tags/BEFORE_IMPORT_OF_MYSQLND_IN_5_3
+  #tags/BEFORE_NEW_OBJECT_MODEL
+  #tags/BEFORE_NEW_OPERATOR_FIX
+  #tags/BEFORE_NEW_OUTPUT_API
+  #tags/BEFORE_NEW_PARAMETER_PARSE
+  #tags/BEFORE_NS_RULES_CHANGE
+  #tags/BEFORE_OBJECTS_STORE
+  #tags/BEFORE_PARAM_PARSING_CHANGE
+  #tags/BEFORE_PHP4_APACHE_MODULE_CHANGE
+  #tags/BEFORE_PRE_SHUTDOWN_REVERSE_PATCH
+  #tags/BEFORE_REAL_IMPORT_OF_MYSQLND
+  #tags/BEFORE_REMOVING_AI_COUNT_FINAL_STEP
+  #tags/BEFORE_REMOVING_GC_STEP1
+  #tags/BEFORE_REMOVING_GC_STEP2
+  #tags/BEFORE_RENAMING
+  #tags/BEFORE_SAPIFICATION_FEB_10_2000
+  #tags/BEFORE_SAPI_POST_PATCH_17_FEB_2000
+  #tags/BEFORE_STACK_PATCH
+  #tags/BEFORE_UNICODE_MERGE
+  #tags/CLOSED_BETA
+  #tags/ChangeLog
+  #tags/INITIAL_IMPORT_SOURCEFORGE
+  #tags/MODERN_SYMMETRIC_SESSION_BEHAVIOUR_20021003
+  #tags/NEWS
+  #tags/NEW_UI_API_BP
+  #tags/POST_PARAMETER_PARSING_API
+  #tags/POST_SUBST_Z_MACROS
+  #tags/PRE_DELAYED_ARRAY_FETCH_PATCH
+  #tags/PRE_EIGHT_BYTE_ALLOC_PATCH
+  #tags/PRE_ENGINE2_SPLIT
+  #tags/PRE_FETCH_READ_PATCH
+  #tags/PRE_FILE_COMPILE_API_CHANGE
+  #tags/PRE_FUNC_RETURNS_OBJECT_PATCH
+  #tags/PRE_GRANULAR_GARBAGE_FIX
+  #tags/PRE_ISSET_PATCH
+  #tags/PRE_ISSET_TYPE
+  #tags/PRE_LIBMYSQL_REVERT
+  #tags/PRE_LIBZEND_TO_ZEND
+  #tags/PRE_METHOD_CALL_SEPERATE_FIX_PATCH
+  #tags/PRE_METHOD_DEREFERENCE_PATCH
+  #tags/PRE_NEW_OCI8_EXTENSION
+  #tags/PRE_NEW_VM_GEN_PATCH
+  #tags/PRE_PARAMETER_PARSING_API
+  #tags/PRE_RETURN_REF_MERGE
+  #tags/PRE_RETURN_REF_PATCH
+  #tags/PRE_SUBST_Z_MACROS
+  #tags/PRE_TSRM_MERGE_PATCH
+  #tags/PRE_USED_RETURN_VALUE_PATCH
+  #tags/PRE_ZEND_VM_DISPATCH_PATCH
+  #tags/PHP_4_3_before_13561_fix
+  #tags/PHP_5_0_dev_before_13561_fix
+  #tags/PHP_5_2_15RC1
+  #tags/RETURN_REF_BP
+  #tags/SAFEGUARD_3_0_BETA1_RC1_26062002
+  #tags/SPL_ALPHA
+  #tags/SQLITE_4_3_20041227
+  #tags/ZEND_OPTIMIZER_B1
+  #tags/ZO_B1
+  #tags/before-sapi-split
+  #tags/dev
+  #tags/help
+  #tags/init
+  #tags/oci8-1.4.0
+  #tags/oci8-1.4.3
+  #tags/php_ibase_before_split
+  #tags/xmlrpc_epi_0_51_merge_pt
+  #tags/yaf-2.1.0
+
+tag tags/RELEASE_0_1        0.1
+tag tags/RELEASE_0_10       0.10
+tag tags/RELEASE_0_11       0.11
+tag tags/RELEASE_0_1_1      0.1.1
+tag tags/RELEASE_0_2        0.2
+tag tags/RELEASE_0_2_0      0.2.0
+tag tags/RELEASE_0_2_1      0.2.1
+tag tags/RELEASE_0_2_2      0.2.2
+tag tags/RELEASE_0_2_3      0.2.3
+tag tags/RELEASE_0_2_4      0.2.4
+tag tags/RELEASE_0_3        0.3
+tag tags/RELEASE_0_4        0.4
+tag tags/RELEASE_0_5        0.5
+tag tags/RELEASE_0_5_2      0.5.2
+tag tags/RELEASE_0_5_3      0.5.3
+tag tags/RELEASE_0_6        0.6
+tag tags/RELEASE_0_7        0.7
+tag tags/RELEASE_0_9        0.9
+tag tags/RELEASE_0_90       0.90
+tag tags/RELEASE_0_91       0.91
+tag tags/RELEASE_0_9_0      0.9.0
+tag tags/RELEASE_0_9_1      0.9.1
+tag tags/RELEASE_0_9_2      0.9.2
+tag tags/RELEASE_0_9_3      0.9.3
+tag tags/RELEASE_0_9_4      0.9.4
+tag tags/RELEASE_0_9b       0.9_b
+tag tags/RELEASE_1_0        1.0
+tag tags/RELEASE_1_0RC1     1.0_rc1
+tag tags/RELEASE_1_0RC2     1.0_rc2
+tag tags/RELEASE_1_0_0RC1   1.0.0_rc1
+tag tags/RELEASE_1_0_1      1.0.1
+tag tags/RELEASE_1_0_2      1.0.2
+tag tags/RELEASE_1_0_3      1.0.3
+tag tags/RELEASE_1_0_4      1.0.4
+tag tags/RELEASE_1_0b1      1.0_b1
+tag tags/RELEASE_1_0b2      1.0_b2
+tag tags/RELEASE_1_0b3      1.0_b3
+tag tags/RELEASE_1_1        1.1
+tag tags/RELEASE_1_1_0      1.1.0
+tag tags/RELEASE_1_1_1      1.1.1
+tag tags/RELEASE_1_2        1.2
+tag tags/RELEASE_1_2_0      1.2.0
+tag tags/RELEASE_1_2_1      1.2.1
+tag tags/RELEASE_1_2_2      1.2.2
+tag tags/RELEASE_1_2_3      1.2.3
+tag tags/RELEASE_1_2_4      1.2.4
+tag tags/RELEASE_1_2_5      1.2.5
+tag tags/RELEASE_1_2b5      1.2_b5
+tag tags/RELEASE_1_3        1.3
+tag tags/RELEASE_1_3_1      1.3.1
+tag tags/RELEASE_1_3_5      1.3.5
+tag tags/RELEASE_1_3b2      1.3_b2
+tag tags/RELEASE_1_3b3      1.3_b3
+tag tags/RELEASE_1_3b6      1.3_b6
+tag tags/RELEASE_1_4        1.4
+tag tags/RELEASE_1_5        1.5
+tag tags/RELEASE_2_0_0      2.0.0
+tag tags/RELEASE_2_0_0RC1   2.0.0_rc1
+tag tags/RELEASE_2_0_0a1    2.0.0_a1
+tag tags/RELEASE_2_0_0a2    2.0.0_a2
+tag tags/RELEASE_2_0_0b1    2.0.0_b1
+tag tags/RELEASE_2_0_1      2.0.1
+tag tags/RELEASE_2_0_2      2.0.2
+
+
+tag tags/php4               4
+tag tags/php_4_0RC1         4.0_rc1
+tag tags/php_4_0RC2         4.0_rc2
+tag tags/php_4_0_0          4.0.0
+tag tags/php_4_0_1          4.0.1
+tag tags/php_4_0_1RC        4.0.1_rc
+tag tags/php_4_0_1RC2       4.0.1_rc2
+tag tags/php_4_0_1pl1       4.0.1_pl1
+tag tags/php_4_0_2          4.0.2
+tag tags/php_4_0_2RC1       4.0.2_rc1
+tag tags/php_4_0_3          4.0.3
+tag tags/php_4_0_3RC1       4.0.3_rc1
+tag tags/php_4_0_3RC2       4.0.3_rc2
+tag tags/php_4_0_4RC3       4.0.4_rc3
+tag tags/php_4_0_4RC4       4.0.4_rc4
+tag tags/php_4_0_4RC5       4.0.4_rc5
+tag tags/php_4_0_4RC6       4.0.4_rc6
+tag tags/php_4_0_4REL       4.0.4
+tag tags/php_4_0_4pl1       4.0.4_pl1
+tag tags/php_4_0_4pl1RC1    4.0.4_pl1_rc1
+tag tags/php_4_0_4pl1RC2    4.0.1_pl1_rc2
+tag tags/php_4_0_5          4.0.5
+tag tags/php_4_0_5RC1       4.0.5_rc1
+tag tags/php_4_0_5RC2       4.0.5_rc2
+tag tags/php_4_0_5RC3       4.0.5_rc3
+tag tags/php_4_0_5RC4       4.0.5_rc4
+tag tags/php_4_0_5RC5       4.0.5_rc5
+tag tags/php_4_0_5RC6       4.0.5_rc6
+tag tags/php_4_0_5RC7       4.0.5_rc7
+tag tags/php_4_0_5RC8       4.0.5_rc8
+tag tags/php_4_0_6          4.0.6
+tag tags/php_4_0_6RC1       4.0.6_rc1
+tag tags/php_4_0_6RC2       4.0.6_rc2
+tag tags/php_4_0_6RC3       4.0.6_rc3
+tag tags/php_4_0_6RC4       4.0.6_rc4
+tag tags/php_4_0_7RC1       4.0.7_rc1
+tag tags/php_4_0_7RC2       4.0.7_rc2
+tag tags/php_4_0_7RC3       4.0.7_rc3
+tag tags/php_4_0b1          4.0_b1
+tag tags/php_4_0b2          4.0_b2
+tag tags/php_4_0b2-1        4.0_b2_1
+tag tags/php_4_0b2-2        4.0_b2_2
+tag tags/php_4_0b3          4.0_b3
+tag tags/php_4_0b3_RC2      4.0_b3_rc2
+tag tags/php_4_0b3_RC3      4.0_b3_rc3
+tag tags/php_4_0b3_RC4      4.0_b3_rc4
+tag tags/php_4_0b3_RC5      4.0_b3_rc5
+tag tags/php_4_0b4          4.0_b4
+tag tags/php_4_0b4_rc1      4.0_b4_rc1
+tag tags/php_4_0b4pl1       4.0_b4_pl1
+tag tags/php_4_1_0          4.1.0
+tag tags/php_4_1_0RC1       4.1.0_rc1
+tag tags/php_4_1_0RC2       4.1.0_rc2
+tag tags/php_4_1_0RC3       4.1.0_rc3
+tag tags/php_4_1_0RC4       4.1.0_rc4
+tag tags/php_4_1_0RC5       4.1.0_rc5
+tag tags/php_4_1_1          4.1.1
+tag tags/php_4_1_2          4.1.2
+tag tags/php_4_2_0          4.2.0
+tag tags/php_4_2_0RC1       4.2.0_rc1
+tag tags/php_4_2_0RC2       4.2.0_rc2
+tag tags/php_4_2_0RC3       4.2.0_rc3
+tag tags/php_4_2_0RC4       4.2.0_rc4
+tag tags/php_4_2_1          4.2.1
+tag tags/php_4_2_1RC1       4.2.1_rc1
+tag tags/php_4_2_1RC2       4.2.1_rc2
+tag tags/php_4_2_2          4.2.2
+tag tags/php_4_2_3          4.2.3
+tag tags/php_4_2_3RC1       4.2.3_rc1
+tag tags/php_4_2_3RC2       4.2.3_rc2
+tag tags/php_4_3_0          4.3.0
+tag tags/php_4_3_0RC1       4.3.0_rc1
+tag tags/php_4_3_0RC2       4.3.0_rc2
+tag tags/php_4_3_0RC3       4.3.0_rc3
+tag tags/php_4_3_0RC4       4.3.0_rc4
+#tag tags/php_4_3_0_dev_ZendEngine2
+#tag tags/php_4_3_0_dev_ZendEngine2_Preview1
+#tag tags/php_4_3_0_dev_zend2_alpha1
+#tag tags/php_4_3_0_dev_zend2_alpha2
+#tag tags/php_4_3_0_dev_zend2_alpha3
+tag tags/php_4_3_0dev       4.3.0_dev
+tag tags/php_4_3_0pre1      4.3.0_pre1
+tag tags/php_4_3_0pre2      4.3.0_pre2
+tag tags/php_4_3_1          4.3.1
+tag tags/php_4_3_10         4.3.10
+tag tags/php_4_3_10RC1      4.3.10_rc1
+tag tags/php_4_3_10RC2      4.3.10_rc2
+tag tags/php_4_3_11         4.3.11
+tag tags/php_4_3_11RC1      4.3.11_rc1
+tag tags/php_4_3_11RC2      4.3.11_rc2
+tag tags/php_4_3_2          4.3.2
+tag tags/php_4_3_2RC1       4.3.2_rc1
+tag tags/php_4_3_2RC2       4.3.2_rc2
+tag tags/php_4_3_2RC3       4.3.2_rc3
+tag tags/php_4_3_2RC4       4.3.2_rc4
+tag tags/php_4_3_3          4.3.3
+tag tags/php_4_3_3RC1       4.3.3_rc1
+tag tags/php_4_3_3RC2       4.3.3_rc2
+tag tags/php_4_3_3RC3       4.3.3_rc3
+tag tags/php_4_3_3RC4       4.3.3_rc4
+tag tags/php_4_3_4          4.3.4
+tag tags/php_4_3_4RC1       4.3.4_rc1
+tag tags/php_4_3_4RC2       4.3.4_rc2
+tag tags/php_4_3_4RC3       4.3.4_rc3
+tag tags/php_4_3_5          4.3.5
+tag tags/php_4_3_5RC1       4.3.5_rc1
+tag tags/php_4_3_5RC2       4.3.5_rc2
+tag tags/php_4_3_5RC3       4.3.5_rc3
+tag tags/php_4_3_5RC4       4.3.5_rc4
+tag tags/php_4_3_6          4.3.6
+tag tags/php_4_3_6RC1       4.3.6_rc1
+tag tags/php_4_3_6RC2       4.3.6_rc2
+tag tags/php_4_3_6RC3       4.3.6_rc3
+tag tags/php_4_3_7          4.3.7
+tag tags/php_4_3_7RC1       4.3.7_rc1
+tag tags/php_4_3_8          4.3.8
+tag tags/php_4_3_9          4.3.9
+tag tags/php_4_3_9RC1       4.3.9_rc1
+tag tags/php_4_3_9RC2       4.3.9_rc2
+tag tags/php_4_3_9RC3       4.3.9_rc3
+tag tags/php_4_4_0          4.4.0
+tag tags/php_4_4_0RC1       4.4.0_rc1
+tag tags/php_4_4_0RC2       4.4.0_rc2
+tag tags/php_4_4_1          4.4.1
+tag tags/php_4_4_1RC1       4.4.1_rc1
+tag tags/php_4_4_2          4.4.2
+tag tags/php_4_4_2RC1       4.4.2_rc1
+tag tags/php_4_4_2RC2       4.4.2_rc2
+tag tags/php_4_4_3          4.4.3
+tag tags/php_4_4_3RC1       4.4.3_rc1
+tag tags/php_4_4_3RC2       4.4.3_rc2
+tag tags/php_4_4_4          4.4.4
+tag tags/php_4_4_4RC1       4.4.4_rc1
+tag tags/php_4_4_5          4.4.5
+tag tags/php_4_4_5RC1       4.4.5_rc1
+tag tags/php_4_4_5RC2       4.4.5_rc2
+tag tags/php_4_4_6          4.4.6
+tag tags/php_4_4_6RC1       4.4.6_rc1
+tag tags/php_4_4_7          4.4.7
+tag tags/php_4_4_7RC1       4.4.7_rc1
+tag tags/php_4_4_8          4.4.8
+tag tags/php_4_4_8RC1       4.4.8_rc1
+tag tags/php_4_4_9          4.4.9
+tag tags/php_4_4_9RC1       4.4.9_rc1
+
+tag tags/php5_5_0           5.5.0
+tag tags/php_5_0_0          5.0.0
+tag tags/php_5_0_0RC1       5.0.0_rc1
+tag tags/php_5_0_0RC1RC1    5.0.0_rc1_rc1
+tag tags/php_5_0_0RC1RC2    5.0.0_rc1_rc2
+tag tags/php_5_0_0RC2       5.0.0_rc2
+tag tags/php_5_0_0RC2RC1    5.0.0_rc2_rc1
+tag tags/php_5_0_0RC2RC2    5.0.0_rc2_rc2
+tag tags/php_5_0_0RC3       5.0.0_rc3
+tag tags/php_5_0_0RC3RC1    5.0.0_rc3_rc1
+tag tags/php_5_0_0RC3RC2    5.0.0_rc3_rc2
+tag tags/php_5_0_0RC4       5.0.0_rc4
+tag tags/php_5_0_0b1        5.0.0_b1
+tag tags/php_5_0_0b2        5.0.0_b2
+tag tags/php_5_0_0b2RC1     5.0.0_b2_rc1
+tag tags/php_5_0_0b3        5.0.0_b3
+tag tags/php_5_0_0b3RC1     5.0.0_b3_rc1
+tag tags/php_5_0_0b3RC2     5.0.0_b3_rc2
+tag tags/php_5_0_0b4        5.0.0_b4
+tag tags/php_5_0_0b4RC1     5.0.0_b4_rc1
+tag tags/php_5_0_1          5.0.1
+tag tags/php_5_0_1RC1       5.0.1_rc1
+tag tags/php_5_0_1RC2       5.0.1_rc2
+tag tags/php_5_0_1b1        5.0.1_b1
+tag tags/php_5_0_2          5.0.2
+tag tags/php_5_0_2RC1       5.0.2_rc1
+tag tags/php_5_0_3          5.0.3
+tag tags/php_5_0_3RC1       5.0.3_rc1
+tag tags/php_5_0_3RC2       5.0.3_rc2
+tag tags/php_5_0_4          5.0.4
+tag tags/php_5_0_4RC1       5.0.4_rc1
+tag tags/php_5_0_4RC2       5.0.4_rc2
+tag tags/php_5_0_5          5.0.5
+tag tags/php_5_0_5RC1       5.0.5_rc1
+tag tags/php_5_0_5RC2       5.0.5_rc2
+tag tags/php_5_1_0          5.1.0
+tag tags/php_5_1_0RC1       5.1.0_rc1
+tag tags/php_5_1_0RC2       5.1.0_rc2
+tag tags/php_5_1_0RC2_PRE   5.1.0_rc2_pre
+tag tags/php_5_1_0RC3       5.1.0_rc3
+tag tags/php_5_1_0RC4       5.1.0_rc4
+tag tags/php_5_1_0RC5       5.1.0_rc5
+tag tags/php_5_1_0RC6       5.1.0_rc6
+tag tags/php_5_1_0b1        5.1.0_b1
+tag tags/php_5_1_0b2        5.1.0_b2
+tag tags/php_5_1_0b3        5.1.0_b3
+tag tags/php_5_1_1          5.1.1
+tag tags/php_5_1_2          5.1.2
+tag tags/php_5_1_2RC1       5.1.2_rc1
+tag tags/php_5_1_2RC2       5.1.2_rc2
+tag tags/php_5_1_3          5.1.3
+tag tags/php_5_1_3RC1       5.1.3_rc1
+tag tags/php_5_1_3RC2       5.1.3_rc2
+tag tags/php_5_1_3RC3       5.1.3_rc3
+tag tags/php_5_1_4          5.1.4
+tag tags/php_5_1_5          5.1.5
+tag tags/php_5_1_5RC1       5.1.5_rc1
+tag tags/php_5_1_6          5.1.6
+tag tags/php_5_2_0          5.2.0
+tag tags/php_5_2_0RC1       5.2.0_rc1
+tag tags/php_5_2_0RC2       5.2.0_rc2
+tag tags/php_5_2_0RC3       5.2.0_rc3
+tag tags/php_5_2_0RC4       5.2.0_rc4
+tag tags/php_5_2_0RC5       5.2.0_rc5
+tag tags/php_5_2_0RC6       5.2.0_rc6
+tag tags/php_5_2_1          5.2.1
+tag tags/php_5_2_10         5.2.10
+tag tags/php_5_2_10RC1      5.2.10_rc1
+tag tags/php_5_2_10RC2      5.2.10_rc2
+tag tags/php_5_2_11         5.2.11
+tag tags/php_5_2_11RC1      5.2.11_rc1
+tag tags/php_5_2_11RC2      5.2.11_rc2
+tag tags/php_5_2_11RC3      5.2.11_rc3
+tag tags/php_5_2_12         5.2.12
+tag tags/php_5_2_12RC1      5.2.12_rc1
+tag tags/php_5_2_12RC2      5.2.12_rc2
+tag tags/php_5_2_12RC3      5.2.12_rc3
+tag tags/php_5_2_12RC4      5.2.12_rc4
+tag tags/php_5_2_13         5.2.13
+tag tags/php_5_2_13RC1      5.2.13_rc1
+tag tags/php_5_2_13RC2      5.2.13_rc2
+tag tags/php_5_2_14         5.2.14
+tag tags/php_5_2_14RC1      5.2.14_rc1
+tag tags/php_5_2_14RC2      5.2.14_rc2
+tag tags/php_5_2_14RC3      5.2.14_rc3
+tag tags/php_5_2_15         5.2.15
+tag tags/php_5_2_15RC1      5.2.15_rc1
+tag tags/php_5_2_15RC2      5.2.15_rc2
+tag tags/php_5_2_16         5.2.16
+tag tags/php_5_2_17         5.2.17
+tag tags/php_5_2_1RC1       5.2.1_rc1
+tag tags/php_5_2_1RC2       5.2.1_rc2
+tag tags/php_5_2_1RC3       5.2.1_rc3
+tag tags/php_5_2_1RC4       5.2.1_rc4
+tag tags/php_5_2_2          5.2.2
+tag tags/php_5_2_2RC1       5.2.2_rc1
+tag tags/php_5_2_2RC2       5.2.2_rc2
+tag tags/php_5_2_3          5.2.3
+tag tags/php_5_2_3RC1       5.2.3_rc1
+tag tags/php_5_2_4          5.2.4
+tag tags/php_5_2_4RC1       5.2.4_rc1
+tag tags/php_5_2_4RC2       5.2.4_rc2
+tag tags/php_5_2_4RC3       5.2.4_rc3
+tag tags/php_5_2_5          5.2.5
+tag tags/php_5_2_5RC1       5.2.5_rc1
+tag tags/php_5_2_5RC2       5.2.5_rc2
+tag tags/php_5_2_6          5.2.6
+tag tags/php_5_2_6RC1       5.2.6_rc1
+tag tags/php_5_2_6RC2       5.2.6_rc2
+tag tags/php_5_2_6RC3       5.2.6_rc3
+tag tags/php_5_2_6RC4       5.2.6_rc4
+tag tags/php_5_2_6RC5       5.2.6_rc5
+tag tags/php_5_2_7          5.2.7
+tag tags/php_5_2_7RC1       5.2.7_rc1
+tag tags/php_5_2_7RC2       5.2.7_rc2
+tag tags/php_5_2_7RC3       5.2.7_rc3
+tag tags/php_5_2_7RC4       5.2.7_rc4
+tag tags/php_5_2_7RC5       5.2.7_rc5
+tag tags/php_5_2_8          5.2.8
+tag tags/php_5_2_9          5.2.9
+tag tags/php_5_2_9RC1       5.2.9_rc1
+tag tags/php_5_2_9RC2       5.2.9_rc2
+tag tags/php_5_2_9RC3       5.2.9_rc3
+tag tags/php_5_3_0          5.3.0
+tag tags/php_5_3_0RC1       5.3.0_rc1
+tag tags/php_5_3_0RC2       5.3.0_rc2
+tag tags/php_5_3_0RC3       5.3.0_rc3
+tag tags/php_5_3_0RC4       5.3.0_rc4
+tag tags/php_5_3_0alpha1    5.3.0_a1
+tag tags/php_5_3_0alpha2    5.3.0_a2
+tag tags/php_5_3_0alpha3    5.3.0_a3
+tag tags/php_5_3_0beta1     5.3.0_b1
+tag tags/php_5_3_1          5.3.1
+tag tags/php_5_3_1RC1       5.3.1_rc1
+tag tags/php_5_3_1RC2       5.3.1_rc2
+tag tags/php_5_3_1RC3       5.3.1_rc3
+tag tags/php_5_3_1RC4       5.3.1_rc4
+tag tags/php_5_3_2          5.3.2
+tag tags/php_5_3_2RC1       5.3.2_rc1
+tag tags/php_5_3_2RC2       5.3.2_rc2
+tag tags/php_5_3_2RC3       5.3.2_rc3
+tag tags/php_5_3_3          5.3.3
+tag tags/php_5_3_3RC1       5.3.3_rc1
+tag tags/php_5_3_3RC2       5.3.3_rc2
+tag tags/php_5_3_3RC3       5.3.3_rc3
+tag tags/php_5_3_4          5.3.4
+tag tags/php_5_3_4RC1       5.3.4_rc1
+tag tags/php_5_3_4RC2       5.3.4_rc2
+tag tags/php_5_3_5          5.3.5
+tag tags/php_5_3_6          5.3.6
+tag tags/php_5_3_6RC1       5.3.6_rc1
+tag tags/php_5_3_6RC2       5.3.6_rc2
+tag tags/php_5_3_6RC3       5.3.6_rc3
+tag tags/php_5_3_7          5.3.7
+tag tags/php_5_3_7RC1       5.3.7_rc1
+tag tags/php_5_3_7RC2       5.3.7_rc2
+tag tags/php_5_3_7RC3       5.3.7_rc3
+tag tags/php_5_3_7RC4       5.3.7_rc4
+tag tags/php_5_3_7RC5       5.3.7_rc5
+tag tags/php_5_3_8          5.3.8
+tag tags/php_5_4_0alpha1    5.4.0_a1
+tag tags/php_5_4_0alpha2    5.4.0_a2
+tag tags/php_5_4_0alpha2@   5.4.0_a2@
+tag tags/php_5_4_0alpha3    5.4.0_a3
 
 git checkout master
 
-git filter-branch  \
-   --prune-empty \
-   --tag-name-filter cat \
-   -- --all
+#git filter-branch  \
+   #--prune-empty \
+   #--tag-name-filter cat \
+   #-d ../tmp/$REPO \
+   #-- --all
 
 rm .git/refs/original -rf
