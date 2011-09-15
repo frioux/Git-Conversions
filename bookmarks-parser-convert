@@ -1,0 +1,21 @@
+#!/bin/bash
+
+source git-lib
+REPO=Bookmarks-Parser
+rm -rf ../$REPO
+
+git svn clone --no-metadata --authors-file=dbic-authors http://dev.catalyst.perl.org/repos/bast/trunk/Bookmarks-Parser ../$REPO-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -d ../tmp/$REPO \
+   -- --all
+
+rm .git/refs/original -rf
