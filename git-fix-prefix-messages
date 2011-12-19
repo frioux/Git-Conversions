@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+
+use 5.12.0;
+use warnings;
+
+my @msg = <>;
+
+if ( @msg == 1 && $msg[0] =~ /^\s*[-*]\s*(.+)$/) {
+   print "$1\n"
+} else {
+   print join "\n", @msg;
+}
+
