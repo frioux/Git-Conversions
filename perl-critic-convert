@@ -1,0 +1,26 @@
+#!/bin/bash
+
+source git-lib
+REPO=Perl-Critic
+rm -rf ../$REPO
+
+git svn clone --no-metadata --tags=tags --trunk=trunk/distributions/Perl-Critic svn://localhost ../${REPO}-export
+
+git svn clone --no-metadata svn://localhost/trunk/Perl-Critic ../${REPO}-old-export
+
+cp ../${REPO}-export ../$REPO -r
+cp ../${REPO}-old-export ../$REPO-old -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git checkout master
+
+git branch -D trunk
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
