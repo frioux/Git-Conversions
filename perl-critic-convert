@@ -6,8 +6,6 @@ rm -rf ../$REPO
 
 git svn clone --no-metadata --tags=tags --branches=branches --trunk=trunk/distributions/Perl-Critic svn://localhost ../${REPO}-export
 
-git svn clone --no-metadata svn://localhost/trunk/Perl-Critic ../${REPO}-old-export
-
 cp ../${REPO}-export ../$REPO -r
 cp ../${REPO}-old-export ../$REPO-old -r
 cd ../$REPO
