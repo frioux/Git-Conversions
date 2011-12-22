@@ -4,7 +4,7 @@ source git-lib
 REPO=Perl-Critic
 rm -rf ../$REPO
 
-git svn clone --no-metadata --tags=tags --trunk=trunk/distributions/Perl-Critic svn://localhost ../${REPO}-export
+git svn clone --no-metadata --tags=tags --branches=branches --trunk=trunk/distributions/Perl-Critic svn://localhost ../${REPO}-export
 
 git svn clone --no-metadata svn://localhost/trunk/Perl-Critic ../${REPO}-old-export
 
