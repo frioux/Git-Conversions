@@ -7,18 +7,134 @@ rm -rf ../$REPO
 git svn clone --no-metadata --tags=tags --branches=branches --trunk=trunk/distributions/Perl-Critic svn://localhost ../${REPO}-export
 
 cp ../${REPO}-export ../$REPO -r
-cp ../${REPO}-old-export ../$REPO-old -r
 cd ../$REPO
-cp .git/refs/remotes/* .git/refs/heads/ -r
-rm .git/refs/remotes -rf
+
+git branch -a | grep -v '* master' | cut -b11- | xargs -n1 -I{} sh -c 'git branch {} remotes/{} && git update-ref -d refs/remotes/{}'
 
 git checkout master
 
+git branch -D Perl-Critic-1.111
+git branch -D Perl-Critic-1.109
+git branch -D Perl-Critic-1.106
+git branch -D Perl-Critic-1.052
+git branch -D Perl-Critic-1.096
+git branch -D Perl-Critic-1.xxx
+git branch -D Perl-Critic-Config-Std
+git branch -D Perl-Critic-PPI-1.203-cleanup
+git branch -D Perl-Critic-PPI-1.204
+git branch -D Perl-Critic-backlog
+git branch -D Perl-Critic-ppi-performance-monkey-patch
+git branch -D rt28120
+git branch -D rt32616
+git branch -D rt38855
+git branch -D rt39601
+git branch -D rt41942
+git branch -D tags/Perl-Critic-0.23
+git branch -D tags/Perl-Critic-1.07
+git branch -D tags/Perl-Critic-1.071
+git branch -D tags/Perl-Critic-1.079_001
+git branch -D tags/Perl-Critic-1.079_002
+git branch -D tags/Perl-Critic-1.079_003
+git branch -D tags/Perl-Critic-1.081_001
 git branch -D trunk
 
+git branch -a | grep @ | xargs -n1 -I{} git branch -D {}
+git branch -a | grep TAP-Formatter | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Bundle-Perl-Critic | xargs -n1 -I{} git branch -D {}
+git branch -a | grep PPIx-Utilities | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Task-Perl-Critic | xargs -n1 -I{} git branch -D {}
+git branch -a | grep criticism | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Perl-Critic-Dynamic | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Perl-Critic-Deprecated | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Perl-Critic-StricterSubs | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Perl-Critic-Progressive | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Perl-Critic-Moose | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Perl-Critic-More | xargs -n1 -I{} git branch -D {}
+git branch -a | grep Test-Perl-Critic | xargs -n1 -I{} git branch -D {}
+
+function tag {
+   BRANCH="tags/Perl-Critic-$1"
+   COMMIT="$(git show refs/heads/$BRANCH --pretty=%H)"
+   manual-tag "v$1" "Release $1" $COMMIT "$(git show $COMMIT --pretty=format:%an)" "$(git show $COMMIT --pretty=format:%ae)" "$(git show $COMMIT --pretty=format:%ai)"
+   git branch -D $BRANCH
+}
+
+tag 1.081_002
+tag 1.081_003
+tag 1.081_004
+tag 1.081_005
+tag 1.081_006
+tag 1.082
+tag 1.083_001
+tag 1.083_002
+tag 1.083_003
+tag 1.083_004
+tag 1.083_005
+tag 1.083_006
+tag 1.084
+tag 1.085
+tag 1.086
+tag 1.087
+tag 1.089
+tag 1.090
+tag 1.091
+tag 1.092
+tag 1.093_001
+tag 1.093_01
+tag 1.093_02
+tag 1.093_03
+tag 1.094
+tag 1.094001
+tag 1.095_001
+tag 1.096
+tag 1.097_001
+tag 1.097_002
+tag 1.098
+tag 1.099_001
+tag 1.099_002
+tag 1.100
+tag 1.101_001
+tag 1.101_002
+tag 1.101_003
+tag 1.102
+tag 1.103
+tag 1.104
+tag 1.105
+tag 1.105_001
+tag 1.105_02
+tag 1.105_03
+tag 1.106
+tag 1.107_001
+tag 1.108
+tag 1.109
+tag 1.110_001
+tag 1.111
+tag 1.112_001
+tag 1.112_002
+tag 1.113
+tag 1.114
+tag 1.115
+tag 1.116
+tag 0.17
+
+# Fix URL to Dolan's post in Test::Perl::Critic -> Fix false statement in POD about ## no critic paying attention to
+graft 737fbd32363fa086dec13b21241875feb215f682 1a6f90d697d3c6c094c98f4d3cf03d65e68a63b8
+
+# stuff under Update Changes to reflect recent patches.
+graft 3915a18b074f13de2be069c0d53fc1721de8e33c 056d124b4b291921dc941c377ef051bc336a6df5
+graft 096c7749f5cd947673005267d2a69cfdebd40415 056d124b4b291921dc941c377ef051bc336a6df5
+graft f0f431b5fe6583ae5d14eeadc5e950dc4f766b21 056d124b4b291921dc941c377ef051bc336a6df5
+graft 34800350d9e4e4a1e443ca52fa64335b7863b98c 056d124b4b291921dc941c377ef051bc336a6df5
+graft db3d15f7dccfeaa882c70e097cd980198647a1ba 056d124b4b291921dc941c377ef051bc336a6df5
+graft 19811884861a0ed906b768bfbb7a5f42a3efe881 056d124b4b291921dc941c377ef051bc336a6df5
+graft 227817d3ff62858c68bcdd68caec104d12046026 056d124b4b291921dc941c377ef051bc336a6df5
+
+rm ../tmp/$REPO -rf
 git filter-branch  \
+   --msg-filter 'git fix-prefix-messages' \
    --prune-empty \
    --tag-name-filter cat \
+   -d ../tmp/$REPO \
    -- --all
 
 rm .git/refs/original -rf
