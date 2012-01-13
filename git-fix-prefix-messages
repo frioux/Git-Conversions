@@ -6,8 +6,8 @@ use warnings;
 my @msg = <>;
 
 if ( @msg == 1 && $msg[0] =~ /^\s*[-*]\s*(.+)$/) {
-   print "$1\n"
+   print "$1"
 } else {
-   print join "\n", @msg;
+   print join "", @msg;
 }
 

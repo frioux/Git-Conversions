@@ -37,6 +37,22 @@ git branch -D tags/Perl-Critic-1.079_002
 git branch -D tags/Perl-Critic-1.079_003
 git branch -D tags/Perl-Critic-1.081_001
 git branch -D trunk
+git branch -D Perl-Critic-Merge-Experiment
+git branch -D old
+git branch -D jeff
+git branch -D chris
+git branch -D chris2
+git branch -D Perl-Critic-1.06-Plus-Perl-5.6-Compatibility-Fixes
+git branch -D tags/Perl-Critic-Compatibility-0.999_001
+git branch -D parameters
+git branch -D Perl-Critic
+git branch -D fix-utils-pod-t
+git branch -D heredoc-regex-fix
+git branch -D rt41443
+git branch -D rt42458
+git branch -D rt42384
+git branch -D rt38530
+git branch -D tpc_expose_critic_object_to_tests
 
 git branch -a | grep @ | xargs -n1 -I{} git branch -D {}
 git branch -a | grep TAP-Formatter | xargs -n1 -I{} git branch -D {}
@@ -59,6 +75,31 @@ function tag {
    git branch -D $BRANCH
 }
 
+tag 0.17
+tag 0.18
+tag 0.18_01
+tag 0.19
+tag 0.20
+tag 0.21
+tag 0.21_01
+tag 0.22
+tag 1.01
+tag 1.02
+tag 1.03
+tag 1.04
+tag 1.05
+tag 1.051
+tag 1.052
+tag 1.053
+tag 1.06
+tag 1.061
+tag 1.072
+tag 1.073
+tag 1.074
+tag 1.075_001
+tag 1.076
+tag 1.077
+tag 1.078
 tag 1.081_002
 tag 1.081_003
 tag 1.081_004
@@ -115,7 +156,6 @@ tag 1.113
 tag 1.114
 tag 1.115
 tag 1.116
-tag 0.17
 
 # Fix URL to Dolan's post in Test::Perl::Critic -> Fix false statement in POD about ## no critic paying attention to
 graft 737fbd32363fa086dec13b21241875feb215f682 1a6f90d697d3c6c094c98f4d3cf03d65e68a63b8
@@ -129,11 +169,51 @@ graft db3d15f7dccfeaa882c70e097cd980198647a1ba 056d124b4b291921dc941c377ef051bc3
 graft 19811884861a0ed906b768bfbb7a5f42a3efe881 056d124b4b291921dc941c377ef051bc336a6df5
 graft 227817d3ff62858c68bcdd68caec104d12046026 056d124b4b291921dc941c377ef051bc336a6df5
 
+# Another attempt to tag version 0.20.
+graft f34c35cabf32e444d86e01e551e158685c919388 cc3c19d352b897416b81a10c9d073317807d44a5
+
+# *sigh.  Finally, a proper P::C 1.072 tag.
+graft 9edff84cca5d070a8641de78316d28c2f997c9f7 41c583c7692c9f50d38d10931a341b32952ee074
+
+# Retag P::C 1.075_001.
+graft 3cb222e42c9846931a0711d9a65601fc9fdc8e31 83197d6091bbdc8ff05f80c2be5f436cc2f8add9
+
+# Retag P::C 1.102 now that it's got the PPI 1.205 dependency in it.
+graft 1df82ab914047fb3f801b3e391ce5b7be6b95f63 cc7e0b88e7e0ab79f219d1d156a644493843cb69
+
+# Create branch for work on RT 64929, which requests a more-aggressive
+graft 2919390bfec91d2ae3ddfcbd57488a0818c07e19 5eb3f3dc90804963f72a49a48c337cb71a1de41f
+
+rm .git/refs/original -rf
+
 rm ../tmp/$REPO -rf
 git filter-branch  \
    --msg-filter 'git fix-prefix-messages' \
    --prune-empty \
    --tag-name-filter cat \
+   --env-filter '
+if [ "$GIT_AUTHOR_NAME" = "acmoore" ]; then export GIT_AUTHOR_NAME="Andrew Moore"; export GIT_AUTHOR_EMAIL="amoore@cpan.org"; fi
+if [ "$GIT_AUTHOR_NAME" = "chrisdolan" ]; then export GIT_AUTHOR_NAME="Chris Dolan"; export GIT_AUTHOR_EMAIL="chris+github@chrisdolan.net"; fi
+if [ "$GIT_AUTHOR_NAME" = "clonezone" ]; then export GIT_AUTHOR_NAME="Elliot Shank"; export GIT_AUTHOR_EMAIL="perl@galumph.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "glauschwuffel" ]; then export GIT_AUTHOR_NAME=" Gregor Goldbach"; export GIT_AUTHOR_EMAIL="goldbach@dfn-cert.de"; fi
+if [ "$GIT_AUTHOR_NAME" = "jgilles" ]; then export GIT_AUTHOR_NAME=" Julien Gilles"; export GIT_AUTHOR_EMAIL="jgilles@tigris.org"; fi
+if [ "$GIT_AUTHOR_NAME" = "jjore" ]; then export GIT_AUTHOR_NAME="Josh ben Jore"; export GIT_AUTHOR_EMAIL="twists@gmail.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "kyleha" ]; then export GIT_AUTHOR_NAME=" Kyle Hasselbacher"; export GIT_AUTHOR_EMAIL="kyleha@gmail.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "mgrimes" ]; then export GIT_AUTHOR_NAME="Mark Grimes"; export GIT_AUTHOR_EMAIL="mgrimes@cpan.org"; fi
+if [ "$GIT_AUTHOR_NAME" = "misterwhipple" ]; then export GIT_AUTHOR_NAME="Edgar Whipple"; export GIT_AUTHOR_EMAIL="tigris@misterwhipple.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "mrwolf" ]; then export GIT_AUTHOR_NAME="Michael R. Wolf"; export GIT_AUTHOR_EMAIL="MichaelRWolf@att.net"; fi
+if [ "$GIT_AUTHOR_NAME" = "petdance" ]; then export GIT_AUTHOR_NAME="Andy Lester"; export GIT_AUTHOR_EMAIL="andy@petdance.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "rcable" ]; then export GIT_AUTHOR_NAME="Rufus Cable"; export GIT_AUTHOR_EMAIL="rufus@threebytesfull.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "rjbs" ]; then export GIT_AUTHOR_NAME="Ricardo Signes"; export GIT_AUTHOR_EMAIL="rjbs@cpan.org"; fi
+if [ "$GIT_AUTHOR_NAME" = "schwern" ]; then export GIT_AUTHOR_NAME="Michael G. Schwern"; export GIT_AUTHOR_EMAIL="schwern@pobox.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "shawnmoore" ]; then export GIT_AUTHOR_NAME="Shawn Moore"; export GIT_AUTHOR_EMAIL="sartak@gmail.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "smanuel" ]; then export GIT_AUTHOR_NAME="Subredu Manuel"; export GIT_AUTHOR_EMAIL="smanuel@tigris.org"; fi
+if [ "$GIT_AUTHOR_NAME" = "thaljef" ]; then export GIT_AUTHOR_NAME="Jeffrey Ryan Thalhammer"; export GIT_AUTHOR_EMAIL="jeff@imaginative-software.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "williadd" ]; then export GIT_AUTHOR_NAME="Dustin Williams"; export GIT_AUTHOR_EMAIL="dustin_d_williams@yahoo.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "wyant" ]; then export GIT_AUTHOR_NAME="Tom Wyant"; export GIT_AUTHOR_EMAIL="harryfmudd@comcast.net"; fi
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME";
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL";
+' \
    -d ../tmp/$REPO \
    -- --all
 
