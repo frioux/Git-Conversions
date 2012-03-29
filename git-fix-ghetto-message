@@ -54,7 +54,10 @@ sub format_branch {
    } elsif ( $body =~ /\@r(\d+)/ ) {
       return $1;
    } else {
-      die "unknown rev for $commit\n$body";
+      die "format branch can't format this commit\n" .
+          "unknown branch-name for commit: '$commit' with a body of <<BODY\n" .
+          "$body\n" .
+          "BODY";
    }
 }
 
