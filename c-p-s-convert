@@ -3,20 +3,93 @@
 source git-lib
 REPO=cpsession
 rm -rf ../$REPO
-git svn clone --no-metadata --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Plugin-Session/0.00/ ../${REPO}-export
+git svn clone --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/Catalyst-Plugin-Session/0.00/ ../${REPO}-export
 cp ../${REPO}-export ../$REPO -r
 cd ../$REPO
-cp .git/refs/remotes/* .git/refs/heads/ -r
-rm .git/refs/remotes -rf
+
+git branch -a | grep -v '* master' | cut -b11- | xargs -n1 -I{} sh -c 'git branch {} remotes/{} && git update-ref -d refs/remotes/{}'
 
 git branch -D trunk
 
 git checkout master
 
+git branch -a | grep @ | xargs -n1 -I{} git branch -D {}
+git branch -D flash_in_session
+git branch -D finalize_race_condition
+git branch -D both
+git branch -D accessor_change
+git branch -D session_deleted_bug
+git branch -D paranoid_session_fixation_protection
+git branch -D verify_user_agent
+
+tag 0.01
+tag 0.02
+tag 0.03
+tag 0.04
+tag 0.05
+tag 0.06
+git branch -m tags/Catalyst-Plugin-Session-0.09 tags/0.09
+tag 0.09
+tag 0.11
+tag 0.12
+tag 0.13
+tag 0.15
+tag 0.16
+tag 0.17
+tag 0.18
+tag 0.19
+tag 0.19_01
+tag 0.20
+tag 0.21
+tag 0.22
+tag 0.23
+tag 0.24
+tag 0.25
+tag 0.26
+tag 0.26_01
+tag 0.27
+tag 0.28
+tag 0.29
+tag 0.30
+tag 0.31
+
+# Merge flash in session and finalize before sending response patches
+#   Add shipit config
+#   flash data is now stored inside the session
+#   finalize session before sending HTTP headers
+graft 29311747d2f7a895a7d49a12efe748cb7b6b84c4 ba5e09b9fe1ae8090d8ab79fdc4631265ebda21c 715e744ffba0d838df81b300a26b5b3970ec01c5 8168b04e406ef7ca0e5f21287d1e4345c3978181
+
+# flash data is now stored inside the session
+#   Unfuck Makefile.PL
+graft 715e744ffba0d838df81b300a26b5b3970ec01c5 3c4a14c35a16d8efee34f25e1598f3e3996f8848
+
+# finalize session before sending HTTP headers
+#   Unfuck Makefile.PL
+graft 8168b04e406ef7ca0e5f21287d1e4345c3978181 3c4a14c35a16d8efee34f25e1598f3e3996f8848
+
+# this is correct
+#   fix the session/mock object problem
+graft d82c2f63510be81c4436c4188600adc128f2bf36 be247f5a4e00d0bd111dfc0d172dc1ab2a7ca65f
+
+# Tagging version '0.26' using shipit.
+#   Checking in changes prior to tagging of version 0.26.  Changelog diff is:
+graft 1ca69b2d5f4ab7420044eb346809e8563e72e21c a59d44502afb258a39de73b5ce187a914c2828d5
+
+# Merge verify_user_agent branch
+#   Add repository resource to all the MI Makefile.PLs
+#   C::Plugin::Session - branche for verify_user_agent option
+graft 3e4a444e2907b32428677520f8a0d0d340e7787d 12cbb11413b1e82e5591963374b4f875a888a8d8 feb82968cf6d2bf6d08b61b15c40dd4e02700a64
+
+# Merge branch paranoid_session_fixation_protection
+#    Fixed minor grammar in Tutorial.pod
+#    C::P::Session - branche session_fixation: new method change_session_id (incl. doc), new session_fixation tests pass, tested with a real application as well
+graft 02ea28a0240e5109d953053c7eb294981b5a63e4 eb80795e2aa10405099b883c72611ea217ad0eec
+
 git filter-branch  \
    --prune-empty \
    --tag-name-filter cat \
+   -d ../tmp/$REPO \
    --msg-filter 'git fix-ghetto-message' \
-   --all
+   -- --all
 
 rm .git/refs/original -rf
