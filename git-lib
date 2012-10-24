@@ -12,12 +12,12 @@ function __tag {
 }
 
 function no_v_tag {
-   COMMIT="$(git show $2 --pretty=%H)"
+   COMMIT="$(git rev-parse $2)"
    manual-tag "$1" "Release $1" $2 "$(git log $COMMIT -1 --pretty=format:%an)" "$(git log $COMMIT -1 --pretty=format:%ae)" "$(git log $COMMIT -1 --pretty=format:%ai)"
 }
 
 function _tag {
-   COMMIT="$(git show $2 --pretty=%H)"
+   COMMIT="$(git rev-parse $2)"
    manual-tag "v$1" "Release $1" $2 "$(git log $COMMIT -1 --pretty=format:%an)" "$(git log $COMMIT -1 --pretty=format:%ae)" "$(git log $COMMIT -1 --pretty=format:%ai)"
 }
 
