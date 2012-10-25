@@ -138,12 +138,11 @@ git checkout --orphan initial-branch
 rm Makefile.PL Changes MANIFEST.skip lib t -rf
 wget http://cpan.metacpan.org/authors/id/A/AS/ASHLEY/Catalyst-Authentication-Credential-OpenID-0.01.tar.gz
 tar -xvzf Catalyst-Authentication-Credential-OpenID-0.01.tar.gz
-rm Catalyst-Authentication-Credential-OpenID-0.01.tar.gz
 mv Catalyst-Authentication-Credential-OpenID-0.01/* .
-rm inc -rf
+rm Catalyst-Authentication-Credential-OpenID-0.01.tar.gz inc META.yml -rf
 rmdir Catalyst-Authentication-Credential-OpenID-0.01
 git add -A .
-git commit -m 'initial commit' --author='Ashley Pond V <ashley@cpan.org>' --date='2008-04-06 00:00:00'
+git commit -m 'initial commit' --author='Ashley Pond V <ashley@cpan.org>' --date='2008-04-06 21:35:25'
 _tag 0.01 HEAD
 
 graft 2607db75cf0f821df9fea063cd6b15f8fe264edb "$(git rev-parse HEAD)"
