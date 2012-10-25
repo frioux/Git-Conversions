@@ -140,7 +140,7 @@ mv Catalyst-Authentication-Credential-OpenID-0.01/* .
 rmdir Catalyst-Authentication-Credential-OpenID-0.01
 git checkout --orphan initial-branch
 git add -A .
-git commit --author='Ashley Pond V <ashley@cpan.org>' --date='2008-04-06 00:00:00'
+git commit -m 'initial commit' --author='Ashley Pond V <ashley@cpan.org>' --date='2008-04-06 00:00:00'
 _tag v0.01 HEAD
 
 graft 2607db75cf0f821df9fea063cd6b15f8fe264edb "$(git rev-parse HEAD)"
