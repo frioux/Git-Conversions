@@ -133,6 +133,18 @@ tag 0.17
 tag 0.18
 tag 0.19
 
+# nice ashley; you never checked 0.01 into svn.  Classy.
+wget http://cpan.metacpan.org/authors/id/A/AS/ASHLEY/Catalyst-Authentication-Credential-OpenID-0.01.tar.gz
+tar -xvzf Catalyst-Authentication-Credential-OpenID-0.01.tar.gz
+mv Catalyst-Authentication-Credential-OpenID-0.01/* .
+rmdir Catalyst-Authentication-Credential-OpenID-0.01
+git checkout --orphan initial-branch
+git add -A .
+git commit --author='Ashley Pond V <ashley@cpan.org>' --date='2008-04-06 00:00:00'
+_tag v0.01 HEAD
+
+graft 2607db75cf0f821df9fea063cd6b15f8fe264edb "$(git rev-parse HEAD)"
+
 git checkout master
 
 git filter-branch  \
