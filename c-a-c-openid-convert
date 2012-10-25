@@ -107,6 +107,15 @@ function tagr {
    git branch -D tags/$1
 }
 
+# A couple of small dorky fixes (spelling/version) makes this 0.13 on the CPAN.
+# A couple of small dorky fixes (spelling/version) makes this 0.13 on the CPAN.
+# (with 0.13 version in Changes)
+graft e57c476f24f11f03871a18274b9a6940d77a7efb beef7d51c03d6f51a798e4aecba70ed5dd98093e
+
+# I think this is the 0.14 on the way up to the CPAN.
+# How about we do our commits in trunk, so that we actually get sane linear revision history along the main development line of the code. Being able to actually use blame and log and diff to do something useful would be, well, useful.
+graft c78e6460d0db01c9b6622d3c13a459f3118ef205 952b523cb0c935a75a194fac5e67c46662a7fa1c
+
 tagr 0.02
 tagr 0.03
 tagr 0.04
@@ -123,7 +132,6 @@ tag 0.14
 tag 0.17
 tag 0.18
 tag 0.19
-
 
 git checkout master
 
