@@ -1,0 +1,65 @@
+#!/bin/bash
+
+source git-lib
+REPO=http-body
+rm -rf ../$REPO
+git svn clone --no-metadata --authors-file=catalyst-authors --trunk=trunk/HTTP-Body/ --tags=tags/HTTP-Body/ http://dev.catalyst.perl.org/repos/Catalyst/ ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D tags/0.03@13764
+git branch -D tags/0.4@13764
+git branch -D tags/1.04@13764
+git branch -D tags/1.05@13764
+git branch -D tags/1.06@13764
+git branch -D trunk@1004
+git branch -D trunk@6208
+git branch -D tags/1.05
+
+_tag 1.16 7cb40b84007b9b1c5d6c7a1caa479eb3d1fac918
+_tag 1.15 487c7e13b90220e0e08588f3639822fb76ae1a21
+_tag 1.14 632c741ff158dc3643dc2041696b98203053db82
+_tag 1.12 4ef42d9586fe77bb6e67b0e0e3c5562c671d3f12
+_tag 1.11 21f2e522471595a9ce4491a4b7810637f5b4f0a6
+_tag 1.10 89afb4a3a533e3974a472b0e786b1b32bfcb0c4e
+_tag 1.08 950863e26c9e72ecaafe1c76d58ed161524e51d2
+_tag 1.07 75c38eddb95374ebcf81d4ccff252191e63e51bd
+tag 1.06
+_tag 1.05 87dcc72d0c6d3b81dbfcf69977a52c08a7a5c231
+tag 1.04
+_tag 1.03 33dd60f56190385e64db0ee6344af2d21e5be3a5
+_tag 1.02 4f67b4f0e0d6ef440e644f3173e23351474f4bf9
+_tag 1.01 48da73b9263d64bafc1d8d516f61d40fc6cc5ab6
+_tag 1.00 f8911f5f2729f85a2d8914615bfd7dc2d0e6347a
+_tag 0.9  4b491c67e1908528773b3866626adf5d282f3c02
+_tag 0.8  a4b482701643ce9f57dfc278f7a3d09ba83f8140
+_tag 0.7  71d31920c9b9bf31405aba74bf677519e3980f7b
+_tag 0.6  40a213fd74efa1a3f7869fd4c2156f4a4ab88cc6
+tag 0.03
+tag 0.4
+_tag 0.01 09abe57d4d1afe837d8935577db1b8953a7e6447
+
+# "Well, I just fucked that up proper style. Put it back so the revision can be zeroed out."
+# ->  "Make tags directory"
+# 0.03
+graft 483e70e542097984b9874bc8553492e64fbb099b af05d2df2c8d9c19f19447016e11858fdb8d952a
+# 0.04
+graft 8380979498d927fafb6aa397a894ca60fa1052d4 1ec011cba16a9cdcbcd51edeab1cb0ba0dceeb5a
+# 1.04
+graft c227b33ef2ebc686517a123c241bd1f0b2a8728b 28dbac44a0032933d25c11af1a959f3031bc1ae2
+# 1.06
+graft 29f1f269744ece18d417d0ecac24622fd951cde5 0bb041e1b801b3e4f19585cc3a0cf071e904428d
+# this is correct
+graft f046b2a89e52aa3a8da910af78f7247d3cd0da31 dd508f91c5a94fedd36a5a359d61adefd3b6a8bd
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   -- --all
+
+rm .git/refs/original -rf
