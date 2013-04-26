@@ -1,0 +1,33 @@
+#!/bin/bash
+
+source git-lib
+REPO=Catalyst-Plugin-RequireSSL
+rm -rf ../$REPO
+git svn clone --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/${REPO} ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D trunk
+git branch -D trunk@5068
+git branch -D trunk@11735
+git branch -D module-install
+
+tag 0.07
+_tag 0.06 6acbbd363364dedb1569f3e429b130ebdf3cde9a
+_tag 0.05 181562fa2b415fe33d5058709bb58dd86b3150cf
+_tag 0.04 8b816f376e2f090696bc6c77059b148c6b56552f
+_tag 0.03 a4f5cdc881f6a1de40dbb3c0df253d6b9d9ede88
+_tag 0.02 c4839032468451f209eff2f77476111535020450
+_tag 0.01 22b6d6212f6f89ffc8c28871bccff57b06028633
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   --msg-filter 'git fix-ghetto-message' \
+   -- --all
+
+rm .git/refs/original -rf
