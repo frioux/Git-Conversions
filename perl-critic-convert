@@ -195,10 +195,10 @@ git filter-branch  \
 if [ "$GIT_AUTHOR_NAME" = "acmoore" ]; then export GIT_AUTHOR_NAME="Andrew Moore"; export GIT_AUTHOR_EMAIL="amoore@cpan.org"; fi
 if [ "$GIT_AUTHOR_NAME" = "chrisdolan" ]; then export GIT_AUTHOR_NAME="Chris Dolan"; export GIT_AUTHOR_EMAIL="chris+github@chrisdolan.net"; fi
 if [ "$GIT_AUTHOR_NAME" = "clonezone" ]; then export GIT_AUTHOR_NAME="Elliot Shank"; export GIT_AUTHOR_EMAIL="perl@galumph.com"; fi
-if [ "$GIT_AUTHOR_NAME" = "glauschwuffel" ]; then export GIT_AUTHOR_NAME=" Gregor Goldbach"; export GIT_AUTHOR_EMAIL="goldbach@dfn-cert.de"; fi
-if [ "$GIT_AUTHOR_NAME" = "jgilles" ]; then export GIT_AUTHOR_NAME=" Julien Gilles"; export GIT_AUTHOR_EMAIL="jgilles@tigris.org"; fi
+if [ "$GIT_AUTHOR_NAME" = "glauschwuffel" ]; then export GIT_AUTHOR_NAME="Gregor Goldbach"; export GIT_AUTHOR_EMAIL="goldbach@dfn-cert.de"; fi
+if [ "$GIT_AUTHOR_NAME" = "jgilles" ]; then export GIT_AUTHOR_NAME="Julien Gilles"; export GIT_AUTHOR_EMAIL="jgilles@tigris.org"; fi
 if [ "$GIT_AUTHOR_NAME" = "jjore" ]; then export GIT_AUTHOR_NAME="Josh ben Jore"; export GIT_AUTHOR_EMAIL="twists@gmail.com"; fi
-if [ "$GIT_AUTHOR_NAME" = "kyleha" ]; then export GIT_AUTHOR_NAME=" Kyle Hasselbacher"; export GIT_AUTHOR_EMAIL="kyleha@gmail.com"; fi
+if [ "$GIT_AUTHOR_NAME" = "kyleha" ]; then export GIT_AUTHOR_NAME="Kyle Hasselbacher"; export GIT_AUTHOR_EMAIL="kyleha@gmail.com"; fi
 if [ "$GIT_AUTHOR_NAME" = "mgrimes" ]; then export GIT_AUTHOR_NAME="Mark Grimes"; export GIT_AUTHOR_EMAIL="mgrimes@cpan.org"; fi
 if [ "$GIT_AUTHOR_NAME" = "misterwhipple" ]; then export GIT_AUTHOR_NAME="Edgar Whipple"; export GIT_AUTHOR_EMAIL="tigris@misterwhipple.com"; fi
 if [ "$GIT_AUTHOR_NAME" = "mrwolf" ]; then export GIT_AUTHOR_NAME="Michael R. Wolf"; export GIT_AUTHOR_EMAIL="MichaelRWolf@att.net"; fi
