@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source git-lib
+REPO=Portable
+rm -rf ../$REPO
+git svn clone --authors-file=catalyst-authors http://svn.ali.as/cpan/trunk/${REPO} ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   --msg-filter 'git fix-ghetto-message' \
+   -- --all
+
+rm .git/refs/original -rf
