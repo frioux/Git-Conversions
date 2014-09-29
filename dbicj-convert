@@ -1,0 +1,28 @@
+#!/bin/bash
+
+source git-lib
+REPO=DBIx-Class-Journal
+rm -rf ../$REPO
+git svn clone --authors-file=dbic-authors --stdlayout http://dev.catalyst.perl.org/repos/bast/${REPO}/1.000 ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+# git branch -D trunk
+# git branch -D trunk@5068
+# git branch -D trunk@11735
+# git branch -D module-install
+
+# tag 0.07
+# _tag 0.06 6acbbd363364dedb1569f3e429b130ebdf3cde9a
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   --msg-filter 'git fix-ghetto-message' \
+   -- --all
+
+rm .git/refs/original -rf
