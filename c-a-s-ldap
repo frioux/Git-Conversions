@@ -1,0 +1,42 @@
+#!/bin/bash
+
+source git-lib
+REPO=Catalyst-Authentication-Store-LDAP
+rm -rf ../$REPO
+git svn clone --authors-file=catalyst-authors --stdlayout http://dev.catalyst.perl.org/repos/Catalyst/${REPO} ../${REPO}-export
+cp ../${REPO}-export ../$REPO -r
+cd ../$REPO
+cp .git/refs/remotes/* .git/refs/heads/ -r
+rm .git/refs/remotes -rf
+
+git branch -D origin/trunk
+
+tag 1.014
+tag 1.013
+tag 1.012
+tag 1.011
+tag 1.010
+tag 1.009
+tag 1.008
+tag 1.007
+git branch -D origin/tags/1.1006
+git branch -D origin/tags/1.0006
+git branch -D origin/tags/1.006
+tag 0.1006
+tag 0.1005
+_tag 0.1004 refs/heads/origin/0.1004
+git branch -D origin/0.1004
+tag 0.1003
+tag 0.1002
+tag 0.1001
+tag 0.1000
+
+git checkout master
+
+git filter-branch  \
+   --prune-empty \
+   --tag-name-filter cat \
+   --msg-filter 'git fix-ghetto-message' \
+   -- --all
+
+rm .git/refs/original -rf

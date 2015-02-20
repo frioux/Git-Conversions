@@ -22,8 +22,8 @@ function _tag {
 }
 
 function tag {
-   _tag $1 refs/heads/tags/$1
-   git branch -D tags/$1
+   _tag $1 refs/heads/origin/tags/$1
+   git branch -D origin/tags/$1
 }
 
 function graft {
